@@ -2,12 +2,14 @@
 
 
 ## Week 1
-* Overview: Why does Nornir exist? What problem is it solving?
-* Overview: High level system 
-* Overivew: what are plugins, what types of plugins are there, what is a task
-* Inventory system (part1): very basic, simpleinventory intro, just start with localhost
-* Initialize a nornir object - inspect inventory items
-* First task(s) -- 'ls -al' or something on localhost
+* Overview: Why does Nornir exist? What problem is it trying to solve?
+* Nornir System Components: Inventory, Core, Plugins, Tasks, Config
+* Inventory System: Internal Object Structure and Schema
+* Inventory System: Example using Simple Inventory
+* Nornir Plugins and Tasks: Types of Plugins, what is a Task
+* Inspect Nornir Inventory using Pdb
+* First Nornir Task
+* The Behavior of .run()
 
 
 ## Week 2
