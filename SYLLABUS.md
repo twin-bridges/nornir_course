@@ -14,38 +14,38 @@
 ## Week 2
 * Introduction to Results Objects
 * Simple Netmiko Task: Show Command
-* Inventory System (Part2): groups, defaults
+* Inventory System: Groups, Defaults
 * Simple NAPALM Task: get_facts
 * Basic Nornir Debugging and Troubleshooting
 
 ## Week 3
-* Inventory System: Order of preference (hosts, groups, defaults)
-* Inventory filtering - get group of junos and group of nxos for example; run different show commands on each group
-* Netmiko: add in ntc-templates
-* NAPALM: expanded use; add in getters
+* Inventory System: Order of Preference (hosts, groups, defaults)
+* Inventory Filtering
+* Netmiko + TextFSM
+* NAPALM: Expanded Getters
 
 ## Week 4
 * Subtasks
-* Results and handling subtasks
+* Results and Handling Subtasks
 * Netmiko File Copy
 * Netmiko Configuration Operations
 * NAPALM Configuration Operations
 
 ## Week 5
-* Inventory system (part3): add in data to the hosts/groups for building actual configs out
+* Inventory System: Data
+* Inventory System: ConnectionOptions
+* Loading Additional Data
 * Jinja2 templating with Nornir
-* More advanced Jinja2 -- extends, ???
-* Jinja2 and Pushing Configurations Using Nornir (merge)
-* Jinja2 and Pushing Configurations Using Nornir (replace)
+* Jinja2 and Pushing Configurations Using Netmiko/NAPALM Plugins
 
 ## Week 6
-* config.yaml: nornir config options, core/inventory/logging/etc.?
-* environment variables
-* transform_function: simple example like this: https://github.com/nornir-automation/nornir/issues/278
-* ConnectionOptions - manually manage some connection option -- for example try custom API port, if it fails manually reset connection option to standard API port
+* config.yaml: Nornir Config Options
+* Environment Variables
+* Handling Passwords/Keys
+* Handling Exceptions and Failed Hosts
 
-## Week 7
-* Best Practice: rasie_on_error, num_workers, password security (env vars, vault, etc.)
+## Bonus Lesson
+* transform_function: simple example like this: https://github.com/nornir-automation/nornir/issues/278
 * dry_run: sometimes useful, why would we want to use it, how do we use it
 * Ansible Inventory plugin -- basic example
 * future/in progress stuff -- NETCONF plugin, ???
