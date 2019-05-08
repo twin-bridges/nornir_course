@@ -43,25 +43,47 @@
 * Environment Variables
 * Handling Passwords/Keys
 * Handling Exceptions and Failed Hosts
+* Nornir Logging
+* Troubleshooting/Debugging
 
 ## Bonus Lesson
-* transform_function: simple example like this: https://github.com/nornir-automation/nornir/issues/278
-* dry_run: sometimes useful, why would we want to use it, how do we use it
-* Ansible Inventory plugin -- basic example
-* future/in progress stuff -- NETCONF plugin, ???
+* transform_function
+* dry_run
+* Ansible Inventory Plugin
+* sftp
+* write_file
+* http_method
+* NETCONF
+* http_command and NetBox
+* Inventory handling when both Netmiko and NAPALM are present in inventory
+* Setting enable secret dynamically
 
-
-## Other stuff
-sftp/write_file
-http_method
-secret management
-transform_function, NETCONF, Ansible Inventory?
-http_command and netbox
-Nornir logging 
-Nornir config file/environment variables.
-Generic data loading
-echo data for troubleshooting https://nornir.readthedocs.io/en/stable/plugins/tasks/data.html#nornir.plugins.tasks.data.echo_data 
-how to deal with a failed task; set workers=1, pdb
-Inventory handling when both Netmiko and NAPALM are present in inventory
-Setting enable secret dynamically
-Raise_on_error behavior
+.
+├── apis
+│   ├── http_method.py
+├── commands
+│   ├── command.py
+│   └── remote_command.py
+├── data
+│   ├── echo_data.py
+│   ├── load_json.py
+│   └── load_yaml.py
+├── files
+│   ├── sftp.py
+│   └── write_file.py
+├── __init__.py
+├── networking
+│   ├── napalm_cli.py
+│   ├── napalm_configure.py
+│   ├── napalm_get.py
+│   ├── napalm_validate.py
+│   ├── netmiko_file_transfer.py
+│   ├── netmiko_save_config.py
+│   ├── netmiko_send_command.py
+│   ├── netmiko_send_config.py
+│   └── tcp_ping.py
+├── text
+│   ├── template_file.py
+│   └── template_string.py
+└── version_control
+    ├── gitlab.py
