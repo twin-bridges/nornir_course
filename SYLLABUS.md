@@ -3,10 +3,9 @@
 
 ## Week 1
 * Overview: Why does Nornir exist? What problem is it trying to solve?
-* Nornir System Components: Inventory, Core, Plugins, Tasks, Config
-* Inventory System: Internal Object Structure and Schema
-* Inventory System: Example using Simple Inventory
-* Inspect Nornir Inventory using Pdb
+* Nornir System Components: Inventory, Config, Core Execution, Tasks, Results
+* Nornir's Inventory System
+* Inventory Example
 * Nornir Plugins and Tasks: Types of Plugins, what is a Task
 * First Nornir Task
 * The Behavior of .run()
