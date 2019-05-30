@@ -1,0 +1,9 @@
+---
+cisco:
+  platform: ios
+  data:
+    key2: value2
+arista:
+  platform: eos
+juniper:
+  platform: junos
