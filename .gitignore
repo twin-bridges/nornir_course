@@ -102,3 +102,8 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+
+# ds store garbage
+*/.DS_Store
+.DS_Store
