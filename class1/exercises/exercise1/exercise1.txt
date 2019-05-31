@@ -1,0 +1,22 @@
+$ python
+Python 3.6.8 (default, Mar 18 2019, 18:57:19) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-28)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+
+>>> 
+>>> from nornir import InitNornir
+>>> 
+>>> nr = InitNornir()
+>>> 
+>>> print(nr.inventory)
+<nornir.core.inventory.Inventory object at 0x7f201c347848>
+>>> 
+>>> print(nr.inventory.hosts)
+{'my_host': Host: my_host}
+>>> 
+>>> print(nr.inventory.hosts["my_host"])
+my_host
+>>> 
+>>> print(nr.inventory.hosts["my_host"].hostname)
+localhost
+>>> 

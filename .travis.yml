@@ -1,0 +1,13 @@
+language: python
+python:
+  - "3.6"
+
+# command to install dependencies
+install:
+  - pip install -r requirements_nornir1.txt
+
+# command to run tests
+script:
+  - pylama .
+  - black --check .
+#  - py.test -s -v tests/

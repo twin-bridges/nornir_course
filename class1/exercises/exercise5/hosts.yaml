@@ -1,0 +1,12 @@
+---
+cisco3: 
+  hostname: cisco3.lasthop.io
+  groups:
+    - ios
+  data:
+    dns1: 8.8.8.8
+
+cisco4: 
+  hostname: cisco4.lasthop.io
+  groups:
+    - ios
