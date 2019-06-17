@@ -109,3 +109,4 @@ venv.bak/
 
 # Nornir specific things
 nornir.log
+*/nornir.log
