@@ -1,0 +1,33 @@
+$ python results_example.py
+--Return--
+None
+> /home/carl/results/results_example.py(14)main()
+     13     result = mulresult[0]
+---> 14     ipdb.set_trace()
+     15
+
+ipdb> dir()
+['__return__', 'aggresult', 'mulresult', 'nr', 'result']
+ipdb> type(aggresult)
+<class 'nornir.core.task.AggregatedResult'>
+ipdb> dir(aggresult)
+['__class__', '__contains__', '__delattr__', '__delitem__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__setitem__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'clear', 'copy', 'failed', 'failed_hosts', 'fromkeys', 'get', 'items', 'keys', 'name', 'pop', 'popitem', 'raise_on_error', 'setdefault', 'update', 'values']
+ipdb> aggresult.items()
+dict_items([('localhost', MultiResult: [Result: "example_task"]), ('localhost1', MultiResult: [Result: "example_task"]), ('localhost2', MultiResult: [Result: "example_task"]), ('localhost3', MultiResult: [Result: "example_task"])])
+ipdb> mulresult
+MultiResult: [Result: "example_task"]
+ipdb> type(mulresult)
+<class 'nornir.core.task.MultiResult'>
+ipdb> dir(mulresult)
+['__add__', '__class__', '__contains__', '__delattr__', '__delitem__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattr__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__iadd__', '__imul__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__module__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__reversed__', '__rmul__', '__setattr__', '__setitem__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'append', 'changed', 'clear', 'copy', 'count', 'extend', 'failed', 'index', 'insert', 'name', 'pop', 'raise_on_error', 'remove', 'reverse', 'sort']
+ipdb> type(result)
+<class 'nornir.core.task.Result'>
+ipdb> dir(result)
+['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'changed', 'diff', 'exception', 'failed', 'host', 'name', 'result', 'severity_level', 'stderr', 'stdout']
+ipdb> result.host
+Host: localhost2
+ipdb> result.result
+'This is a nornir task executed against localhost2'
+ipdb> result.failed
+False
+ipdb>

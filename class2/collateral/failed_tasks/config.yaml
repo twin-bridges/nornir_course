@@ -1,0 +1,4 @@
+---
+core:
+  raise_on_error: False
+

@@ -1,0 +1,18 @@
+---
+cisco1:
+  hostname: cisco1.lasthop.io
+  password: notarealpassword
+  groups:
+    - cisco
+cisco2:
+  hostname: cisco2.lasthop.io
+  groups:
+    - cisco
+cisco3:
+  hostname: cisco3.lasthop.io
+  groups:
+    - cisco
+cisco4:
+  hostname: cisco4.lasthop.io
+  groups:
+    - cisco
