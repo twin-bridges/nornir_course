@@ -49,7 +49,11 @@ def test_class2_ex1b():
     cmd_list = ["python", "exercise1b.py"]
 
     nornir_inventory = gen_inventory_dict(base_path)
-    nr = InitNornir(inventory=nornir_inventory, logging=NORNIR_LOGGING, config_file=f"{base_path}/config.yaml")
+    nr = InitNornir(
+        inventory=nornir_inventory,
+        logging=NORNIR_LOGGING,
+        config_file=f"{base_path}/config.yaml",
+    )
     assert nr.config.core.num_workers == 5
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
@@ -62,7 +66,11 @@ def test_class2_ex1c():
     cmd_list = ["python", "exercise1c.py"]
 
     nornir_inventory = gen_inventory_dict(base_path)
-    nr = InitNornir(inventory=nornir_inventory, logging=NORNIR_LOGGING, config_file=f"{base_path}/config.yaml")
+    nr = InitNornir(
+        inventory=nornir_inventory,
+        logging=NORNIR_LOGGING,
+        config_file=f"{base_path}/config.yaml",
+    )
     assert nr.config.core.num_workers == 5
     os.environ["NORNIR_CORE_NUM_WORKERS"] = "10"
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
@@ -77,7 +85,11 @@ def test_class2_ex1d():
     cmd_list = ["python", "exercise1d.py"]
 
     nornir_inventory = gen_inventory_dict(base_path)
-    nr = InitNornir(inventory=nornir_inventory, logging=NORNIR_LOGGING, config_file=f"{base_path}/config.yaml")
+    nr = InitNornir(
+        inventory=nornir_inventory,
+        logging=NORNIR_LOGGING,
+        config_file=f"{base_path}/config.yaml",
+    )
     assert nr.config.core.num_workers == 5
     os.environ["NORNIR_CORE_NUM_WORKERS"] = "10"
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
@@ -107,7 +119,7 @@ def test_class2_ex2b():
     assert "<class 'nornir.core.task.AggregatedResult'>" in std_out
     assert "'raise_on_error', 'setdefault', 'update', 'values']" in std_out
     assert "dict_keys(['cisco3', 'cisco4'])" in std_out
-    assert "dict_values([MultiResult: [Result: \"netmiko_send_command\"]" in std_out
+    assert 'dict_values([MultiResult: [Result: "netmiko_send_command"]' in std_out
     assert std_err == ""
 
 
@@ -121,7 +133,7 @@ def test_class2_ex2c():
     assert "<class 'nornir.core.task.AggregatedResult'>" in std_out
     assert "'raise_on_error', 'setdefault', 'update', 'values']" in std_out
     assert "dict_keys(['cisco3', 'cisco4'])" in std_out
-    assert "dict_values([MultiResult: [Result: \"netmiko_send_command\"]" in std_out
+    assert 'dict_values([MultiResult: [Result: "netmiko_send_command"]' in std_out
     assert "'raise_on_error', 'remove', 'reverse', 'sort']" in std_out
     assert "hostname cisco3" in std_out
     assert "<method-wrapper '__iter__' of MultiResult object at " in std_out
@@ -138,7 +150,7 @@ def test_class2_ex2d():
     assert "<class 'nornir.core.task.AggregatedResult'>" in std_out
     assert "'raise_on_error', 'setdefault', 'update', 'values']" in std_out
     assert "dict_keys(['cisco3', 'cisco4'])" in std_out
-    assert "dict_values([MultiResult: [Result: \"netmiko_send_command\"]" in std_out
+    assert 'dict_values([MultiResult: [Result: "netmiko_send_command"]' in std_out
     assert "'raise_on_error', 'remove', 'reverse', 'sort']" in std_out
     assert "hostname cisco3" in std_out
     assert "<method-wrapper '__iter__' of MultiResult object at " in std_out
@@ -202,7 +214,10 @@ def test_class2_ex5b():
     os.environ["PYTHONWARNINGS"] = "ignore::Warning"
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
-    assert "netmiko.ssh_exception.NetMikoAuthenticationException: Authentication failure" in std_out
+    assert (
+        "netmiko.ssh_exception.NetMikoAuthenticationException: Authentication failure"
+        in std_out
+    )
     assert "GigabitEthernet0/0/0   10.220.88.23" in std_out
     assert "Task failed hosts: {'cisco3'" in std_out
     assert "Global failed hosts: {'cisco3'}" in std_out
@@ -216,7 +231,10 @@ def test_class2_ex5c():
     os.environ["PYTHONWARNINGS"] = "ignore::Warning"
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
-    assert "netmiko.ssh_exception.NetMikoAuthenticationException: Authentication failure" in std_out
+    assert (
+        "netmiko.ssh_exception.NetMikoAuthenticationException: Authentication failure"
+        in std_out
+    )
     assert "GigabitEthernet0/0/0   10.220.88.23" in std_out
     assert "Task failed hosts: {'cisco3'" in std_out
     assert std_out.count("Global failed hosts: {'cisco3'}", 2)
@@ -231,7 +249,10 @@ def test_class2_ex5d():
     os.environ["PYTHONWARNINGS"] = "ignore::Warning"
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
-    assert "netmiko.ssh_exception.NetMikoAuthenticationException: Authentication failure" in std_out
+    assert (
+        "netmiko.ssh_exception.NetMikoAuthenticationException: Authentication failure"
+        in std_out
+    )
     assert "GigabitEthernet0/0/0   10.220.88.23" in std_out
     assert "Task failed hosts: {'cisco3'" in std_out
     assert std_out.count("Global failed hosts: {'cisco3'}", 2)
