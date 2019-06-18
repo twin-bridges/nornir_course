@@ -11,4 +11,8 @@ script:
   - pylama .
   - black --check .
   - cd tests
-  - py.test -s -v .
+  - py.test -s -v test_class1.py
+  - py.test -s -v test_class2.py::test_class2_ex1a
+  - py.test -s -v test_class2.py::test_class2_ex1b
+  - py.test -s -v test_class2.py::test_class2_ex1c
+  - py.test -s -v test_class2.py::test_class2_ex1d
