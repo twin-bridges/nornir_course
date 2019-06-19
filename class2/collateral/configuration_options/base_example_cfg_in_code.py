@@ -9,6 +9,7 @@ def main():
             "options": {"host_file": "inventory.yaml"},
         }
     )
+    print(nr)
     ipdb.set_trace()
 
 

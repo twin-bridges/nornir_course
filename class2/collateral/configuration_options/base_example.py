@@ -4,6 +4,7 @@ from nornir import InitNornir
 
 def main():
     nr = InitNornir()
+    print(nr)
     ipdb.set_trace()
 
 

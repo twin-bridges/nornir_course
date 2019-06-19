@@ -9,8 +9,9 @@ def example_task(task):
 def main():
     nr = InitNornir()
     aggresult = nr.run(task=example_task)
-    mulresult = aggresult['localhost2']
+    mulresult = aggresult["localhost2"]
     result = mulresult[0]
+    print(result)
     ipdb.set_trace()
 
 
