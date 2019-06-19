@@ -1,0 +1,5 @@
+---
+core:
+  num_workers: 10
+logging:
+  file: ""

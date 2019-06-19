@@ -1,0 +1,9 @@
+---
+cisco:
+  platform: cisco_ios
+  username: test9
+  password: bogus
+  connection_options:
+    netmiko:
+      extras:
+        secret: bogus
