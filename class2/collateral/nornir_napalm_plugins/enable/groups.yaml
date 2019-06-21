@@ -1,0 +1,10 @@
+---
+cisco:
+  platform: ios
+  username: test9
+  password: bogus
+  connection_options:
+    napalm:
+      extras:
+        optional_args:
+          secret: bogus
