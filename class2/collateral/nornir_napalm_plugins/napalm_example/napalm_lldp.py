@@ -3,10 +3,7 @@ from nornir import InitNornir
 from nornir.plugins.tasks.networking import napalm_get
 
 nr = InitNornir(config_file="nornir.yaml")
-results = nr.run(
-    task=napalm_get,
-    getters=["lldp_neighbors"]
-)
+results = nr.run(task=napalm_get, getters=["lldp_neighbors"])
 
 print()
 for k, v in results.items():

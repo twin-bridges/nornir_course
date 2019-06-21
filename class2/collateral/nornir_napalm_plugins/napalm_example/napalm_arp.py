@@ -3,10 +3,7 @@ from nornir.plugins.tasks.networking import napalm_get
 from pprint import pprint
 
 nr = InitNornir(config_file="nornir.yaml")
-results = nr.run(
-    task=napalm_get,
-    getters=["facts", "arp_table"]
-)
+results = nr.run(task=napalm_get, getters=["facts", "arp_table"])
 
 print()
 for k, v in results.items():
