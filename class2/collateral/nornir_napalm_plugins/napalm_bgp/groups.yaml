@@ -1,0 +1,6 @@
+---
+nxos:
+  platform: nxos
+  username: pyclass
+  password: bogus
+  port: 8443

@@ -1,0 +1,10 @@
+---
+nxos1:
+  hostname: nxos1.lasthop.io
+  groups:
+    - nxos
+
+nxos2:
+  hostname: nxos2.lasthop.io
+  groups:
+    - nxos
