@@ -1,0 +1,5 @@
+---
+cisco:
+  platform: ios
+  username: pyclass
+  password: bogus
