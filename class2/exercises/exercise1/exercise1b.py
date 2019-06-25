@@ -3,7 +3,8 @@ from nornir import InitNornir
 
 def main():
     nr = InitNornir(config_file="config.yaml")
-    print(nr.config.core.num_workers)  # print 5 from setting in config file
+    # Use setting in the config_file: 5 workers
+    print(f"\nNumber of workers: {nr.config.core.num_workers}\n")
 
 
 if __name__ == "__main__":
