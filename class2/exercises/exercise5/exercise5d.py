@@ -15,7 +15,7 @@ def main():
     print_result(my_results)
     print(f"Task failed hosts: {my_results.failed_hosts}")
     print(f"Global failed hosts: {nr.data.failed_hosts}")
-    nr.inventory.hosts["cisco3"].password = "88newclass"
+    nr.inventory.hosts["cisco3"].password = os.environ["NORNIR_PASSWORD"]
 
     # Need to fix/improve this
     # Nornir doesnt reset connection for failed hosts causing issues
