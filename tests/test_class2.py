@@ -117,7 +117,6 @@ def test_class2_ex2b():
     assert return_code == 0
     assert "{'cisco3': Host: cisco3, 'cisco4': Host: cisco4}" in std_out
     assert "<class 'nornir.core.task.AggregatedResult'>" in std_out
-    assert "'raise_on_error', 'setdefault', 'update', 'values']" in std_out
     assert "dict_keys(['cisco3', 'cisco4'])" in std_out
     assert 'dict_values([MultiResult: [Result: "netmiko_send_command"]' in std_out
     assert std_err == ""
@@ -130,11 +129,7 @@ def test_class2_ex2c():
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
     assert "{'cisco3': Host: cisco3, 'cisco4': Host: cisco4}" in std_out
-    assert "<class 'nornir.core.task.AggregatedResult'>" in std_out
-    assert "'raise_on_error', 'setdefault', 'update', 'values']" in std_out
-    assert "dict_keys(['cisco3', 'cisco4'])" in std_out
-    assert 'dict_values([MultiResult: [Result: "netmiko_send_command"]' in std_out
-    assert "'raise_on_error', 'remove', 'reverse', 'sort']" in std_out
+    assert "<class 'nornir.core.task.MultiResult'>" in std_out
     assert "hostname cisco3" in std_out
     assert "<method-wrapper '__iter__' of MultiResult object at " in std_out
     assert std_err == ""
@@ -147,16 +142,7 @@ def test_class2_ex2d():
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
     assert "{'cisco3': Host: cisco3, 'cisco4': Host: cisco4}" in std_out
-    assert "<class 'nornir.core.task.AggregatedResult'>" in std_out
-    assert "'raise_on_error', 'setdefault', 'update', 'values']" in std_out
-    assert "dict_keys(['cisco3', 'cisco4'])" in std_out
-    assert 'dict_values([MultiResult: [Result: "netmiko_send_command"]' in std_out
-    assert "'raise_on_error', 'remove', 'reverse', 'sort']" in std_out
-    assert "hostname cisco3" in std_out
-    assert "<method-wrapper '__iter__' of MultiResult object at " in std_out
     assert "<class 'nornir.core.task.Result'>" in std_out
-    assert "<class 'nornir.core.task.Result'>" in std_out
-    assert "Host: cisco3" in std_out
     assert "'host', 'name', 'result', 'severity_level', 'stderr', 'stdout']" in std_out
     assert "Failed: False" in std_out
     assert "Result: hostname cisco3" in std_out
