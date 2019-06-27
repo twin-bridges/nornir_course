@@ -6,7 +6,7 @@ from nornir.plugins.tasks.networking import netmiko_send_command
 
 def main():
     nr = InitNornir(config_file="config.yaml")
-    # Filtering - this will be explained in detail in later lessons.
+    # Filtering - will be explained in detail in later lessons.
     ios_filt = F(groups__contains="ios")
     eos_filt = F(groups__contains="eos")
     nr = nr.filter(ios_filt | eos_filt)

@@ -149,7 +149,7 @@ def test_class2_ex2d():
     assert std_err == ""
 
 
-def test_class2_ex3a():
+def test_class2_ex3():
     base_path = "../class2/exercises/exercise3/"
     cmd_list = ["python", "exercise3.py"]
 
@@ -165,7 +165,7 @@ def test_class2_ex3a():
     assert std_err == ""
 
 
-def test_class2_ex4a():
+def test_class2_ex4():
     base_path = "../class2/exercises/exercise4/"
     cmd_list = ["python", "exercise4.py"]
 
