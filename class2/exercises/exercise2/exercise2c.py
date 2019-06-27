@@ -1,4 +1,3 @@
-import os
 from nornir import InitNornir
 from nornir.core.filter import F
 from nornir.plugins.tasks.networking import netmiko_send_command

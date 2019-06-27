@@ -1,4 +1,3 @@
-import os
 from nornir import InitNornir
 from nornir.core.filter import F
 
