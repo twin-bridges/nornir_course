@@ -1,0 +1,31 @@
+---
+arista1:
+    hostname: arista1.lasthop.io
+    port: 8443
+    groups:
+      - eos
+      - sfo
+    data:
+      role: WAN
+      site_details:
+        wifi_password: verysupersecure
+
+arista2:
+    hostname: arista2.lasthop.io
+    port: 22
+    groups:
+      - eos
+      - sea
+    data:
+      role: WAN
+      site_details:
+        wifi_password: racecar
+
+arista3:
+    hostname: arista3.lasthop.io
+    port: 8443
+    groups:
+      - eos
+      - sea
+    data:
+      role: AGG

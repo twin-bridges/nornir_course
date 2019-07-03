@@ -1,24 +1,5 @@
+import os
 import subprocess
-
-
-NORNIR_LOGGING = {"enabled": False}
-
-
-def gen_inventory_dict(base_path):
-    """Dynamically create an inventory dictionary using exercise path."""
-    # BASE_PATH = "../class1/exercises/exercise1/"
-    NORNIR_HOSTS = f"{base_path}/hosts.yaml"
-    NORNIR_GROUPS = f"{base_path}/groups.yaml"
-    NORNIR_DEFAULTS = f"{base_path}/defaults.yaml"
-    NORNIR_INVENTORY = {
-        "plugin": "nornir.plugins.inventory.simple.SimpleInventory",
-        "options": {
-            "host_file": NORNIR_HOSTS,
-            "group_file": NORNIR_GROUPS,
-            "defaults_file": NORNIR_DEFAULTS,
-        },
-    }
-    return NORNIR_INVENTORY
 
 
 def subprocess_runner(cmd_list, exercise_dir):
@@ -48,16 +29,19 @@ def test_class3_ex1b():
 
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
+    assert std_out.count("CET") == 2
+    assert std_out.count("PST") == 3
     assert "{'role': 'AGG'}" in std_out
     assert (
-        "dict_items([('role', 'AGG'), ('state', 'WA'), ('timezone', 'PST')])" in std_out
+        "dict_items([('role', 'AGG'), ('state', 'WA'), ('timezone', 'PST'), ('dns', '8.8.8.8')])"
+        in std_out
     )
     assert std_err == ""
 
 
-def test_class3_ex2a():
+def test_class3_ex2():
     base_path = "../class3/exercises/exercise2/"
-    cmd_list = ["python", "exercise2a.py"]
+    cmd_list = ["python", "exercise2.py"]
 
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
@@ -67,9 +51,9 @@ def test_class3_ex2a():
     assert std_err == ""
 
 
-def test_class3_ex3a():
+def test_class3_ex3():
     base_path = "../class3/exercises/exercise3/"
-    cmd_list = ["python", "exercise3a.py"]
+    cmd_list = ["python", "exercise3.py"]
 
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
@@ -83,25 +67,43 @@ def test_class3_ex3a():
     assert std_err == ""
 
 
-def test_class3_ex5a():
-    base_path = "../class3/exercises/exercise5/"
-    cmd_list = ["python", "exercise5a.py"]
+def test_class3_ex4():
+    base_path = "../class3/exercises/exercise4/"
+    cmd_list = ["python", "exercise4.py"]
 
+    os.environ["PYTHONWARNINGS"] = "ignore::Warning"
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
     assert "{'arista1': {'Et1': {'status': 'connected', 'vlan': '1'}," in std_out
-    assert "{'arista2': {'Et1': {'status': 'connected', 'vlan': '1'}," in std_out
-    assert "{'arista3': {'Et1': {'status': 'connected', 'vlan': '1'}," in std_out
-    assert "{'arista4': {'Et1': {'status': 'connected', 'vlan': '1'}," in std_out
+    assert "'arista2': {'Et1': {'status': 'connected', 'vlan': '1'}," in std_out
+    assert "'arista3': {'Et1': {'status': 'connected', 'vlan': '1'}," in std_out
+    assert "'arista4': {'Et1': {'status': 'connected', 'vlan': '1'}," in std_out
     assert std_err == ""
 
 
-def test_class3_ex6a():
-    base_path = "../class3/exercises/exercise6/"
-    cmd_list = ["python", "exercise6a.py"]
+def test_class3_ex5():
+    base_path = "../class3/exercises/exercise5/"
+    cmd_list = ["python", "exercise4.py"]
 
+    os.environ["PYTHONWARNINGS"] = "ignore::Warning"
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
-    assert "{'nxos1': {'model': 'Nexus9000 9000v Chassis'" in std_out
-    assert "'nxos2': {'model': 'Nexus9000 9000v Chassis'," in std_out
+    assert "{'arista1': {'Et1': {'status': 'connected', 'vlan': '1'}," in std_out
+    assert "'arista2': {'Et1': {'status': 'connected', 'vlan': '1'}," in std_out
+    assert "'arista3': {'Et1': {'status': 'connected', 'vlan': '1'}," in std_out
+    assert "'arista4': {'Et1': {'status': 'connected', 'vlan': '1'}," in std_out
     assert std_err == ""
+
+
+def test_class3_ex6():
+    pass
+
+#    Exercise6 may change, leaving this here for now
+#    base_path = "../class3/exercises/exercise6/"
+#    cmd_list = ["python", "exercise6.py"]
+#
+#    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
+#    assert return_code == 0
+#    assert "{'nxos1': {'model': 'Nexus9000 9000v Chassis'" in std_out
+#    assert "'nxos2': {'model': 'Nexus9000 9000v Chassis'," in std_out
+#    assert std_err == ""

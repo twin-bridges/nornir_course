@@ -1,0 +1,17 @@
+---
+eos:
+  connection_options:
+    netmiko:
+      platform: cisco_ios
+    napalm:
+      platform: eos
+  data:
+    timezone: CET
+
+sea:
+  data:
+    state: WA
+
+sfo:
+  data:
+    state: CA

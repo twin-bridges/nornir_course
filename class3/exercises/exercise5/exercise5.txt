@@ -1,0 +1,177 @@
+$ python -m ipdb exercise5.py
+> /home/student3/wk3/tmp/exercise5.py(1)<module>()
+----> 1 from pprint import pprint
+      2 from nornir import InitNornir
+      3 from nornir.plugins.tasks.networking import netmiko_send_command
+
+ipdb> list 6
+----> 1 from pprint import pprint
+      2 from nornir import InitNornir
+      3 from nornir.plugins.tasks.networking import netmiko_send_command
+      4
+      5
+      6 def main():
+      7     nr = InitNornir(config_file="config.yaml")
+      8     nr = nr.filter(groups=["eos"])
+      9     result = nr.run(
+     10         task=netmiko_send_command, command_string="show int status", use_textfsm=True
+     11     )
+
+ipdb> list 22
+     17             combined_data[res][interface["port"]]["status"] = interface["status"]
+     18             combined_data[res][interface["port"]]["vlan"] = interface["vlan"]
+     19     pprint(combined_data)
+     20
+     21
+     22 if __name__ == "__main__":
+     23     main()
+     24
+
+ipdb> next
+> /home/student3/wk3/tmp/exercise5.py(2)<module>()
+      1 from pprint import pprint
+----> 2 from nornir import InitNornir
+      3 from nornir.plugins.tasks.networking import netmiko_send_command
+
+ipdb> next
+next
+> /home/student3/wk3/tmp/exercise5.py(3)<module>()
+      2 from nornir import InitNornir
+----> 3 from nornir.plugins.tasks.networking import netmiko_send_command
+      4
+
+ipdb> next
+> /home/student3/wk3/tmp/exercise5.py(6)<module>()
+      5
+----> 6 def main():
+      7     nr = InitNornir(config_file="config.yaml")
+
+ipdb> next
+> /home/student3/wk3/tmp/exercise5.py(22)<module>()
+     21
+---> 22 if __name__ == "__main__":
+     23     main()
+
+ipdb> step
+> /home/student3/wk3/tmp/exercise5.py(23)<module>()
+     22 if __name__ == "__main__":
+---> 23     main()
+     24
+
+ipdb> step
+--Call--
+> /home/student3/wk3/tmp/exercise5.py(6)main()
+      5
+----> 6 def main():
+      7     nr = InitNornir(config_file="config.yaml")
+
+ipdb> step
+> /home/student3/wk3/tmp/exercise5.py(7)main()
+      6 def main():
+----> 7     nr = InitNornir(config_file="config.yaml")
+      8     nr = nr.filter(groups=["eos"])
+
+ipdb> step
+--Call--
+> /home/student3/VENV/py3_venv/local/lib/python3.6/site-packages/nornir/init_nornir.py(23)InitNornir()
+     22
+---> 23 def InitNornir(
+     24     config_file: str = "",
+
+ipdb> up
+> /home/student3/wk3/tmp/exercise5.py(7)main()
+      6 def main():
+----> 7     nr = InitNornir(config_file="config.yaml")
+      8     nr = nr.filter(groups=["eos"])
+
+ipdb> next
+> /home/student3/wk3/tmp/exercise5.py(8)main()
+      7     nr = InitNornir(config_file="config.yaml")
+----> 8     nr = nr.filter(groups=["eos"])
+      9     result = nr.run(
+
+ipdb> p nr.inventory.hosts
+{'cisco3': Host: cisco3, 'cisco4': Host: cisco4, 'nxos1': Host: nxos1, 'nxos2': Host: nxos2, 'arista1': Host: arista1, 'arista2': Host: arista2, 'arista3': Host: arista3, 'arista4': Host: arista4, 'srx2': Host: srx2}
+ipdb> pp nr.inventory.hosts
+{'arista1': Host: arista1,
+ 'arista2': Host: arista2,
+ 'arista3': Host: arista3,
+ 'arista4': Host: arista4,
+ 'cisco3': Host: cisco3,
+ 'cisco4': Host: cisco4,
+ 'nxos1': Host: nxos1,
+ 'nxos2': Host: nxos2,
+ 'srx2': Host: srx2}
+ipdb> next
+> /home/student3/wk3/tmp/exercise5.py(9)main()
+      8     nr = nr.filter(groups=["eos"])
+----> 9     result = nr.run(
+     10         task=netmiko_send_command, command_string="show int status", use_textfsm=True
+
+ipdb> p nr.inventory.hosts
+{'arista1': Host: arista1, 'arista2': Host: arista2, 'arista3': Host: arista3, 'arista4': Host: arista4}
+ipdb> pp nr.inventory.hosts
+{'arista1': Host: arista1,
+ 'arista2': Host: arista2,
+ 'arista3': Host: arista3,
+ 'arista4': Host: arista4}
+ipdb> print(nr.inventory.hosts)
+{'arista1': Host: arista1, 'arista2': Host: arista2, 'arista3': Host: arista3, 'arista4': Host: arista4}
+ipdb> pprint(nr.inventory.hosts)
+{'arista1': Host: arista1,
+ 'arista2': Host: arista2,
+ 'arista3': Host: arista3,
+ 'arista4': Host: arista4}
+ipdb> dir()
+['nr']
+ipdb> temp = "somecoolstring"
+ipdb> !l = "someotherstring"
+ipdb> temp
+'somecoolstring'
+ipdb> !l
+'someotherstring'
+ipdb> break 19
+Breakpoint 1 at /home/student3/wk3/tmp/exercise5.py:19
+ipdb> continue
+> /home/student3/wk3/tmp/exercise5.py(19)main()
+     18             combined_data[res][interface["port"]]["vlan"] = interface["vlan"]
+1--> 19     pprint(combined_data)
+     20
+
+ipdb> continue
+{'arista1': {'Et1': {'status': 'connected', 'vlan': '1'},
+             'Et2': {'status': 'connected', 'vlan': '2'},
+             'Et3': {'status': 'connected', 'vlan': '3'},
+             'Et4': {'status': 'connected', 'vlan': '4'},
+             'Et5': {'status': 'connected', 'vlan': '5'},
+             'Et6': {'status': 'connected', 'vlan': '6'},
+             'Et7': {'status': 'connected', 'vlan': '7'}},
+ 'arista2': {'Et1': {'status': 'connected', 'vlan': '1'},
+             'Et2': {'status': 'connected', 'vlan': '2'},
+             'Et3': {'status': 'connected', 'vlan': '3'},
+             'Et4': {'status': 'connected', 'vlan': '4'},
+             'Et5': {'status': 'connected', 'vlan': '5'},
+             'Et6': {'status': 'connected', 'vlan': '6'},
+             'Et7': {'status': 'connected', 'vlan': '7'}},
+ 'arista3': {'Et1': {'status': 'connected', 'vlan': '1'},
+             'Et2': {'status': 'connected', 'vlan': '2'},
+             'Et3': {'status': 'connected', 'vlan': '3'},
+             'Et4': {'status': 'connected', 'vlan': '4'},
+             'Et5': {'status': 'connected', 'vlan': '5'},
+             'Et6': {'status': 'connected', 'vlan': '6'},
+             'Et7': {'status': 'connected', 'vlan': '7'}},
+ 'arista4': {'Et1': {'status': 'connected', 'vlan': '1'},
+             'Et2': {'status': 'connected', 'vlan': '2'},
+             'Et3': {'status': 'connected', 'vlan': '3'},
+             'Et4': {'status': 'connected', 'vlan': '4'},
+             'Et5': {'status': 'connected', 'vlan': '5'},
+             'Et6': {'status': 'connected', 'vlan': '6'},
+             'Et7': {'status': 'connected', 'vlan': '7'}}}
+The program finished and will be restarted
+> /home/student3/wk3/tmp/exercise5.py(1)<module>()
+----> 1 from pprint import pprint
+      2 from nornir import InitNornir
+      3 from nornir.plugins.tasks.networking import netmiko_send_command
+
+ipdb> exit()
+$
