@@ -1,0 +1,21 @@
+---
+cisco3:
+  hostname: cisco3
+  password: strongpass
+  groups:
+    - ios
+    - sea
+
+arista1:
+  hostname: arista1
+  groups:
+    - sea
+    - eos
+
+arista2:
+  hostname: arista2
+  data:
+    somevar: taco
+    somevar1: salsa
+  groups:
+    - eos

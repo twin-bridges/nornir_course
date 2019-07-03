@@ -1,0 +1,12 @@
+---
+sea: {}
+
+ios:
+  connection_options:
+    netmiko:
+      platform: cisco_ios
+
+nxos: {}
+
+eos:
+  platform: arista_eos

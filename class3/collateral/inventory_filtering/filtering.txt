@@ -1,0 +1,56 @@
+$ python filtering.py
+--Return--
+None
+> /home/carl/nornir_filtering/filtering.py(7)main()
+      6     nr = InitNornir(config_file="config.yaml")
+----> 7     import ipdb; ipdb.set_trace()
+      8
+
+ipdb> nr.inventory.hosts
+{'cisco3': Host: cisco3, 'cisco4': Host: cisco4, 'nxos1': Host: nxos1, 'nxos2': Host: nxos2, 'arista3': Host: arista3, 'arista4': Host: arista4}
+ipdb> nr.inventory.groups
+{'sea': Group: sea, 'ios': Group: ios, 'nxos': Group: nxos, 'eos': Group: eos}
+ipdb> nr.inventory.hosts['arista3']
+Host: arista3
+ipdb> nr.inventory.hosts['arista3'].hostname
+'arista3.lasthop.io'
+ipdb> arista3 = nr.filter(hostname="arista3")
+ipdb> arista3.inventory.hosts
+{}
+ipdb> arista3 = nr.filter(hostname="arista3.lasthop.io")
+ipdb> arista3.inventory.hosts
+{'arista3': Host: arista3}
+ipdb> nr.inventory.hosts['cisco3']
+Host: cisco3
+ipdb> nr.inventory.hosts['cisco3'].platform
+ipdb> nr.inventory.hosts['cisco4'].platform
+'cisco_ios'
+ipdb> cisco = nr.filter(platform="cisco_ios")
+ipdb> cisco.inventory.hosts
+{'cisco4': Host: cisco4}
+ipdb> nr.inventory.hosts['arista3'].port
+ipdb> nr.inventory.hosts['arista4'].port
+22
+ipdb> nr.inventory.groups
+{'sea': Group: sea, 'ios': Group: ios, 'nxos': Group: nxos, 'eos': Group: eos}
+ipdb> eos = nr.filter(platform="arista_eos")
+ipdb> eos.inventory.hosts
+{'arista3': Host: arista3, 'arista4': Host: arista4}
+ipdb> eos = nr.filter(platform="arista_eos").filter(port=22)
+ipdb> eos.inventory.hosts
+{'arista4': Host: arista4}
+ipdb> dir(F)
+['__and__', '__call__', '__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__invert__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__or__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_verify_rules']
+ipdb> ios = nr.filter(F(groups__contains="ios"))
+ipdb> ios.inventory.hosts
+{'cisco3': Host: cisco3, 'cisco4': Host: cisco4}
+ipdb> ios_nxos = nr.filter(F(groups__contains="ios") | F(groups__contains="nxos"))
+ipdb> ios_nxos.inventory.hosts
+{'cisco3': Host: cisco3, 'cisco4': Host: cisco4, 'nxos1': Host: nxos1, 'nxos2': Host: nxos2}
+ipdb> nxos_sea = nr.filter(F(groups__contains="nxos") & F(groups__contains="sea"))
+ipdb> nxos_sea.inventory.hosts
+{'nxos1': Host: nxos1}
+ipdb> nxos_sea = nr.filter(F(groups__contains="nxos") & ~F(groups__contains="sea"))
+ipdb> nxos_sea.inventory.hosts
+{'nxos2': Host: nxos2}
+ipdb>

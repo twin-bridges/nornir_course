@@ -1,0 +1,18 @@
+---
+ios:
+  password: cisco123
+  data:
+    somevar: neato
+    somevar1: cool
+
+eos:
+  password: password
+  data:
+    somevar: racecar
+    somevar1: turbo
+
+sea:
+  password: 12345678
+  data:
+    somevar: rainy
+    somevar1: cloudy
