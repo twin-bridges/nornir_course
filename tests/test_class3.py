@@ -96,14 +96,12 @@ def test_class3_ex5():
 
 
 def test_class3_ex6():
-    pass
+    base_path = "../class3/exercises/exercise6/"
+    cmd_list = ["python", "exercise6.py"]
 
-#    Exercise6 may change, leaving this here for now
-#    base_path = "../class3/exercises/exercise6/"
-#    cmd_list = ["python", "exercise6.py"]
-#
-#    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
-#    assert return_code == 0
-#    assert "{'nxos1': {'model': 'Nexus9000 9000v Chassis'" in std_out
-#    assert "'nxos2': {'model': 'Nexus9000 9000v Chassis'," in std_out
-#    assert std_err == ""
+    os.environ["PYTHONWARNINGS"] = "ignore::Warning"
+    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
+    assert return_code == 0
+    assert "{'nxos1': {'model': 'Nexus9000 9000v Chassis'" in std_out
+    assert "'nxos2': {'model': 'Nexus9000 9000v Chassis'," in std_out
+    assert std_err == ""
