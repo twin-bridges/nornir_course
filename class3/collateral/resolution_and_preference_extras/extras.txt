@@ -1,0 +1,31 @@
+$ python filtering.py
+--Return--
+None
+> /home/carl/nornir_filtering/filtering.py(7)main()
+      6     nr = InitNornir(config_file="config.yaml")
+----> 7     import ipdb; ipdb.set_trace()
+      8
+
+ipdb> nr.inventory.hosts
+{'cisco3': Host: cisco3, 'cisco4': Host: cisco4, 'nxos1': Host: nxos1, 'nxos2': Host: nxos2, 'arista3': Host: arista3, 'arista4': Host: arista4}
+ipdb> nr.inventory.groups
+{'sea': Group: sea, 'ios': Group: ios, 'nxos': Group: nxos, 'eos': Group: eos}
+ipdb>
+{'sea': Group: sea, 'ios': Group: ios, 'nxos': Group: nxos, 'eos': Group: eos}
+ipdb> nr.inventory.hosts['nxos1'].items()
+dict_items([('role', 'somerole'), ('version', 9.0)])
+ipdb> nr.inventory.hosts['nxos1'].data
+{'role': 'somerole'}
+ipdb> nr.inventory.hosts['nxos1']['role'[
+*** SyntaxError: unexpected EOF while parsing
+ipdb> nr.inventory.hosts['nxos1']['role']
+'somerole'
+ipdb> nr.inventory.hosts['nxos1']['version']
+9.0
+ipdb> nxos_versions = nr.filter(version=9.0)
+ipdb> nxos_versions.inventory.hosts
+{'nxos1': Host: nxos1, 'nxos2': Host: nxos2}
+ipdb> nxos = nxos_versions.filter(role="somerole")
+ipdb> nxos.inventory.hosts
+{'nxos1': Host: nxos1}
+ipdb>

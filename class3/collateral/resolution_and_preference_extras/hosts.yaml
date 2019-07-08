@@ -1,0 +1,35 @@
+---
+cisco3:
+    hostname: cisco3.lasthop.io
+    groups:
+      - ios
+
+cisco4:
+    hostname: cisco4.lasthop.io
+    platform: cisco_ios
+    groups:
+      - ios
+
+nxos1:
+    hostname: nxos1.lasthop.io
+    data:
+        role: somerole
+    groups:
+      - nxos
+      - sea
+
+nxos2:
+    hostname: nxos2.lasthop.io
+    groups:
+      - nxos
+
+arista3:
+    hostname: arista3.lasthop.io
+    groups:
+      - eos
+
+arista4:
+    hostname: arista4.lasthop.io
+    port: 22
+    groups:
+      - eos
