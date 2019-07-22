@@ -8,7 +8,7 @@ def main():
     nr = InitNornir(config_file="config.yaml")
     ios_filt = F(groups__contains="ios")
     nr = nr.filter(ios_filt)
-    nr.inventory.hosts["cisco3"].password = 'bogus'
+    nr.inventory.hosts["cisco3"].password = "bogus"
     my_results = nr.run(task=netmiko_send_command, command_string="show ip int brief")
     print_result(my_results)
     print(f"Task failed hosts: {my_results.failed_hosts}")
