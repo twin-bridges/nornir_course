@@ -38,15 +38,3 @@ if __name__ == "__main__":
     nr = InitNornir(config_file="config.yaml")
     ios = nr.filter(F(groups__contains="ios"))
     results = ios.run(task=file_copy, num_workers=1)
-
-
-
-
-
-
-
-
-
-
-
-
