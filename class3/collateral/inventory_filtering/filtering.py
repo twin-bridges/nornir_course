@@ -1,5 +1,5 @@
 from nornir import InitNornir
-from nornir.core.filter import F    # noqa
+from nornir.core.filter import F  # noqa
 
 
 def main():
