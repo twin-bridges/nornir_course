@@ -8,7 +8,7 @@ def file_copy(task):
     group_name = task.host.groups[0]
 
     # Set the filename based on the platform (ios, eos, et cetera)
-    base_file = "test_file.txt"
+    base_file = "test_file1.txt"
     source_file = f"{group_name}/{base_file}"
     dest_file = base_file
     # print(source_file)
@@ -38,3 +38,15 @@ if __name__ == "__main__":
     nr = InitNornir(config_file="config.yaml")
     ios = nr.filter(F(groups__contains="ios"))
     results = ios.run(task=file_copy, num_workers=1)
+
+
+
+
+
+
+
+
+
+
+
+

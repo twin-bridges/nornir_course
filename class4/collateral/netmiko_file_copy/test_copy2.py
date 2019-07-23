@@ -8,7 +8,7 @@ def file_copy(task):
     group_name = task.host.groups[0]
 
     # Set the filename based on the platform (ios, eos, et cetera)
-    base_file = "test_file.txt"
+    base_file = "test_file1.txt"
     source_file = f"{group_name}/{base_file}"
     dest_file = base_file
 

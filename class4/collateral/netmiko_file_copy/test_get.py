@@ -7,7 +7,7 @@ def file_copy(task):
     group_name = task.host.groups[0]
 
     # Set the filename based on the platform (ios, eos, et cetera)
-    source_file = "test_file.txt"
+    source_file = "test_file1.txt"
     dest_file = f"{group_name}/test_new.txt"
 
     # Transfer the file
@@ -24,7 +24,7 @@ def file_copy(task):
     print(source_file)
     print()
     if results[0].changed is False:
-        print("File not transferred: correct file is already on the device")
+        print("File not transferred: correct local file already exists")
     else:
         print("File downloaded")
 
