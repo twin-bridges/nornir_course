@@ -3,6 +3,7 @@ from nornir import InitNornir
 
 def main():
     nr = InitNornir(config_file="config.yaml")
+    print(nr)
     import ipdb
 
     ipdb.set_trace()
