@@ -1,3 +1,4 @@
+import ipdb
 from nornir import InitNornir
 from nornir.plugins.tasks.networking import netmiko_send_config
 
@@ -9,7 +10,6 @@ if __name__ == "__main__":
 
     # Direct inline configs
     commands = ["interface loopback90", "ip address 172.31.90.1/32"]
-    import ipdb
 
     ipdb.set_trace()
     results = nr.run(task=netmiko_send_config, config_commands=commands)
