@@ -1,0 +1,2 @@
+interface loopback92
+  ip address 172.31.92.1/32
