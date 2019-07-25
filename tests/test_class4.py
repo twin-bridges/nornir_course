@@ -42,10 +42,16 @@ def remove_ex2_flash_files():
 
     # remove test files from eos flash
     eos.run(task=networking.netmiko_send_command, command_string="terminal dont-ask")
-    eos.run(task=networking.netmiko_send_command, command_string="delete flash:arista.txt")
+    eos.run(
+        task=networking.netmiko_send_command, command_string="delete flash:arista.txt"
+    )
 
     # remove test files from ios flash
-    ios.run(task=networking.netmiko_send_command, use_timing=True, command_string="delete flash:cisco.txt")
+    ios.run(
+        task=networking.netmiko_send_command,
+        use_timing=True,
+        command_string="delete flash:cisco.txt",
+    )
     ios.run(task=networking.netmiko_send_command, use_timing=True, command_string="\n")
     ios.run(task=networking.netmiko_send_command, use_timing=True, command_string="\n")
 
@@ -72,7 +78,10 @@ def remove_loopback():
     nr = InitNornir(inventory=nornir_inventory, logging=NORNIR_LOGGING)
     ex5_host = nr.filter(name="arista4")
 
-    ex5_host.run(task=networking.netmiko_send_config, config_commands=["no interface loopback 123"])
+    ex5_host.run(
+        task=networking.netmiko_send_config,
+        config_commands=["no interface loopback 123"],
+    )
 
 
 def test_class4_ex1a():
@@ -159,7 +168,7 @@ def test_class4_ex3a():
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
     for host in exercise_hosts:
-        if host.startswith('arista'):
+        if host.startswith("arista"):
             assert f"{host}(config)#vlan 123" in std_out
         else:
             assert f"{host}(config)# vlan 123" in std_out
@@ -182,7 +191,7 @@ def test_class4_ex3b():
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
     for host in exercise_hosts:
-        if host.startswith('arista'):
+        if host.startswith("arista"):
             assert f"{host}(config)#vlan 123" in std_out
         else:
             assert f"{host}(config)# vlan 123" in std_out
@@ -205,7 +214,7 @@ def test_class4_ex3c():
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
     for host in exercise_hosts:
-        if host.startswith('arista'):
+        if host.startswith("arista"):
             assert f"{host}(config)#vlan 123" in std_out
         else:
             assert f"{host}(config)# vlan 123" in std_out

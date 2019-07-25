@@ -22,7 +22,9 @@ def main():
     nr = nr.filter(name="srx2")
     result = nr.run(task=my_task, num_workers=1)
     print_result(result)
-    import ipdb; ipdb.set_trace()
+    import ipdb
+
+    ipdb.set_trace()
 
 
 if __name__ == "__main__":

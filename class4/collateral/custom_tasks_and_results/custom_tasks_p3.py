@@ -20,11 +20,13 @@ def new_task(task):
 
 def main():
     nr = InitNornir(config_file="config.yaml", logging={"enabled": False})
-    #result = nr.run(task=my_task)
-    #print_result(result)
+    # result = nr.run(task=my_task)
+    # print_result(result)
     nr = nr.filter(name="arista1")
     result = nr.run(task=new_task)
-    import ipdb; ipdb.set_trace()
+    import ipdb
+
+    ipdb.set_trace()
     print_result(result)
 
 
