@@ -25,7 +25,6 @@ def main():
     nr = nr.filter(F(groups__contains="eos") | F(groups__contains="nxos"))
     result = nr.run(task=configure_vlan, vlan_id="123", vlan_name="ntp_vlan")
     print_result(result)
-    print(result["cisco3"].changed)
 
 
 if __name__ == "__main__":

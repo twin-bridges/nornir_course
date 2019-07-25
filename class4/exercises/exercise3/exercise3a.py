@@ -14,7 +14,7 @@ def configure_vlans(task, vlan_id, vlan_name):
 def main():
     nr = InitNornir(config_file="config.yaml")
     nr = nr.filter(F(groups__contains="eos") | F(groups__contains="nxos"))
-    result = nr.run(task=configure_vlans)
+    result = nr.run(task=configure_vlans, vlan_id="123", vlan_name="ntp_vlan")
     print_result(result)
 
 

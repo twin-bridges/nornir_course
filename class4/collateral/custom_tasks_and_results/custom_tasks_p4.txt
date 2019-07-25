@@ -1,0 +1,34 @@
+$ python custom_tasks.py
+ my_task*************************************************************************
+* srx2 ** changed : True *******************************************************
+vvvv my_task ** changed : True vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv INFO
+ran command
+---- netmiko_send_command ** changed : False ----------------------------------- INFO
+
+host-name srx2;
+
+^^^^ END my_task ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+--Return--
+None
+> /home/carl/nornir_custom_tasks/custom_tasks.py(25)main()
+     24     print_result(result)
+---> 25     import ipdb; ipdb.set_trace()
+     26
+
+ipdb>  result
+AggregatedResult (my_task): {'srx2': MultiResult: [Result: "my_task", Result: "netmiko_send_command"]}
+ipdb> result['srx2']
+MultiResult: [Result: "my_task", Result: "netmiko_send_command"]
+ipdb> result['srx2'][0]
+Result: "my_task"
+ipdb> result['srx2'][1]
+Result: "netmiko_send_command"
+ipdb> result['srx2'][1].result
+'\nhost-name srx2;\n'
+ipdb> result['srx2'][0].result
+'ran command'
+ipdb> result['srx2'][0].changed
+True
+ipdb> result['srx2'][1].changed
+False
+ipdb>

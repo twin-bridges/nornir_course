@@ -1,0 +1,18 @@
+$ python custom_tasks.py
+> /home/carl/nornir_custom_tasks/custom_tasks.py(28)main()
+     27     import ipdb; ipdb.set_trace()
+---> 28     print_result(result)
+     29
+
+ipdb> result
+AggregatedResult (new_task): {'arista1': MultiResult: [Result: "new_task"]}
+ipdb> result['arista1']
+MultiResult: [Result: "new_task"]
+ipdb> result['arista1'][0]
+Result: "new_task"
+ipdb> result['arista1'][0].result
+'this task succeeded'
+ipdb> result['arista1'][0].failed
+True
+ipdb> result['arista1'][0].changed
+True
