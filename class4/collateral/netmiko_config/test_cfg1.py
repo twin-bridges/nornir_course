@@ -8,11 +8,9 @@ if __name__ == "__main__":
     nr = nr.filter(name="nxos1")
 
     # Direct inline configs
-    commands = [
-        "interface loopback90",
-        "ip address 172.31.90.1/32",
-    ]
+    commands = ["interface loopback90", "ip address 172.31.90.1/32"]
     import ipdb
+
     ipdb.set_trace()
     results = nr.run(task=netmiko_send_config, config_commands=commands)
-    print(results['nxos1'][0].result)
+    print(results["nxos1"][0].result)

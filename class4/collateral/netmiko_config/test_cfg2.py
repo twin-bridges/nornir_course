@@ -15,10 +15,7 @@ def custom_config(task):
     print(net_connect.fast_cli)
 
     # Direct inline configs
-    commands = [
-        "interface loopback90",
-        "ip address 172.31.90.1/32",
-    ]
+    commands = ["interface loopback90", "ip address 172.31.90.1/32"]
     results = task.run(task=netmiko_send_config, config_commands=commands)
     print(results[0].result)
 
