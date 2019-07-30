@@ -1,0 +1,7 @@
+{% for interface, data in interfaces.items() %}
+interface {{ interface }}
+ description {{ data.descr }}
+ switchport access vlan {{ data.vlan }}
+ switchport mode access
+ {{ data.state }}
+{% endfor %}

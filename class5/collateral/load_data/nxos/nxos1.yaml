@@ -1,0 +1,7 @@
+---
+data_type: YAML
+interface_list:
+  - element1
+  - element2
+interface_descr:
+  Ethernet2: not important server

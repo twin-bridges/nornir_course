@@ -1,0 +1,10 @@
+{
+    "data_type": "json!",
+    "interface_list": [
+        "Ethernet4",
+        "Ethernet5"
+    ],
+    "interface_descr": {
+        "Ethernet4": "to important server link 2"
+    }
+}

@@ -1,0 +1,5 @@
+{% for interface, data in interfaces.items() %}
+interface {{ interface }}
+ description {{ data.descr }}
+ {{ data.state }}
+{% endfor %}
