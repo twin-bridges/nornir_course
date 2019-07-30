@@ -83,7 +83,7 @@ def test_class3_ex4():
 
 def test_class3_ex5():
     base_path = "../class3/exercises/exercise5/"
-    cmd_list = ["python", "exercise4.py"]
+    cmd_list = ["python", "exercise5.py"]
 
     os.environ["PYTHONWARNINGS"] = "ignore::Warning"
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
