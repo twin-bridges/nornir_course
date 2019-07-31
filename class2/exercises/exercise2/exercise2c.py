@@ -13,9 +13,8 @@ def main():
     host_results = my_results["cisco3"]
 
     print()
-    print(nr.inventory.hosts)
     print(type(host_results))
-    print(host_results[0])
+    print(repr(host_results[0]))
     print(host_results.__iter__)
     print()
 

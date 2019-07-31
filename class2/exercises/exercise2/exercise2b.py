@@ -14,10 +14,10 @@ def main():
     print()
     print(nr.inventory.hosts)
     print()
-    print(type(my_results))
-    print(my_results.items())
-    print(my_results.keys())
-    print(my_results.values())
+    print(f"my_results type: {type(my_results)}\n")
+    print(f"items() method: {my_results.items()}\n")
+    print(f"keys() method: {my_results.keys()}\n")
+    print(f"values() method: {my_results.values()}\n")
     print()
 
 

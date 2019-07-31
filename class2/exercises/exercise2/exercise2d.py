@@ -14,9 +14,7 @@ def main():
     task_result = host_results[0]
 
     print()
-    print(nr.inventory.hosts)
     print(type(task_result))
-    print(dir(task_result))
     print(
         f"Host: {task_result.host}\n"
         f"Task Name: {task_result.name}\n"
