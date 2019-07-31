@@ -11,8 +11,10 @@ def main():
     nr.inventory.hosts["cisco3"].password = "bogus"
     my_results = nr.run(task=netmiko_send_command, command_string="show ip int brief")
     print_result(my_results)
+    print()
     print(f"Task failed hosts: {my_results.failed_hosts}")
     print(f"Global failed hosts: {nr.data.failed_hosts}")
+    print()
 
 
 if __name__ == "__main__":

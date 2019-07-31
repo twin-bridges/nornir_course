@@ -15,8 +15,10 @@ def main():
     my_results = nr.run(task=netmiko_send_command, command_string="show ip int brief")
     print()
     print_result(my_results)
+    print()
     print(f"Task failed hosts: {my_results.failed_hosts}")
     print(f"Global failed hosts: {nr.data.failed_hosts}")
+    print()
 
     # Re-set password back to valid value
     nr.inventory.hosts["cisco3"].password = os.environ["NORNIR_PASSWORD"]
@@ -36,6 +38,7 @@ def main():
         on_failed=True,
     )
     print_result(my_results)
+    print()
     print(f"Task failed hosts: {my_results.failed_hosts}")
     print(f"Global failed hosts: {nr.data.failed_hosts}")
     print()

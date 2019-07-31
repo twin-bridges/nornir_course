@@ -3,6 +3,8 @@ from nornir import InitNornir
 from nornir.core.filter import F
 from nornir.plugins.tasks.networking import netmiko_send_command
 
+DEFAULT_GATEWAY = "10.220.88.1"
+
 
 def main():
     nr = InitNornir(config_file="config.yaml")
@@ -18,7 +20,7 @@ def main():
         output = multi_result[0].result
         desired_data = ""
         for line in output.splitlines():
-            if "10.220.88.1" in line:
+            if DEFAULT_GATEWAY in line:
                 desired_data = line
                 break
         parsed_results.append((host, desired_data))

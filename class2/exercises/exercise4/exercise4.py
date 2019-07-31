@@ -2,6 +2,8 @@ from nornir import InitNornir
 from nornir.core.filter import F
 from nornir.plugins.tasks.networking import napalm_get
 
+GATEWAY = "10.220.88.1"
+
 
 def main():
     nr = InitNornir(config_file="config.yaml")
@@ -15,7 +17,7 @@ def main():
         output = multiresult[0].result["arp_table"]
         desired_data = ""
         for entry in output:
-            if entry["ip"] == "10.220.88.1":
+            if entry["ip"] == GATEWAY:
                 desired_data = entry
                 break
         parsed_results.append((host, desired_data))
