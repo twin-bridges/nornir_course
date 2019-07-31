@@ -20,7 +20,7 @@ def write_configs(task):
     cfg_path = f"configs/{task.host.platform}/"
     filename = f"{cfg_path}{task.host.name}_interfaces"
     content = task.host["rendered_config"]
-    result = task.run(task=files.write_file, filename=filename, content=content)
+    task.run(task=files.write_file, filename=filename, content=content)
 
 
 def deploy_configs(task):

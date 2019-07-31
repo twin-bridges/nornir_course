@@ -1,5 +1,4 @@
 from nornir import InitNornir
-from nornir.plugins.functions.text import print_result
 from nornir.plugins.tasks import text
 
 
@@ -9,7 +8,9 @@ TEMPLATE_STR = """interface loopback{{ int_num }}
 
 
 def my_task(task):
-    result = task.run(task=text.template_file, template="interfaces.j2", path=".", **task.host)
+    result = task.run(
+        task=text.template_file, template="interfaces.j2", path=".", **task.host
+    )
     print(result[0].result)
 
 
