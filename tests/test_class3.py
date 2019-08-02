@@ -11,31 +11,24 @@ def subprocess_runner(cmd_list, exercise_dir):
 
 
 def test_class3_ex1a():
-    base_path = "../class3/exercises/exercise1/1a/"
+    base_path = "../class3/exercises/exercise1/exercise1a/"
     cmd_list = ["python", "exercise1a.py"]
 
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
     assert "{'role': 'AGG'}" in std_out
-    assert (
-        "dict_items([('role', 'AGG'), ('timezone', 'CET'), ('state', 'WA')])" in std_out
-    )
+    assert "{'role': 'AGG', 'timezone': 'CET', 'state': 'WA'}" in std_out
     assert std_err == ""
 
 
 def test_class3_ex1b():
-    base_path = "../class3/exercises/exercise1/1b/"
+    base_path = "../class3/exercises/exercise1/exercise1b/"
     cmd_list = ["python", "exercise1b.py"]
 
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
     assert std_out.count("CET") == 2
-    assert std_out.count("PST") == 3
-    assert "{'role': 'AGG'}" in std_out
-    assert (
-        "dict_items([('role', 'AGG'), ('state', 'WA'), ('timezone', 'PST'), ('dns', '8.8.8.8')])"
-        in std_out
-    )
+    assert std_out.count("PST") == 1
     assert std_err == ""
 
 
