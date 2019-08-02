@@ -9,7 +9,7 @@ def main():
     nr = InitNornir(config_file="config.yaml")
     # Exercise 4b
     nr = nr.filter(F(groups__contains="eos"))
-    result = nr.run(
+    agg_result = nr.run(
         task=netmiko_send_command, command_string="show int status", use_textfsm=True
     )
 
@@ -17,13 +17,13 @@ def main():
     print()
     print("Exercise 4b - verify structured data")
     print("-" * 20)
-    print(type(result['arista1'][0].result))
+    print(type(agg_result['arista1'][0].result))
     print("-" * 20)
 
     print("\nExercise 4c - final dictionary")
     print("-" * 20)
     combined_data = {}
-    for device_name, multi_result in result.items():
+    for device_name, multi_result in agg_result.items():
         combined_data[device_name] = {}
         device_result = multi_result[0]
         for intf_dict in device_result.result:
