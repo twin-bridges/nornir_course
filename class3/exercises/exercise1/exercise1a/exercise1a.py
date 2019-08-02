@@ -3,8 +3,11 @@ from nornir import InitNornir
 
 def main():
     nr = InitNornir()
+    print()
     print(nr.inventory.hosts["arista3"].data)
-    print(nr.inventory.hosts["arista3"].items())
+    # Cast as a dict() to make output more readable
+    print(dict(nr.inventory.hosts["arista3"].items()))
+    print()
 
 
 if __name__ == "__main__":
