@@ -1,0 +1,5 @@
+---
+arista4:
+    hostname: arista4.lasthop.io
+    groups:
+      - eos

@@ -1,0 +1,34 @@
+$ python generic_data.py
+--Return--
+None
+> /home/carl/nornir_generic_data/generic_data.py(8)main()
+      7     cisco3 = nr.inventory.hosts['cisco3']
+----> 8     import ipdb; ipdb.set_trace()
+      9
+
+ipdb> dir()
+['__return__', 'cisco3', 'ipdb', 'nr']
+ipdb> cisco3
+Host: cisco3
+ipdb> cisco3.data
+{'device_asn': 65535}
+ipdb>
+{'device_asn': 65535}
+ipdb>
+{'device_asn': 65535}
+ipdb> cisco3.data['device_asn']
+65535
+ipdb>
+65535
+ipdb>
+65535
+ipdb>
+65535
+ipdb> cisco3.items()
+dict_items([('device_asn', 65535), ('log_svr', '2.4.8.1'), ('ntp_servers', ['1.1.1.1', '1.1.1.2'])])
+ipdb> cisco3['log_svr']
+'2.4.8.1'
+ipdb> cisco3['ntp_servers']
+['1.1.1.1', '1.1.1.2']
+ipdb>
+

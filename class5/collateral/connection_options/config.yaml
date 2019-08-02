@@ -1,0 +1,6 @@
+inventory:
+  plugin: nornir.plugins.inventory.simple.SimpleInventory
+  options:
+    host_file: "hosts.yaml"
+    group_file: "groups.yaml"
+    defaults_file: "defaults.yaml"
