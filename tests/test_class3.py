@@ -38,7 +38,7 @@ def test_class3_ex2():
 
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
-    assert std_out.count("{'arista1': Host: arista1}") == 3
+    assert std_out.count("{'arista1': Host: arista1}") == 2
     assert "{'arista1': Host: arista1, 'arista2': Host: arista2}" in std_out
     assert "{'arista2': Host: arista2}" in std_out
     assert std_err == ""
@@ -51,12 +51,12 @@ def test_class3_ex3():
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
     assert "{'arista3': Host: arista3}" in std_out
-    assert std_out.count("{'arista2': Host: arista2}") == 2
     assert (
         "{'arista1': Host: arista1, 'arista2': Host: arista2, 'arista3': Host: arista3}"
         in std_out
     )
-    assert "{'arista1': Host: arista1}" in std_out
+    assert "{'arista2': Host: arista2}" in std_out
+    assert "{'arista1': Host: arista1, 'arista3': Host: arista3}" in std_out
     assert std_err == ""
 
 
