@@ -1,11 +1,14 @@
 from pprint import pprint
 from nornir import InitNornir
+from nornir.core.filter import F
 from nornir.plugins.tasks.networking import netmiko_send_command
 
 
 def main():
+    # Exercise 5a
     nr = InitNornir(config_file="config.yaml")
-    nr = nr.filter(groups=["eos"])
+    # Exercise 5b
+    nr = filter(F(groups__contains="eos")
     result = nr.run(
         task=netmiko_send_command, command_string="show int status", use_textfsm=True
     )
