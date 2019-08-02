@@ -4,28 +4,41 @@ from nornir.plugins.tasks.networking import napalm_get
 
 
 def main():
+
+    # Exercise 6a
     nr = InitNornir(config_file="config.yaml")
     nr = nr.filter(groups=["nxos"])
-    result = nr.run(
+    agg_result = nr.run(
         task=napalm_get,
         getters=["config", "facts"],
         getters_options={"config": {"retrieve": "all"}},
     )
+
     combined_data = {}
-    for res in result:
-        combined_data[res] = {}
-        config_get = result[res][0].result["config"]
+    for device_name, multi_result in agg_result.items():
+
+        combined_data[device_name] = {}
+        device_result = multi_result[0]
+
+        # Retrieve the NAPALM "configuration" getter info
+        config_get = device_result.result["config"]
+
         # Remove first four lines of configuration which contain a timestamp
         config_start = config_get["startup"].split("\n")[4:]
         config_running = config_get["running"].split("\n")[4:]
-        fact_get = result[res][0].result["facts"]
+
+        # Retrieve the NAPALM "facts"
+        fact_get = device_result.result["facts"]
+
+        # Update combined_data for this device
         if config_running == config_start:
-            combined_data[res]["start_running_match"] = True
+            combined_data[device_name]["start_running_match"] = True
         else:
-            combined_data[res]["start_running_match"] = False
-        combined_data[res]["vendor"] = fact_get["vendor"]
-        combined_data[res]["model"] = fact_get["model"]
-        combined_data[res]["uptime"] = fact_get["uptime"]
+            combined_data[device_name]["start_running_match"] = False
+        combined_data[device_name]["vendor"] = fact_get["vendor"]
+        combined_data[device_name]["model"] = fact_get["model"]
+        combined_data[device_name]["uptime"] = fact_get["uptime"]
+
     pprint(combined_data)
 
 
