@@ -88,9 +88,58 @@ def test_class3_ex5():
     assert std_err == ""
 
 
-def test_class3_ex6():
+def test_class3_ex6a():
     base_path = "../class3/exercises/exercise6/"
-    cmd_list = ["python", "exercise6.py"]
+    cmd_list = ["python", "exercise6a.py"]
+
+    os.environ["PYTHONWARNINGS"] = "ignore::Warning"
+    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
+    assert return_code == 0
+    assert std_out.count("nxos1") == 5
+    assert std_out.count("nxos2") == 5
+    assert std_out.count("napalm_get") == 5
+    assert std_out.count("candidate") == 2
+    assert std_out.count("running") == 4
+    assert std_out.count("startup") == 4
+    assert std_err == ""
+
+
+def test_class3_ex6b():
+    base_path = "../class3/exercises/exercise6/"
+    cmd_list = ["python", "exercise6b.py"]
+
+    os.environ["PYTHONWARNINGS"] = "ignore::Warning"
+    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
+    assert return_code == 0
+    assert std_out.count("nxos1") == 3
+    assert std_out.count("nxos2") == 3
+    assert std_out.count("napalm_get") == 5
+    assert std_out.count("candidate") == 2
+    assert std_out.count("running") == 4
+    assert std_out.count("startup") == 2
+    assert std_err == ""
+
+
+def test_class3_ex6c():
+    base_path = "../class3/exercises/exercise6/"
+    cmd_list = ["python", "exercise6c.py"]
+
+    os.environ["PYTHONWARNINGS"] = "ignore::Warning"
+    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
+    assert return_code == 0
+    assert std_out.count("nxos1") == 5
+    assert std_out.count("nxos2") == 5
+    assert std_out.count("facts") == 2
+    assert std_out.count("napalm_get") == 5
+    assert std_out.count("candidate") == 2
+    assert std_out.count("running") == 4
+    assert std_out.count("startup") == 2
+    assert std_err == ""
+
+
+def test_class3_ex6d():
+    base_path = "../class3/exercises/exercise6/"
+    cmd_list = ["python", "exercise6d.py"]
 
     os.environ["PYTHONWARNINGS"] = "ignore::Warning"
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
