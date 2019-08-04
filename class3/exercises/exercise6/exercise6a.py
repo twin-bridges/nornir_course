@@ -1,4 +1,3 @@
-from pprint import pprint
 from nornir import InitNornir
 from nornir.core.filter import F
 from nornir.plugins.tasks.networking import napalm_get

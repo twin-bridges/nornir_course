@@ -17,7 +17,7 @@ def main():
     print()
     print("Exercise 4b - verify structured data")
     print("-" * 20)
-    print(type(agg_result['arista1'][0].result))
+    print(type(agg_result["arista1"][0].result))
     print("-" * 20)
 
     print("\nExercise 4c - final dictionary")
@@ -27,7 +27,7 @@ def main():
         combined_data[device_name] = {}
         device_result = multi_result[0]
         for intf_dict in device_result.result:
-            intf_name = intf_dict["port"] 
+            intf_name = intf_dict["port"]
             inner_dict = {}
             inner_dict["status"] = intf_dict["status"]
             inner_dict["vlan"] = intf_dict["vlan"]
