@@ -1,0 +1,17 @@
+---
+my_acl:
+  - from_protocol: tcp
+    from_port: 1025
+    to_address: 1.2.3.4/32
+    rule_name: my_first_rule
+    state: accept
+  - from_protocol: tcp
+    from_port: 3389
+    to_address: 1.2.3.4/32
+    rule_name: second_rule
+    state: deny
+  - from_protocol: tcp
+    from_port: 443
+    to_address: 1.2.3.4/32
+    rule_name: the_LAST_rule
+    state: accept

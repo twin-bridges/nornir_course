@@ -1,0 +1,65 @@
+---
+cisco3:
+    hostname: cisco3.lasthop.io
+    groups:
+      - ios
+    data:
+      snmp_id: sea_edge_rtr
+
+cisco4:
+    hostname: cisco4.lasthop.io
+    groups:
+      - ios
+    data:
+      snmp_id: sfo_edge_rtr
+
+nxos1:
+    hostname: nxos1.lasthop.io
+    groups:
+      - nxos
+    data:
+      int_name: Ethernet1/4
+      ip_address: 172.20.0.1
+      ip_mask: 255.255.255.252
+      bgp_router_id: 1.1.1.1
+      bgp_asn: 22
+      bgp_remote_asn: 22
+      bgp_peer: 172.20.0.2
+
+nxos2:
+    hostname: nxos2.lasthop.io
+    groups:
+      - nxos
+    data:
+      int_name: Ethernet1/4
+      ip_address: 172.20.0.2
+      ip_mask: 255.255.255.252
+      bgp_router_id: 2.2.2.2
+      bgp_asn: 22
+      bgp_remote_asn: 22
+      bgp_peer: 172.20.0.1
+
+arista1:
+    hostname: arista1.lasthop.io
+    groups:
+      - eos
+
+arista2:
+    hostname: arista2.lasthop.io
+    groups:
+      - eos
+
+arista3:
+    hostname: arista3.lasthop.io
+    groups:
+      - eos
+
+arista4:
+    hostname: arista4.lasthop.io
+    groups:
+      - eos
+
+srx2:
+    hostname: srx2.lasthop.io
+    groups:
+      - junos
