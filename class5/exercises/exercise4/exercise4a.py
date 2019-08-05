@@ -11,7 +11,7 @@ set firewall family inet filter {{ acl }} term {{ entry['rule_name'] }} from por
 set firewall family inet filter {{ acl }} term {{ entry['rule_name'] }} from destination-address {{ entry['to_address'] }}
 set firewall family inet filter {{ acl }} term {{ entry['rule_name'] }} then {{ entry['state'] }}
 {% endfor %}
-{% endfor %}"""     # noqa
+{% endfor %}"""  # noqa
 
 
 def junos_acl(task):
