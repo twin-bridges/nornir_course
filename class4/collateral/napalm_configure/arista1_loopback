@@ -1,0 +1,4 @@
+interface loopback123
+  ip address 1.2.3.4/32
+  no shutdown
+  description nornir was here!
