@@ -4,19 +4,25 @@ from nornir.plugins.functions.text import print_result
 from nornir.plugins.tasks import networking
 
 
-def capture_default_route(task):
-    cmd = "show ip route 0.0.0.0"
+def uptime(task):
+
+    host = task.host
+    platform = host.platform
+
+    cmd_mapper = {
+        "ios": "show version | inc uptime",
+        "eos": "show version | inc Uptime",
+        "nxos": "show version | inc uptime",
+        "junos": "show system uptime | match System"
+    }
+    cmd = cmd_mapper[platform]
+    print(cmd)
     result = task.run(task=networking.netmiko_send_command, command_string=cmd)
-    for line in result.result.splitlines():
-        if line.strip().startswith("*"):
-            next_hop = line.strip()[2:]
-    return f"Next hop: {next_hop}"
 
 
 def main():
     nr = InitNornir(config_file="config.yaml")
-    nr = nr.filter(F(groups__contains="ios"))
-    result = nr.run(task=capture_default_route)
+    result = nr.run(task=uptime)
     print_result(result)
 
 
