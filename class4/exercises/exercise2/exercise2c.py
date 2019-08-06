@@ -4,31 +4,25 @@ from nornir.plugins.functions.text import print_result
 from nornir.plugins.tasks import networking
 
 
-def file_copy(task, direction="put"):
-    if task.host.platform == "eos":
-        filename = "arista.txt"
-    elif task.host.platform == "ios":
-        filename = "cisco.txt"
-    if direction == "put":
-        source_file = f"{task.host.platform}/{filename}"
-        dest_file = filename
-    elif direction == "get":
-        source_file = filename
-        dest_file = f"{task.host.platform}/{task.host.name}_{filename}"
-    task.run(
-        task=networking.netmiko_file_transfer,
-        source_file=source_file,
-        dest_file=dest_file,
-        direction=direction,
-    )
+def file_copy(task):
 
+    host = task.host
+    platform = host.platform
+    filename = host['file_name']
+    dest_file = f"{platform}/{filename}-saved.txt"
+    multi_result = task.run(
+        task=networking.netmiko_file_transfer,
+        source_file=filename,
+        dest_file=dest_file,
+        direction="get",
+    )
+    import ipdb; ipdb.set_trace()
+    print()
 
 def main():
     nr = InitNornir(config_file="config.yaml")
-    nr = nr.filter(F(groups__contains="ios") | F(groups__contains="eos"))
-    result = nr.run(task=file_copy)
-    print_result(result)
-    result = nr.run(task=file_copy, direction="get")
+    nr = nr.filter(F(groups__contains="eos"))
+    result = nr.run(task=file_copy, num_workers=1)
     print_result(result)
 
 

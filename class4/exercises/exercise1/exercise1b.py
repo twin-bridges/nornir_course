@@ -57,12 +57,18 @@ def uptime(task):
     cmd = cmd_mapper[platform]
     multi_result = task.run(task=networking.netmiko_send_command, command_string=cmd)
     uptime_output = multi_result[0].result
-    uptime_sec = parse_uptime(uptime_output)
+
+    import ipdb; ipdb.set_trace()
+    if platform != "junos":
+        uptime_sec = parse_uptime(uptime_output)
+    else:
+        return None
 
     if uptime_sec >= DAY_SECONDS:
         print()
         print("-" * 40)
         print(f"{host.name}: Up more than a day")
+        print(uptime_sec)
         print("-" * 40)
         print()
 
