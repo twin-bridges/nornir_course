@@ -31,7 +31,7 @@ def subprocess_runner(cmd_list, exercise_dir):
 
 def test_class5_ex1():
     base_path = "../class5/exercises/exercise1/"
-    cmd_list = ["python3.7", "exercise1.py"]
+    cmd_list = ["python", "exercise1.py"]
 
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
@@ -42,7 +42,7 @@ def test_class5_ex1():
 
 def test_class5_ex2():
     base_path = "../class5/exercises/exercise2/"
-    cmd_list = ["python3.7", "exercise2.py"]
+    cmd_list = ["python", "exercise2.py"]
 
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
@@ -53,7 +53,7 @@ def test_class5_ex2():
 
 def test_class5_ex3():
     base_path = "../class5/exercises/exercise3/"
-    cmd_list = ["python3.7", "exercise3.py"]
+    cmd_list = ["python", "exercise3.py"]
 
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
@@ -64,7 +64,7 @@ def test_class5_ex3():
 
 def test_class5_ex4a():
     base_path = "../class5/exercises/exercise4/"
-    cmd_list = ["python3.7", "exercise4a.py"]
+    cmd_list = ["python", "exercise4a.py"]
 
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
@@ -90,7 +90,7 @@ set firewall family inet filter my_acl term the_LAST_rule then accept
 
 def test_class5_ex4b():
     base_path = "../class5/exercises/exercise4/"
-    cmd_list = ["python3.7", "exercise4b.py"]
+    cmd_list = ["python", "exercise4b.py"]
 
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
@@ -116,7 +116,7 @@ set firewall family inet filter my_acl term the_LAST_rule then accept
 
 def test_class5_ex4c():
     base_path = "../class5/exercises/exercise4/"
-    cmd_list = ["python3.7", "exercise4c.py"]
+    cmd_list = ["python", "exercise4c.py"]
 
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
@@ -142,7 +142,7 @@ set firewall family inet filter my_acl term the_LAST_rule then accept
 
 def test_class5_ex5():
     base_path = "../class5/exercises/exercise5/"
-    cmd_list = ["python3.7", "exercise5.py"]
+    cmd_list = ["python", "exercise5.py"]
 
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
@@ -159,7 +159,7 @@ def test_class5_ex5():
 
 def test_class5_ex5c():
     base_path = "../class5/exercises/exercise5/"
-    cmd_list = ["python3.7", "exercise5c.py"]
+    cmd_list = ["python", "exercise5c.py"]
 
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
