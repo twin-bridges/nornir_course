@@ -1,4 +1,5 @@
 import re
+import colorama
 
 from nornir import InitNornir
 from nornir.plugins.tasks import networking
@@ -7,14 +8,23 @@ HOUR_SECONDS = 3600
 DAY_SECONDS = 24 * HOUR_SECONDS
 WEEK_SECONDS = 7 * DAY_SECONDS
 YEAR_SECONDS = 365 * DAY_SECONDS
-
+TEST = True
 
 def parse_uptime(uptime_str):
     """Based on method in the NAPALM library"""
 
+    #import ipdb; ipdb.set_trace()
     if 'uptime is' in uptime_str:
+        # IOS/NX-OS
         uptime_str = uptime_str.split("uptime is")[1]
-        uptime_str = uptime_str.strip()
+    elif 'Uptime:' in uptime_str:
+        # Arista
+        uptime_str = uptime_str.split("Uptime: ")[1]
+    else:
+        # Juniper - different text form
+        # System booted: 2018-10-03 20:51:06 PDT (44w1d 01:59 ago)
+        # pretend it just rebooted
+        return 90
 
     # Initialize to zero
     (years, weeks, days, hours, minutes) = (0, 0, 0, 0, 0)
@@ -57,17 +67,22 @@ def uptime(task):
     cmd = cmd_mapper[platform]
     multi_result = task.run(task=networking.netmiko_send_command, command_string=cmd)
     uptime_output = multi_result[0].result
-
-    import ipdb; ipdb.set_trace()
-    if platform != "junos":
-        uptime_sec = parse_uptime(uptime_output)
-    else:
-        return None
-
-    if uptime_sec >= DAY_SECONDS:
+    
+    uptime_sec = parse_uptime(uptime_output)
+    if uptime_sec < DAY_SECONDS:
+        # Make it look nicer--yes, we are geeks
+        colorama.init()
+        print()
+        print(colorama.Fore.RED + colorama.Back.WHITE)
+        print("-" * 40)
+        print(f"{host.name}: device rebooted recently!")
+        print(uptime_sec)
+        print("-" * 40 + colorama.Style.RESET_ALL)
+        print()
+    elif TEST is True:
         print()
         print("-" * 40)
-        print(f"{host.name}: Up more than a day")
+        print(f"{host.name}: device uptime is:")
         print(uptime_sec)
         print("-" * 40)
         print()
@@ -75,7 +90,7 @@ def uptime(task):
 
 def main():
     nr = InitNornir(config_file="config.yaml")
-    result = nr.run(task=uptime, num_workers=1)
+    result = nr.run(task=uptime, num_workers=10)
 
 
 if __name__ == "__main__":

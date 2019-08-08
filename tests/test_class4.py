@@ -90,9 +90,9 @@ def test_class4_ex1a():
 
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
-    assert std_out.count("Next hop: 10.220.88.1") == 2
-    assert "* cisco3 ** changed : False" in std_out
-    assert "* cisco4 ** changed : False" in std_out
+    assert std_out.count("uptime") == 4
+    assert std_out.count("Uptime") == 4
+    assert std_out.count("System booted") == 1
     assert std_err == ""
 
 
@@ -102,10 +102,8 @@ def test_class4_ex1b():
 
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
-    assert std_out.count("Command not executed on platform eos") == 4
-    assert std_out.count("Command not executed on platform nxos") == 2
-    assert "Next hop:  10.220.88.1 via vlan.0" in std_out
-    assert "Next hop: 10.220.88.1" in std_out
+    assert "srx2: device rebooted recently" in std_out
+    assert std_out.count("uptime") == 8
     assert std_err == ""
 
 
