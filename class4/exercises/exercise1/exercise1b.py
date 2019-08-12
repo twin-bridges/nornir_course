@@ -10,14 +10,15 @@ WEEK_SECONDS = 7 * DAY_SECONDS
 YEAR_SECONDS = 365 * DAY_SECONDS
 TEST = True
 
+
 def parse_uptime(uptime_str):
     """Based on method in the NAPALM library"""
 
-    #import ipdb; ipdb.set_trace()
-    if 'uptime is' in uptime_str:
+    # import ipdb; ipdb.set_trace()
+    if "uptime is" in uptime_str:
         # IOS/NX-OS
         uptime_str = uptime_str.split("uptime is")[1]
-    elif 'Uptime:' in uptime_str:
+    elif "Uptime:" in uptime_str:
         # Arista
         uptime_str = uptime_str.split("Uptime: ")[1]
     else:
@@ -62,12 +63,12 @@ def uptime(task):
         "ios": "show version | inc uptime",
         "eos": "show version | inc Uptime",
         "nxos": "show version | inc uptime",
-        "junos": "show system uptime | match System"
+        "junos": "show system uptime | match System",
     }
     cmd = cmd_mapper[platform]
     multi_result = task.run(task=networking.netmiko_send_command, command_string=cmd)
     uptime_output = multi_result[0].result
-    
+
     uptime_sec = parse_uptime(uptime_output)
     if uptime_sec < DAY_SECONDS:
         # Make it look nicer--yes, we are geeks
@@ -90,7 +91,7 @@ def uptime(task):
 
 def main():
     nr = InitNornir(config_file="config.yaml")
-    result = nr.run(task=uptime, num_workers=10)
+    nr.run(task=uptime, num_workers=10)
 
 
 if __name__ == "__main__":

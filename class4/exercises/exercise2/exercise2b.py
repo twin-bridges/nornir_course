@@ -35,8 +35,11 @@ def file_copy(task):
 def main():
     nr = InitNornir(config_file="config.yaml")
     nr = nr.filter(F(groups__contains="eos"))
-    result = nr.run(task=file_copy)
-    print_result(result)
+    # result = nr.run(task=networking.netmiko_send_command, command_string="terminal dont-ask")
+    # result = nr.run(
+    #    task=networking.netmiko_send_command, command_string="delete flash:arista_test.txt"
+    #)
+    nr.run(task=file_copy)
 
 
 if __name__ == "__main__":

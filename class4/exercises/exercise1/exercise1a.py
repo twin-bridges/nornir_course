@@ -1,6 +1,4 @@
 from nornir import InitNornir
-from nornir.core.filter import F
-from nornir.plugins.functions.text import print_result
 from nornir.plugins.tasks import networking
 
 
@@ -9,12 +7,12 @@ def uptime(task):
         "ios": "show version | inc uptime",
         "eos": "show version | inc Uptime",
         "nxos": "show version | inc uptime",
-        "junos": "show system uptime | match System"
+        "junos": "show system uptime | match System",
     }
     host = task.host
     platform = host.platform
     cmd = cmd_mapper[platform]
-    result = task.run(task=networking.netmiko_send_command, command_string=cmd)
+    task.run(task=networking.netmiko_send_command, command_string=cmd)
 
 
 def main():

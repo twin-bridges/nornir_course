@@ -5,17 +5,16 @@ from nornir.plugins.tasks import networking
 
 
 def file_copy(task):
-
-#    import ipdb; ipdb.set_trace()
     host = task.host
     platform = host.platform
-    filename = host['file_name']
+    filename = host["file_name"]
     source_file = f"{platform}/{filename}"
     task.run(
         task=networking.netmiko_file_transfer,
         source_file=source_file,
         dest_file=filename,
         direction="put",
+        overwrite_file=True,
     )
 
 
