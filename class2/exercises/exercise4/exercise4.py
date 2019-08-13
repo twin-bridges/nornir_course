@@ -3,7 +3,7 @@ from nornir import InitNornir
 from nornir.core.filter import F
 from nornir.plugins.tasks.networking import napalm_get
 
-# Default to "10.220.88.1", but let us have envvar for different pods for internal use
+# Default to "10.220.88.1", but use environment variable to allow different lab pods
 DEFAULT_GATEWAY = os.environ.get("EOS_GATEWAY", "10.220.88.1")
 
 
@@ -19,7 +19,7 @@ def main():
         output = multiresult[0].result["arp_table"]
         desired_data = ""
         for entry in output:
-            if entry["ip"] == GATEWAY:
+            if entry["ip"] == DEFAULT_GATEWAY:
                 desired_data = entry
                 break
         parsed_results.append((host, desired_data))

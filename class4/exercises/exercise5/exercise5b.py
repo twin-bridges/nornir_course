@@ -6,17 +6,21 @@ from nornir.plugins.tasks import networking
 def main():
     nr = InitNornir(config_file="config.yaml")
     nr = nr.filter(name="arista4")
-    result = nr.run(task=networking.napalm_get, getters=["config"], retrieve="running")
-    arista4_running_config = result["arista4"][0].result["config"]["running"]
-    print(arista4_running_config)
+
+    # Current running config
+    agg_result = nr.run(
+        task=networking.napalm_get, getters=["config"], retrieve="running"
+    )
+    arista4_result = agg_result["arista4"][0].result
+    arista4_running_config = arista4_result["config"]["running"]  # noqa
 
     # New config
     config = """
 interface loopback123
   description verycoolloopback
     """
-    result = nr.run(task=networking.napalm_configure, configuration=config)
-    print_result(result)
+    agg_result = nr.run(task=networking.napalm_configure, configuration=config)
+    print_result(agg_result)
 
 
 if __name__ == "__main__":

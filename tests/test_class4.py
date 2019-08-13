@@ -42,7 +42,8 @@ def remove_ex2_flash_files():
     # remove test files from eos flash
     eos.run(task=networking.netmiko_send_command, command_string="terminal dont-ask")
     eos.run(
-        task=networking.netmiko_send_command, command_string="delete flash:arista_test.txt"
+        task=networking.netmiko_send_command,
+        command_string="delete flash:arista_test.txt",
     )
 
 
@@ -74,7 +75,6 @@ def remove_loopback():
     nornir_inventory = gen_inventory_dict("~/nornir_inventory/")
     nr = InitNornir(inventory=nornir_inventory, logging=NORNIR_LOGGING)
     ex5_host = nr.filter(name="arista4")
-
     ex5_host.run(
         task=networking.netmiko_send_config,
         config_commands=["no interface loopback 123"],
@@ -247,36 +247,37 @@ def test_class4_ex4b():
     assert std_err == ""
 
 
-#def test_class4_ex5a():
-#    base_path = "../class4/exercises/exercise5/"
-#    cmd_list = ["python", "exercise5a.py"]
-#
-#    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
-#    assert return_code == 0
-#    assert "! Command: show running-config" in std_out
-#    assert std_err == ""
-#
-#
-#def test_class4_ex5b():
-#    base_path = "../class4/exercises/exercise5/"
-#    cmd_list = ["python", "exercise5b.py"]
-#
-#    remove_loopback()
-#
-#    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
-#    assert return_code == 0
-#    assert "+interface Loopback123\n+   description verycoolloopback\n+!" in std_out
-#    assert std_err == ""
-#
-#
-#def test_class4_ex5c():
-#    base_path = "../class4/exercises/exercise5/"
-#    cmd_list = ["python", "exercise5c.py"]
-#
-#    remove_loopback()
-#
-#    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
-#    assert return_code == 0
-#    assert "+interface Loopback123\n+   description verycoolloopback\n+!" in std_out
-#    assert "-interface Loopback123\n-   description verycoolloopback\n-!" in std_out
-#    assert std_err == ""
+def test_class4_ex5a():
+    base_path = "../class4/exercises/exercise5/"
+    cmd_list = ["python", "exercise5a.py"]
+
+    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
+    assert return_code == 0
+    assert "! Command: show running-config" in std_out
+    assert std_err == ""
+
+
+def test_class4_ex5b():
+    base_path = "../class4/exercises/exercise5/"
+    cmd_list = ["python", "exercise5b.py"]
+
+    remove_loopback()
+
+    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
+    assert return_code == 0
+    assert "+interface Loopback123\n+   description verycoolloopback\n+!" in std_out
+    assert std_err == ""
+
+
+def test_class4_ex5c():
+    base_path = "../class4/exercises/exercise5/"
+    cmd_list = ["python", "exercise5c.py"]
+
+    # Ensure loopback is not currently configured
+    remove_loopback()
+
+    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
+    assert return_code == 0
+    assert "+interface Loopback123\n+   description verycoolloopback\n+!" in std_out
+    assert "-interface Loopback123\n-   description verycoolloopback\n-!" in std_out
+    assert std_err == ""

@@ -8,25 +8,27 @@ def main():
     nr = nr.filter(name="arista4")
 
     # Capture current running configuration
-    result = nr.run(task=networking.napalm_get, getters=["config"], retrieve="running")
-    print_result(result)
-    arista4_running_config = result["arista4"][0].result["config"]["running"]
+    agg_result = nr.run(
+        task=networking.napalm_get, getters=["config"], retrieve="running"
+    )
+    arista4_result = agg_result["arista4"][0].result
+    arista4_running_config = arista4_result["config"]["running"]
 
     # Configure a new loopback
     config = """interface loopback123
   description verycoolloopback"""
-    result = nr.run(task=networking.napalm_configure, configuration=config)
-    print_result(result)
+    agg_result = nr.run(task=networking.napalm_configure, configuration=config)
+    print_result(agg_result)
 
-    input = ("Pause here to verify the state")
+    print()
 
     # Completely resture the configuration using configure replace
-    result = nr.run(
+    agg_result = nr.run(
         task=networking.napalm_configure,
         configuration=arista4_running_config,
         replace=True,
     )
-    print_result(result)
+    print_result(agg_result)
 
 
 if __name__ == "__main__":
