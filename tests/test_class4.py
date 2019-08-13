@@ -125,6 +125,8 @@ def test_class4_ex2c():
     base_path = "../class4/exercises/exercise2"
     cmd_list = ["python", "exercise2c.py"]
 
+    remove_ex2_local_files(base_path)
+
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
     assert os.path.exists(f"{base_path}/eos/arista1-saved.txt")
@@ -133,7 +135,7 @@ def test_class4_ex2c():
     assert os.path.exists(f"{base_path}/eos/arista4-saved.txt")
     assert std_err == ""
 
-    # remove_ex2_local_files(base_path)
+    remove_ex2_local_files(base_path)
 
 
 def test_class4_ex3a():
