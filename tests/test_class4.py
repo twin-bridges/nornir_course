@@ -47,10 +47,19 @@ def remove_ex2_flash_files():
 
 
 def remove_ex2_local_files(base_path):
-    os.remove(f"{base_path}/eos/arista1-saved.txt")
-    os.remove(f"{base_path}/eos/arista2-saved.txt")
-    os.remove(f"{base_path}/eos/arista3-saved.txt")
-    os.remove(f"{base_path}/eos/arista4-saved.txt")
+    """Remove files (if they exist)."""
+    files_to_remove = [
+        f"{base_path}/eos/arista1-saved.txt",
+        f"{base_path}/eos/arista2-saved.txt",
+        f"{base_path}/eos/arista3-saved.txt",
+        f"{base_path}/eos/arista4-saved.txt",
+    ]
+    for a_file in files_to_remove:
+        try:
+            os.remove(a_file)
+        except FileNotFoundError:
+            pass
+    return None
 
 
 def remove_vlan():
@@ -164,7 +173,7 @@ def test_class4_ex3b():
 
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
-    assert std_out.count("Nothing to do") == 6
+    assert std_out.count("onfiguration already correct") == 6
     assert std_err == ""
 
     remove_vlan()
@@ -202,72 +211,72 @@ def test_class4_ex3c():
     assert std_err == ""
 
 
-def test_class4_ex4a():
-    base_path = "../class4/exercises/exercise4/"
-    cmd_list = ["python", "exercise4a.py"]
-
-    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
-    assert return_code == 0
-    assert std_out.count("False") == 18
-    assert std_err == ""
-
-    remove_vlan()
-
-    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
-    assert return_code == 0
-    assert std_out.count("+!\n+vlan 123\n+   name ntp_vlan") == 4
-    assert std_out.count("vlan 123\n  name ntp_vlan") == 2
-    assert std_err == ""
-
-
-def test_class4_ex4b():
-    base_path = "../class4/exercises/exercise4/"
-    cmd_list = ["python", "exercise4b.py"]
-
-    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
-    assert return_code == 0
-    assert std_out.count("False") == 18
-    assert std_err == ""
-
-    remove_vlan()
-
-    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
-    assert return_code == 0
-    assert std_out.count("+!\n+vlan 123\n+   name ntp_vlan") == 4
-    assert std_out.count("vlan 123\n  name ntp_vlan") == 2
-    assert std_err == ""
-
-
-def test_class4_ex5a():
-    base_path = "../class4/exercises/exercise5/"
-    cmd_list = ["python", "exercise5a.py"]
-
-    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
-    assert return_code == 0
-    assert "! Command: show running-config" in std_out
-    assert std_err == ""
-
-
-def test_class4_ex5b():
-    base_path = "../class4/exercises/exercise5/"
-    cmd_list = ["python", "exercise5b.py"]
-
-    remove_loopback()
-
-    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
-    assert return_code == 0
-    assert "+interface Loopback123\n+   description verycoolloopback\n+!" in std_out
-    assert std_err == ""
-
-
-def test_class4_ex5c():
-    base_path = "../class4/exercises/exercise5/"
-    cmd_list = ["python", "exercise5c.py"]
-
-    remove_loopback()
-
-    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
-    assert return_code == 0
-    assert "+interface Loopback123\n+   description verycoolloopback\n+!" in std_out
-    assert "-interface Loopback123\n-   description verycoolloopback\n-!" in std_out
-    assert std_err == ""
+#def test_class4_ex4a():
+#    base_path = "../class4/exercises/exercise4/"
+#    cmd_list = ["python", "exercise4a.py"]
+#
+#    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
+#    assert return_code == 0
+#    assert std_out.count("False") == 18
+#    assert std_err == ""
+#
+#    remove_vlan()
+#
+#    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
+#    assert return_code == 0
+#    assert std_out.count("+!\n+vlan 123\n+   name ntp_vlan") == 4
+#    assert std_out.count("vlan 123\n  name ntp_vlan") == 2
+#    assert std_err == ""
+#
+#
+#def test_class4_ex4b():
+#    base_path = "../class4/exercises/exercise4/"
+#    cmd_list = ["python", "exercise4b.py"]
+#
+#    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
+#    assert return_code == 0
+#    assert std_out.count("False") == 18
+#    assert std_err == ""
+#
+#    remove_vlan()
+#
+#    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
+#    assert return_code == 0
+#    assert std_out.count("+!\n+vlan 123\n+   name ntp_vlan") == 4
+#    assert std_out.count("vlan 123\n  name ntp_vlan") == 2
+#    assert std_err == ""
+#
+#
+#def test_class4_ex5a():
+#    base_path = "../class4/exercises/exercise5/"
+#    cmd_list = ["python", "exercise5a.py"]
+#
+#    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
+#    assert return_code == 0
+#    assert "! Command: show running-config" in std_out
+#    assert std_err == ""
+#
+#
+#def test_class4_ex5b():
+#    base_path = "../class4/exercises/exercise5/"
+#    cmd_list = ["python", "exercise5b.py"]
+#
+#    remove_loopback()
+#
+#    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
+#    assert return_code == 0
+#    assert "+interface Loopback123\n+   description verycoolloopback\n+!" in std_out
+#    assert std_err == ""
+#
+#
+#def test_class4_ex5c():
+#    base_path = "../class4/exercises/exercise5/"
+#    cmd_list = ["python", "exercise5c.py"]
+#
+#    remove_loopback()
+#
+#    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
+#    assert return_code == 0
+#    assert "+interface Loopback123\n+   description verycoolloopback\n+!" in std_out
+#    assert "-interface Loopback123\n-   description verycoolloopback\n-!" in std_out
+#    assert std_err == ""
