@@ -38,31 +38,19 @@ def remove_ex2_flash_files():
     nornir_inventory = gen_inventory_dict("~/nornir_inventory/")
     nr = InitNornir(inventory=nornir_inventory, logging=NORNIR_LOGGING)
     eos = nr.filter(F(groups__contains="eos"))
-    ios = nr.filter(F(groups__contains="ios"))
 
     # remove test files from eos flash
     eos.run(task=networking.netmiko_send_command, command_string="terminal dont-ask")
     eos.run(
-        task=networking.netmiko_send_command, command_string="delete flash:arista.txt"
+        task=networking.netmiko_send_command, command_string="delete flash:arista_test.txt"
     )
-
-    # remove test files from ios flash
-    ios.run(
-        task=networking.netmiko_send_command,
-        use_timing=True,
-        command_string="delete flash:cisco.txt",
-    )
-    ios.run(task=networking.netmiko_send_command, use_timing=True, command_string="\n")
-    ios.run(task=networking.netmiko_send_command, use_timing=True, command_string="\n")
 
 
 def remove_ex2_local_files(base_path):
-    os.remove(f"{base_path}ios/cisco3_cisco.txt")
-    os.remove(f"{base_path}ios/cisco4_cisco.txt")
-    os.remove(f"{base_path}eos/arista1_arista.txt")
-    os.remove(f"{base_path}eos/arista2_arista.txt")
-    os.remove(f"{base_path}eos/arista3_arista.txt")
-    os.remove(f"{base_path}eos/arista4_arista.txt")
+    os.remove(f"{base_path}/eos/arista1-saved.txt")
+    os.remove(f"{base_path}/eos/arista2-saved.txt")
+    os.remove(f"{base_path}/eos/arista3-saved.txt")
+    os.remove(f"{base_path}/eos/arista4-saved.txt")
 
 
 def remove_vlan():
@@ -115,9 +103,9 @@ def test_class4_ex2a():
 
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
-    assert std_out.count("True") == 18
-    assert std_out.count("False") == 6
-    assert std_out.count("---- netmiko_file_transfer **") == 6
+    assert std_out.count("True") == 12
+    assert std_out.count("False") == 4
+    assert std_out.count("---- netmiko_file_transfer **") == 4
     assert std_err == ""
 
 
@@ -129,30 +117,23 @@ def test_class4_ex2b():
 
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
-    assert std_out.count("---- netmiko_file_transfer **") == 12
-    assert os.path.exists(f"{base_path}ios/get_cisco.txt")
-    assert os.path.exists(f"{base_path}eos/get_arista.txt")
+    assert std_out.count("nornir test file") == 4
     assert std_err == ""
-
-    os.remove(f"{base_path}eos/get_arista.txt")
-    os.remove(f"{base_path}ios/get_cisco.txt")
 
 
 def test_class4_ex2c():
-    base_path = "../class4/exercises/exercise2/"
+    base_path = "../class4/exercises/exercise2"
     cmd_list = ["python", "exercise2c.py"]
 
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
-    assert os.path.exists(f"{base_path}ios/cisco3_cisco.txt")
-    assert os.path.exists(f"{base_path}ios/cisco4_cisco.txt")
-    assert os.path.exists(f"{base_path}eos/arista1_arista.txt")
-    assert os.path.exists(f"{base_path}eos/arista2_arista.txt")
-    assert os.path.exists(f"{base_path}eos/arista3_arista.txt")
-    assert os.path.exists(f"{base_path}eos/arista4_arista.txt")
+    assert os.path.exists(f"{base_path}/eos/arista1-saved.txt")
+    assert os.path.exists(f"{base_path}/eos/arista2-saved.txt")
+    assert os.path.exists(f"{base_path}/eos/arista3-saved.txt")
+    assert os.path.exists(f"{base_path}/eos/arista4-saved.txt")
     assert std_err == ""
 
-    remove_ex2_local_files(base_path)
+    # remove_ex2_local_files(base_path)
 
 
 def test_class4_ex3a():
