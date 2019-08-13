@@ -14,8 +14,12 @@ def file_copy(task):
         source_file=filename,
         dest_file=dest_file,
         direction="get",
+        overwrite_file=True,
     )
-    return f"SCP get completed: {dest_file}"
+    if multi_result[0].result is True:
+        return f"SCP get completed: {dest_file}"
+    else:
+        return f"Failure...SCP get failed!!!"
 
 
 def main():

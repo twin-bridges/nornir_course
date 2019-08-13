@@ -1,6 +1,5 @@
 from nornir import InitNornir
 from nornir.core.filter import F
-from nornir.plugins.functions.text import print_result
 from nornir.plugins.tasks import networking
 
 
@@ -36,7 +35,7 @@ def file_copy(task):
 def main():
     nr = InitNornir(config_file="config.yaml")
     nr = nr.filter(F(groups__contains="eos"))
-    results = nr.run(task=file_copy)
+    nr.run(task=file_copy)
 
 
 if __name__ == "__main__":

@@ -7,7 +7,7 @@ from nornir.plugins.tasks import networking
 def configure_vlan(task, vlan_id, vlan_name):
     config_string = f"""vlan {vlan_id}
   name {vlan_name}"""
-    task.run(task=networking.napalm_configure, configuration=config_string)
+    task.run(task=networking.napalm_configure, configuration=config_string, dry_run=False)
 
 
 def main():
