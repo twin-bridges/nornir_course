@@ -1,9 +1,11 @@
+import os
 import re
 from nornir import InitNornir
 from nornir.core.filter import F
 from nornir.plugins.tasks.networking import netmiko_send_command
 
-DEFAULT_GATEWAY = "10.220.88.1"
+# Default to "10.220.88.1", but let us have envvar for different pods for internal use
+DEFAULT_GATEWAY = os.environ.get("EOS_GATEWAY", "10.220.88.1")
 
 
 def main():
