@@ -211,42 +211,42 @@ def test_class4_ex3c():
     assert std_err == ""
 
 
-#def test_class4_ex4a():
-#    base_path = "../class4/exercises/exercise4/"
-#    cmd_list = ["python", "exercise4a.py"]
-#
-#    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
-#    assert return_code == 0
-#    assert std_out.count("False") == 18
-#    assert std_err == ""
-#
-#    remove_vlan()
-#
-#    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
-#    assert return_code == 0
-#    assert std_out.count("+!\n+vlan 123\n+   name ntp_vlan") == 4
-#    assert std_out.count("vlan 123\n  name ntp_vlan") == 2
-#    assert std_err == ""
-#
-#
-#def test_class4_ex4b():
-#    base_path = "../class4/exercises/exercise4/"
-#    cmd_list = ["python", "exercise4b.py"]
-#
-#    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
-#    assert return_code == 0
-#    assert std_out.count("False") == 18
-#    assert std_err == ""
-#
-#    remove_vlan()
-#
-#    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
-#    assert return_code == 0
-#    assert std_out.count("+!\n+vlan 123\n+   name ntp_vlan") == 4
-#    assert std_out.count("vlan 123\n  name ntp_vlan") == 2
-#    assert std_err == ""
-#
-#
+def test_class4_ex4a():
+    base_path = "../class4/exercises/exercise4/"
+    cmd_list = ["python", "exercise4a.py"]
+
+    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
+    assert return_code == 0
+    assert std_out.count("False") == 18
+    assert std_err == ""
+
+    remove_vlan()
+
+    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
+    assert return_code == 0
+    assert std_out.count("+!\n+vlan 123\n+   name ntp_vlan") == 4
+    assert std_out.count("vlan 123\n  name ntp_vlan") == 2
+    assert std_err == ""
+
+
+def test_class4_ex4b():
+    base_path = "../class4/exercises/exercise4/"
+    cmd_list = ["python", "exercise4b.py"]
+
+    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
+    assert return_code == 0
+    assert std_out.count("False") == 18
+    assert std_err == ""
+
+    remove_vlan()
+
+    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
+    assert return_code == 0
+    assert std_out.count("+!\n+vlan 123\n+   name ntp_vlan") == 4
+    assert std_out.count("vlan 123\n  name ntp_vlan") == 2
+    assert std_err == ""
+
+
 #def test_class4_ex5a():
 #    base_path = "../class4/exercises/exercise5/"
 #    cmd_list = ["python", "exercise5a.py"]

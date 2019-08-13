@@ -7,13 +7,17 @@ from nornir.plugins.tasks import networking
 def configure_vlan(task, vlan_id, vlan_name):
     config_string = f"""vlan {vlan_id}
   name {vlan_name}"""
-    task.run(task=networking.napalm_configure, configuration=config_string, dry_run=False)
+    task.run(task=networking.napalm_configure, configuration=config_string)
 
 
 def main():
+
+    VLAN_ID = "123"
+    VLAN_NAME = "ntp_vlan"
+
     nr = InitNornir(config_file="config.yaml")
     nr = nr.filter(F(groups__contains="eos") | F(groups__contains="nxos"))
-    result = nr.run(task=configure_vlan, vlan_id="123", vlan_name="ntp_vlan")
+    result = nr.run(task=configure_vlan, vlan_id=VLAN_ID, vlan_name=VLAN_NAME)
     print_result(result)
 
 
