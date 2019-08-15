@@ -1,0 +1,10 @@
+
+
+
+cisco4#
+cisco4#terminal length 0
+cisco4#terminal width 511
+cisco4#
+cisco4#show version | inc uptime
+cisco4 uptime is 45 weeks, 8 hours, 32 minutes
+cisco4#
