@@ -13,7 +13,7 @@ def render_configurations(task):
 
 
 def main():
-    nr = InitNornir(config_file="config_2b_2c.yaml")
+    nr = InitNornir(config_file="config.yaml")
     nr = nr.filter(F(groups__contains="nxos"))
     agg_result = nr.run(task=render_configurations)
     print_result(agg_result)

@@ -1,11 +1,16 @@
-import logging
 from getpass import getpass
+import logging
+import os
 from nornir import InitNornir
 from nornir.core.filter import F
 from nornir.plugins.tasks import networking
 
 
-PASSWORD = getpass()
+# env var for testing purposes
+if os.environ.get("NORNIR_PASSWORD", False):
+    PASSWORD = os.environ["NORNIR_PASSWORD"]
+else:
+    PASSWORD = getpass()
 LOGGER = logging.getLogger("nornir")
 
 

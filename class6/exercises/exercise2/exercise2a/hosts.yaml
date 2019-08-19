@@ -24,12 +24,12 @@ nxos2:
     hostname: nxos2.lasthop.io
     groups:
       - nxos
-#    data:
-#      loopbacks:
-#        - id: 321
-#          description: backward ntp source
-#          ip: 1.3.2.1
-#          mask: 255.255.255.255
+    data:
+      loopbacks:
+        - id: 321
+          description: backward ntp source
+          ip: 1.3.2.1
+          mask: 255.255.255.255
 
 arista1:
     hostname: arista1.lasthop.io
