@@ -1,0 +1,8 @@
+---
+username: lowprivs
+password: 88newclass
+
+connection_options:
+  netmiko:
+    extras:
+      secret: verysecure

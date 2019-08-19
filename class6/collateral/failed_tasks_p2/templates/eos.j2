@@ -1,0 +1,37 @@
+transceiver qsfp default-mode 4x10G
+!
+hostname {{ host.name }}
+!
+ip domain-name {{ domain_name }}
+!
+ntp server pool.ntp.org
+!
+spanning-tree mode mstp
+!
+aaa authorization exec default local
+!
+no aaa root
+!
+{% for interface, attrs in ethernet_interfaces.items() %}
+interface {{ interface }}
+  description {{ attrs['description'] }}
+{% if attrs['routed'] %}
+  no switchport
+  ip address {{ attrs['routed']['ip'] }}
+{% elif attrs['swithced']  %}
+  switchport
+  switchport mode access
+  switchport access vlan {{ attrs['switched']['vlan'] }}
+{% endif %}
+  {{ attrs['state'] }}
+!
+{% endfor %}
+!
+interface Management1
+   ip address dhcp
+!
+ip routing
+!
+management api http-commands
+   no shutdown
+   protocol https port 444
