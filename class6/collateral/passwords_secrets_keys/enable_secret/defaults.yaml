@@ -1,6 +1,6 @@
 ---
 username: lowprivs
-password: 88newclass
+password: bogus
 
 connection_options:
   netmiko:
