@@ -87,9 +87,71 @@ def test_class6_ex3():
     base_path = "../class6/exercises/exercise3/"
     cmd_list = ["python", "exercise3.py"]
 
-    os.environ["NORNIR_PASSWORD"] = "88newclass"
     remove_log_files(base_path)
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
-    remove_log_files(base_path)
+    assert os.stat(f"{base_path}my_log.log")
     assert return_code == 0
     assert std_err == ""
+    remove_log_files(base_path)
+
+
+def test_class6_ex4a():
+    base_path = "../class6/exercises/exercise4/"
+    cmd_list = ["python", "exercise4a.py"]
+
+    remove_log_files(base_path)
+    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
+    assert os.stat(f"{base_path}my_session.log")
+    assert return_code == 0
+    assert std_err == ""
+    remove_log_files(base_path)
+
+
+def test_class6_ex4b():
+    base_path = "../class6/exercises/exercise4/"
+    cmd_list = ["python", "exercise4b.py"]
+
+    remove_log_files(base_path)
+    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
+    assert os.stat(f"{base_path}nxos1_session.log")
+    assert os.stat(f"{base_path}nxos2_session.log")
+    assert return_code == 0
+    assert std_err == ""
+    remove_log_files(base_path)
+
+
+def test_class6_ex5a():
+    base_path = "../class6/exercises/exercise5/"
+    cmd_list = ["python", "exercise5a.py"]
+
+    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
+    assert std_out.count("Clock source: NTP server") == 4
+    assert std_out.count("Time source is NTP") == 2
+    assert "Current time:" in std_out
+    assert return_code == 0
+    assert std_err == ""
+
+
+def test_class6_ex5b():
+    base_path = "../class6/exercises/exercise5/"
+    cmd_list = ["python", "exercise5b.py"]
+
+    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
+    assert std_out.count("Clock source: NTP server") == 4
+    assert std_out.count("Time source is NTP") == 2
+    assert "Current time:" in std_out
+    assert return_code == 0
+    assert "Authentication failed." in std_err
+
+
+def test_class6_ex5c():
+    base_path = "../class6/exercises/exercise5/"
+    cmd_list = ["python", "exercise5c.py"]
+
+    os.environ["NORNIR_VAULT_PASSWORD"] = "password"
+    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
+    assert std_out.count("Clock source: NTP server") == 4
+    assert std_out.count("Time source is NTP") == 2
+    assert "Current time:" in std_out
+    assert return_code == 0
+    assert "Authentication failed." in std_err
