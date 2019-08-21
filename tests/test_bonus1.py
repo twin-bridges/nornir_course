@@ -1,7 +1,6 @@
 import os
 import re
 import subprocess
-import time
 
 
 NORNIR_LOGGING = {"enabled": False}
