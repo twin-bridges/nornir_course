@@ -1,0 +1,27 @@
+[all:vars]
+ansible_connection=local
+ansible_user=pyclass
+ansible_ssh_pass=bogus
+
+[local]
+localhost ansible_connection=local
+
+[arista]
+arista1 ansible_host=arista1.lasthop.io
+arista2 ansible_host=arista2.lasthop.io
+arista3 ansible_host=arista3.lasthop.io
+arista4 ansible_host=arista4.lasthop.io
+
+[arista:vars]
+eapi_port=443
+
+[cisco]
+cisco3 ansible_host=cisco3.lasthop.io
+cisco4 ansible_host=cisco4.lasthop.io
+
+[juniper]
+srx2 ansible_host=srx2.lasthop.io
+
+[nxos]
+nxos1 ansible_host=nxos1.lasthop.io
+nxos2 ansible_host=nxos2.lasthop.io

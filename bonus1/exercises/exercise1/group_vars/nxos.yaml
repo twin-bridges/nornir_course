@@ -1,0 +1,11 @@
+---
+platform: nxos
+
+connection_options:
+  netmiko:
+    platform: cisco_nxos
+    extras: {}
+  napalm:
+    port: 8443
+    extras:
+      optional_args: {}
