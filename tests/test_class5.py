@@ -31,14 +31,6 @@ def subprocess_runner(cmd_list, exercise_dir):
     return (std_out.decode(), std_err.decode(), proc.returncode)
 
 
-def replace_inventory_password(filename, find_str, replace_str):
-    with open(f"{filename}", "r") as f:
-        contents = f.read()
-        contents = re.sub(find_str, replace_str, contents, flags=re.M)
-    with open(f"{filename}", "w") as f:
-        f.write(contents)
-
-
 def test_class5_ex1():
     base_path = "../class5/exercises/exercise1/"
     cmd_list = ["python", "exercise1.py"]
@@ -54,20 +46,7 @@ def test_class5_ex2():
     base_path = "../class5/exercises/exercise2/"
     cmd_list = ["python", "exercise2.py"]
 
-    filename = f"{base_path}defaults.yaml"
-    replace_inventory_password(
-        filename,
-        find_str=r"^password: bogus$",
-        replace_str=f"password: {os.environ['NORNIR_PASSWORD']}",
-    )
-
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
-    replace_inventory_password(
-        filename,
-        find_str=rf"^password: {os.environ['NORNIR_PASSWORD']}$",
-        replace_str="password: bogus",
-    )
-
     assert return_code == 0
     assert std_out.count("! Command: show running-config") == 4
     assert "Traceback" not in std_out
