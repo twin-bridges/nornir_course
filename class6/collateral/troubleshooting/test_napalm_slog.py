@@ -5,12 +5,16 @@ from nornir.plugins.tasks.networking import napalm_get
 
 def napalm_custom(task):
 
-    import ipdb; ipdb.set_trace()
+    import ipdb
+
+    ipdb.set_trace()
 
     # Dynamically set the session_log to be unique per host
     filename = f"{task.host}-output.txt"
     group_object = task.host.groups.refs[0]
-    group_object.connection_options["napalm"].extras["optional_args"]["session_log"] = filename
+    group_object.connection_options["napalm"].extras["optional_args"][
+        "session_log"
+    ] = filename
 
     results = task.run(task=napalm_get, getters=["facts"])
     print(results)

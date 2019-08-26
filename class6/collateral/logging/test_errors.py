@@ -1,8 +1,7 @@
-import os
 import logging
 from nornir import InitNornir
 from nornir.core.filter import F
-from nornir.plugins.functions.text import print_result
+from nornir.plugins.functions.text import print_result  # noqa
 from nornir.plugins.tasks.networking import netmiko_send_command
 
 logger = logging.getLogger("nornir")
@@ -20,7 +19,9 @@ def main():
 
     # Set one of the devices to an invalid password
     nr.inventory.hosts["cisco3"].password = "bogus"
-    my_results = nr.run(task=netmiko_send_command, command_string="show ip int brief")
+    my_results = nr.run(
+        task=netmiko_send_command, command_string="show ip int brief"
+    )  # noqa
 
 
 if __name__ == "__main__":

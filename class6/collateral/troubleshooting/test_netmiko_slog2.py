@@ -7,7 +7,7 @@ def uptime(task):
     # import ipdb; ipdb.set_trace()
 
     # Dynamically set the session_log to be unique per host
-    filename = f"{task.host}-output.txt" 
+    filename = f"{task.host}-output.txt"
     group_object = task.host.groups.refs[0]
     group_object.connection_options["netmiko"].extras["session_log"] = filename
 
