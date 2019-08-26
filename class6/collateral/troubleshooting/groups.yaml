@@ -4,8 +4,7 @@ ios:
   connection_options:
     netmiko:
       platform: cisco_ios
-      extras: 
-        session_log: my_output.txt
+      extras: {}
     napalm:
       extras:
         optional_args: {}
@@ -15,8 +14,7 @@ nxos:
   connection_options:
     netmiko:
       platform: cisco_nxos
-      extras:
-        session_log: my_output.txt
+      extras: {}
     napalm:
       port: 8443
       extras:

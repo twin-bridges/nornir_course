@@ -4,7 +4,7 @@ from nornir.plugins.tasks import networking
 
 def uptime(task):
 
-    import ipdb; ipdb.set_trace()
+    # import ipdb; ipdb.set_trace()
 
     # Dynamically set the session_log to be unique per host
     filename = f"{task.host}-output.txt" 
@@ -26,7 +26,7 @@ def uptime(task):
 
 def main():
     nr = InitNornir(config_file="config.yaml")
-    agg_result = nr.run(task=uptime, num_workers=1)
+    agg_result = nr.run(task=uptime, num_workers=20)
     for hostname, multi_result in agg_result.items():
         print()
         print("-" * 40)

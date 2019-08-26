@@ -1,26 +1,29 @@
+import ipdb
 from nornir import InitNornir
 from nornir.plugins.tasks import networking
-from nornir.core.exceptions import NornirSubTaskError
 
-
-def int_task(task):
-    raise IndexError()
 
 def uptime(task):
-    import ipdb; ipdb.set_trace()
-    try:
-        task.run(task=int_task)
-    except NornirSubTaskError:
-        print("Caught")
-    print("hello")
-    raise ValueError()
+    cmd_mapper = {
+        "ios": "show version | inc uptime",
+        "eos": "show version | inc Uptime",
+        "nxos": "show version | inc uptime",
+        "junos": "show system uptime | match System",
+    }
+
+    host = task.host
+    platform = host.platform
+    cmd = cmd_mapper[platform]
+
+    multi_result = task.run(task=networking.netmiko_send_command, command_string=cmd)
+    print(multi_result)
 
 
 def main():
     nr = InitNornir(config_file="config.yaml")
     nr = nr.filter(name="cisco3")
     agg_result = nr.run(task=uptime, num_workers=1)
-    import ipdb; ipdb.set_trace()
+    ipdb.set_trace()
     for hostname, multi_result in agg_result.items():
         print()
         print("-" * 40)
