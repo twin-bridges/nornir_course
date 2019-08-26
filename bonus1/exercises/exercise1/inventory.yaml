@@ -1,0 +1,8 @@
+all:
+  children:
+    nxos:
+      hosts:
+        nxos1:
+          ansible_host: nxos1.lasthop.io
+        nxos2:
+          ansible_host: nxos2.lasthop.io

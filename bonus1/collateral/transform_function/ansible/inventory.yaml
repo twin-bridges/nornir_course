@@ -1,0 +1,29 @@
+---
+all:
+  children:
+    eos:
+      hosts:
+        arista1:
+          ansible_host: arista1.lasthop.io
+        arista2:
+          ansible_host: arista2.lasthop.io
+        arista3:
+          ansible_host: arista3.lasthop.io
+        arista4:
+          ansible_host: arista4.lasthop.io
+    ios:
+      hosts:
+        cisco3:
+          ansible_host: cisco3.lasthop.io
+        cisco4:
+          ansible_host: cisco4.lasthop.io
+    nxos:
+      hosts:
+        nxos1:
+          ansible_host: nxos1.lasthop.io
+        nxos2:
+          ansible_host: nxos2.lasthop.io
+    junos:
+      hosts:
+        srx2:
+          ansible_host: srx2.lasthop.io

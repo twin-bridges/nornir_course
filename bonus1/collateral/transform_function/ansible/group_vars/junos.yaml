@@ -1,0 +1,9 @@
+---
+platform: junos
+connection_options:
+  netmiko:
+    platform: juniper_junos
+    extras: {}
+  napalm:
+    extras:
+      optional_args: {}

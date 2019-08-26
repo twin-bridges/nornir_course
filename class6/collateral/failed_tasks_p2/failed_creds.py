@@ -1,0 +1,26 @@
+from nornir import InitNornir
+from nornir.plugins.tasks import networking
+from nornir.core.exceptions import NornirSubTaskError
+
+
+def netmiko_configure(task):
+    try:
+        print(task.host["loopback_config"])
+        task.run(
+            task=networking.netmiko_send_config,
+            config_commands=["interface lopback 123"],
+        )
+    except NornirSubTaskError:
+        print("sad, we hit a subtask error.... :(")
+
+
+def main():
+    nr = InitNornir(config_file="config_creds.yaml")
+    nr = nr.filter(name="cisco3")
+    agg_result = nr.run(task=netmiko_configure)
+    print(agg_result["cisco3"].result)
+    print("Complete!")
+
+
+if __name__ == "__main__":
+    main()

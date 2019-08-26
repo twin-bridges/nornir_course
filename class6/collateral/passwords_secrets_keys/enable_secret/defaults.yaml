@@ -1,0 +1,8 @@
+---
+username: lowprivs
+password: bogus
+
+connection_options:
+  netmiko:
+    extras:
+      secret: verysecure
