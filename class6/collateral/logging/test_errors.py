@@ -19,9 +19,8 @@ def main():
 
     # Set one of the devices to an invalid password
     nr.inventory.hosts["cisco3"].password = "bogus"
-    my_results = nr.run(
-        task=netmiko_send_command, command_string="show ip int brief"
-    )  # noqa
+    my_results = nr.run(task=netmiko_send_command, command_string="show ip int brief")
+    print(my_results)
 
 
 if __name__ == "__main__":
