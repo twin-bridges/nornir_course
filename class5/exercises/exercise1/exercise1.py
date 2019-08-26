@@ -6,7 +6,7 @@ from nornir.plugins.functions.text import print_result
 
 def set_snmp_id(task):
     if task.host.platform == "eos":
-        snmp_config = [f"snmp chassis-id {task.host['snmp_id']}"]
+        snmp_config = [f"snmp chassis-id {task.host['snmp_id']}-{task.host.name}"]
     elif task.host.platform == "ios":
         snmp_config = [f"snmp-server chassis-id {task.host['snmp_id']}"]
     else:

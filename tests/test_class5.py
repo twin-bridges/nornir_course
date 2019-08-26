@@ -36,6 +36,9 @@ def test_class5_ex1():
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
     assert std_out.count("---- netmiko_send_config ** changed : True") == 6
+    assert std_out.count("snmp-server chassis-id") == 2
+    assert std_out.count("snmp chassis-id") == 4
+    assert std_out.count("sea_datacenter-arista4") == 1
     assert "% Invalid input" not in std_out
     assert std_err == ""
 
