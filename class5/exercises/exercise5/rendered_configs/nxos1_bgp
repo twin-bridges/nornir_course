@@ -1,5 +1,5 @@
 router bgp 22
-  router-id 1.1.1.1
+  router-id 172.20.0.1
   neighbor 172.20.0.2
     remote-as 22
     address-family ipv4 unicast

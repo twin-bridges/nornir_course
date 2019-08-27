@@ -72,23 +72,9 @@ def test_class5_ex4a():
 
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
-    assert (
-        """set firewall family inet filter my_acl term my_first_rule from protocol tcp
-set firewall family inet filter my_acl term my_first_rule from port 1025
-set firewall family inet filter my_acl term my_first_rule from destination-address 1.2.3.4/32
-set firewall family inet filter my_acl term my_first_rule then accept
-set firewall family inet filter my_acl term second_rule from protocol tcp
-set firewall family inet filter my_acl term second_rule from port 3389
-set firewall family inet filter my_acl term second_rule from destination-address 1.2.3.4/32
-set firewall family inet filter my_acl term second_rule then deny
-set firewall family inet filter my_acl term the_LAST_rule from protocol tcp
-set firewall family inet filter my_acl term the_LAST_rule from port 443
-set firewall family inet filter my_acl term the_LAST_rule from destination-address 1.2.3.4/32
-set firewall family inet filter my_acl term the_LAST_rule then accept
-"""
-        in std_out
-    )
-    assert "unknown command." not in std_out
+    assert std_out.count("rule1") == 4
+    assert std_out.count("rule2") == 4
+    assert std_out.count("rule3") == 4
     assert std_err == ""
 
 
@@ -98,23 +84,9 @@ def test_class5_ex4b():
 
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
-    assert (
-        """set firewall family inet filter my_acl term my_first_rule from protocol tcp
-set firewall family inet filter my_acl term my_first_rule from port 1025
-set firewall family inet filter my_acl term my_first_rule from destination-address 1.2.3.4/32
-set firewall family inet filter my_acl term my_first_rule then accept
-set firewall family inet filter my_acl term second_rule from protocol tcp
-set firewall family inet filter my_acl term second_rule from port 3389
-set firewall family inet filter my_acl term second_rule from destination-address 1.2.3.4/32
-set firewall family inet filter my_acl term second_rule then deny
-set firewall family inet filter my_acl term the_LAST_rule from protocol tcp
-set firewall family inet filter my_acl term the_LAST_rule from port 443
-set firewall family inet filter my_acl term the_LAST_rule from destination-address 1.2.3.4/32
-set firewall family inet filter my_acl term the_LAST_rule then accept
-"""
-        in std_out
-    )
-    assert "unknown command." not in std_out
+    assert std_out.count("rule1") == 4
+    assert std_out.count("rule2") == 4
+    assert std_out.count("rule3") == 4
     assert std_err == ""
 
 
@@ -124,29 +96,15 @@ def test_class5_ex4c():
 
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
-    assert (
-        """set firewall family inet filter my_acl term my_first_rule from protocol tcp
-set firewall family inet filter my_acl term my_first_rule from port 1025
-set firewall family inet filter my_acl term my_first_rule from destination-address 1.2.3.4/32
-set firewall family inet filter my_acl term my_first_rule then accept
-set firewall family inet filter my_acl term second_rule from protocol tcp
-set firewall family inet filter my_acl term second_rule from port 3389
-set firewall family inet filter my_acl term second_rule from destination-address 1.2.3.4/32
-set firewall family inet filter my_acl term second_rule then deny
-set firewall family inet filter my_acl term the_LAST_rule from protocol tcp
-set firewall family inet filter my_acl term the_LAST_rule from port 443
-set firewall family inet filter my_acl term the_LAST_rule from destination-address 1.2.3.4/32
-set firewall family inet filter my_acl term the_LAST_rule then accept
-"""
-        in std_out
-    )
-    assert "unknown command." not in std_out
+    assert std_out.count("rule1") == 4
+    assert std_out.count("rule2") == 4
+    assert std_out.count("rule3") == 4
     assert std_err == ""
 
 
-def test_class5_ex5():
+def test_class5_ex5b():
     base_path = "../class5/exercises/exercise5/"
-    cmd_list = ["python", "exercise5.py"]
+    cmd_list = ["python", "exercise5b.py"]
 
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0

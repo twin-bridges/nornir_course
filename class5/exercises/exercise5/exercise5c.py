@@ -37,12 +37,16 @@ def deploy_configurations(task):
 
 def validate_bgp(task):
     bgp_result = task.run(task=networking.napalm_get, getters=["bgp_neighbors"])
+    print()
+    print("*" * 80)
     if not bgp_result.result["bgp_neighbors"]["global"]["peers"][task.host["bgp_peer"]][
         "is_up"
     ]:
         print("Failed BGP peer is not up...")
     else:
-        print("Success BGP is up...")
+        print("It's alive...success BGP is up!")
+    print("*" * 80)
+    print()
 
 
 def main():
@@ -54,8 +58,7 @@ def main():
     print_result(agg_result)
     agg_result = nr.run(task=deploy_configurations)
     print_result(agg_result)
-    agg_result = nr.run(task=validate_bgp)
-    print_result(agg_result)
+    nr.run(task=validate_bgp)
 
 
 if __name__ == "__main__":

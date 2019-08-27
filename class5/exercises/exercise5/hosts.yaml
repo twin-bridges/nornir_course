@@ -3,15 +3,11 @@ cisco3:
     hostname: cisco3.lasthop.io
     groups:
       - ios
-    data:
-      snmp_id: sea_edge_rtr
 
 cisco4:
     hostname: cisco4.lasthop.io
     groups:
       - ios
-    data:
-      snmp_id: sfo_edge_rtr
 
 nxos1:
     hostname: nxos1.lasthop.io
@@ -21,7 +17,7 @@ nxos1:
       int_name: Ethernet1/4
       ip_address: 172.20.0.1
       ip_mask: 255.255.255.252
-      bgp_router_id: 1.1.1.1
+      bgp_router_id: 172.20.0.1
       bgp_asn: 22
       bgp_remote_asn: 22
       bgp_peer: 172.20.0.2
@@ -34,7 +30,7 @@ nxos2:
       int_name: Ethernet1/4
       ip_address: 172.20.0.2
       ip_mask: 255.255.255.252
-      bgp_router_id: 2.2.2.2
+      bgp_router_id: 172.20.0.2
       bgp_asn: 22
       bgp_remote_asn: 22
       bgp_peer: 172.20.0.1
