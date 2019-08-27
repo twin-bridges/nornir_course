@@ -1,40 +1,45 @@
 from nornir import InitNornir
-from nornir.plugins.tasks import networking
-from nornir.plugins.functions.text import print_result
 from nornir.plugins.tasks import data
 
 
 def junos_acl(task):
+
+    # Load the YAML-ACL entries
     in_yaml = task.run(task=data.load_yaml, file=f"acl.yaml")
     in_yaml = in_yaml[0].result
-    acl_names = in_yaml.keys()
     rules = []
-    for acl in acl_names:
-        for acl_entry in in_yaml[acl]:
+
+    for acl_name, acl_entries in in_yaml.items():
+        for acl_entry in acl_entries:
             rules.append(
-                f"set firewall family inet filter {acl} term {acl_entry['rule_name']} "
-                f"from protocol {acl_entry['from_protocol']}"
+                f"set firewall family inet filter {acl_name} term {acl_entry['term_name']} "
+                f"from protocol {acl_entry['protocol']}"
             )
             rules.append(
-                f"set firewall family inet filter {acl} term {acl_entry['rule_name']} "
-                f"from port {acl_entry['from_port']}"
+                f"set firewall family inet filter {acl_name} term {acl_entry['term_name']} "
+                f"from destination-port {acl_entry['destination_port']}"
             )
             rules.append(
-                f"set firewall family inet filter {acl} term {acl_entry['rule_name']} "
-                f"from destination-address {acl_entry['to_address']}"
+                f"set firewall family inet filter {acl_name} term {acl_entry['term_name']} "
+                f"from destination-address {acl_entry['destination_address']}"
             )
             rules.append(
-                f"set firewall family inet filter {acl} term {acl_entry['rule_name']} "
+                f"set firewall family inet filter {acl_name} term {acl_entry['term_name']} "
                 f"then {acl_entry['state']}"
             )
-    task.run(task=networking.netmiko_send_config, config_commands=rules)
+
+    print()
+    print("#" * 80)
+    for rule in rules:
+        print(rule)
+    print("#" * 80)
+    print()
 
 
 def main():
     nr = InitNornir(config_file="config.yaml")
     nr = nr.filter(name="srx2")
-    agg_result = nr.run(task=junos_acl)
-    print_result(agg_result)
+    nr.run(task=junos_acl)
 
 
 if __name__ == "__main__":

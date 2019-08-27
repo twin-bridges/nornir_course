@@ -10,8 +10,8 @@ PASSWORD = os.environ.get("NORNIR_PASSWORD", "bogus")
 def main():
     nr = InitNornir(config_file="config.yaml")
     nr = nr.filter(F(groups__contains="nxos"))
-    for host, data in nr.inventory.hosts.items():
-        data.password = PASSWORD
+    for hostname, host_obj in nr.inventory.hosts.items():
+        host_obj.password = PASSWORD
     nr.run(
         task=networking.netmiko_send_command,
         command_string="show mac address-table",

@@ -11,8 +11,8 @@ PASSWORD = os.environ.get("NORNIR_PASSWORD", "bogus")
 def main():
     nr = InitNornir(config_file="config.yaml")
     nr = nr.filter(F(groups__contains="eos"))
-    for host, data in nr.inventory.hosts.items():
-        data.password = PASSWORD
+    for hostname, host_obj in nr.inventory.hosts.items():
+        host_obj.password = PASSWORD
     agg_result = nr.run(task=networking.napalm_get, getters=["config"])
     print_result(agg_result)
 

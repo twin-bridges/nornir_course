@@ -41,9 +41,9 @@ def send_command(task):
 
 def main():
     nr = InitNornir(config_file="config.yaml")
-    for host, data in nr.inventory.hosts.items():
+    for hostname, host_obj in nr.inventory.hosts.items():
         if random.choice([True, False]):
-            data.password = BAD_PASSWORD
+            host_obj.password = BAD_PASSWORD
     agg_result = nr.run(task=send_command)
     print_result(agg_result)
 

@@ -19,8 +19,8 @@ def log_send_command(task):
 def main():
     nr = InitNornir(config_file="config.yaml")
     nr = nr.filter(F(groups__contains="nxos"))
-    for host, data in nr.inventory.hosts.items():
-        data.password = PASSWORD
+    for hostname, host_obj in nr.inventory.hosts.items():
+        host_obj.password = PASSWORD
     nr.run(task=log_send_command)
 
 

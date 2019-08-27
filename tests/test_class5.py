@@ -60,8 +60,9 @@ def test_class5_ex3():
 
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
-    assert "---- netmiko_send_config ** changed" in std_out
-    assert "unknown command." not in std_out
+    assert std_out.count("rule1") == 4
+    assert std_out.count("rule2") == 4
+    assert std_out.count("rule3") == 4
     assert std_err == ""
 
 

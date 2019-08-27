@@ -18,8 +18,8 @@ def main():
     LOGGER.info("Script initalizing...")
     nr = InitNornir(config_file="config.yaml")
     nr = nr.filter(F(groups__contains="eos"))
-    for host, data in nr.inventory.hosts.items():
-        data.password = PASSWORD
+    for hostname, host_obj in nr.inventory.hosts.items():
+        host_obj.password = PASSWORD
     LOGGER.critical("Passwords set, commence automation!")
     nr.run(
         task=networking.netmiko_send_command, command_string="show mac address-table"
