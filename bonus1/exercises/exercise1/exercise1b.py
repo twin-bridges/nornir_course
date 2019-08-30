@@ -1,10 +1,15 @@
+import os
 from nornir import InitNornir
 from nornir.plugins.tasks import networking
 from nornir.plugins.functions.text import print_result
 
+PASSWORD = os.environ.get("NORNIR_PASSWORD", None)  # for testing purposes
+
 
 def main():
     nr = InitNornir(config_file="config.yaml")
+    for host, host_obj in nr.inventory.hosts.items():
+        host_obj.password = PASSWORD
     print(nr.inventory.hosts)
     nxos1 = nr.inventory.hosts["nxos1"]
     print(nxos1.username)
