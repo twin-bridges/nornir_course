@@ -1,4 +1,3 @@
-from jinja2.exceptions import UndefinedError
 from nornir import InitNornir
 from nornir.core.filter import F
 from nornir.core.task import Result

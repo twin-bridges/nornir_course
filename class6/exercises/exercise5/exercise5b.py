@@ -18,9 +18,7 @@ def send_command(task):
     except NornirSubTaskError as e:
         if isinstance(e.result.exception, NetMikoAuthenticationException):
             # For failed devices reset the password to the correct value using environment var
-            task.host.password = os.environ[
-                "NORNIR_PASSWORD"
-            ]
+            task.host.password = os.environ["NORNIR_PASSWORD"]
 
             # Force Nornir to close stale connections
             try:

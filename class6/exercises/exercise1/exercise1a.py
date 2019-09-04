@@ -4,7 +4,7 @@ from nornir.plugins.tasks import networking
 
 
 def send_command(task):
-    mul_result = task.run(
+    task.run(
         task=networking.netmiko_send_command, command_string="show ip interface brief"
     )
 
