@@ -17,7 +17,6 @@ def main():
     nr = nr.filter(F(groups__contains="nxos"))
     agg_result = nr.run(task=render_configurations)
     print_result(agg_result)
-    import ipdb; ipdb.set_trace()
 
 
 if __name__ == "__main__":

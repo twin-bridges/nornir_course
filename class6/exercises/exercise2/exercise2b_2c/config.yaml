@@ -6,4 +6,4 @@ inventory:
     defaults_file: "~/nornir_inventory/defaults.yaml"
 
 logging:
-  enabled: False
+  enabled: True

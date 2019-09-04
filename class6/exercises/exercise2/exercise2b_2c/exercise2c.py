@@ -10,20 +10,17 @@ from nornir.core.exceptions import NornirSubTaskError
 def render_configurations(task):
     try:
         task.run(task=text.template_file, template="loopback.j2", path=".", **task.host)
-    except NornirSubTaskError as e:
-        if isinstance(e.result.exception, UndefinedError):
-            task.results.pop()
-            msg = "Encountered Jinja2 error Undefined Variable"
-            return Result(
-                changed=False,
-                diff=None,
-                result=msg,
-                host=task.host,
-                failed=False,
-                exception=None,
-            )
-        else:
-            return "Encountered unhandled error..."
+    except NornirSubTaskError:
+        task.results.pop()
+        msg = "Encountered Jinja2 error"
+        return Result(
+            changed=False,
+            diff=None,
+            result=msg,
+            host=task.host,
+            failed=False,
+            exception=None,
+        )
 
 
 def main():
@@ -31,7 +28,6 @@ def main():
     nr = nr.filter(F(groups__contains="nxos"))
     agg_result = nr.run(task=render_configurations)
     print_result(agg_result)
-    import ipdb; ipdb.set_trace()
 
 
 if __name__ == "__main__":
