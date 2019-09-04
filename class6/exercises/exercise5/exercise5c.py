@@ -73,7 +73,7 @@ def main():
     for hostname, host_obj in nr.inventory.hosts.items():
         if random.choice([True, False]):
             host_obj.password = BAD_PASSWORD
-    agg_result = nr.run(task=send_command, num_workers=1)
+    agg_result = nr.run(task=send_command)
     print_result(agg_result)
 
 

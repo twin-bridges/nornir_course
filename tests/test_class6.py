@@ -162,7 +162,7 @@ def test_class6_ex5b():
     assert std_out.count("Time source is NTP") == 2
     assert "Current time:" in std_out
     assert return_code == 0
-    assert "Authentication failed." in std_err
+    assert std_err == ""
 
 
 def test_class6_ex5c():
@@ -175,4 +175,4 @@ def test_class6_ex5c():
     assert std_out.count("Time source is NTP") == 2
     assert "Current time:" in std_out
     assert return_code == 0
-    assert "Authentication failed." in std_err
+    assert std_err == ""
