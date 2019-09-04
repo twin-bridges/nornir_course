@@ -3,11 +3,9 @@ from nornir.plugins.functions.text import print_result
 from nornir.plugins.tasks import networking
 
 
-COMMAND_MAPPER = {"junos": "show system uptime"}
-
-
 def send_command(task):
-    cmd = COMMAND_MAPPER.get(task.host.platform, "show clock")
+    command_mapper = {"junos": "show system uptime"}
+    cmd = command_mapper.get(task.host.platform, "show clock")
     task.run(task=networking.netmiko_send_command, command_string=cmd)
 
 

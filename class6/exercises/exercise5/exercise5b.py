@@ -8,22 +8,26 @@ from nornir.core.exceptions import NornirSubTaskError
 
 
 BAD_PASSWORD = "bogus"
-COMMAND_MAPPER = {"junos": "show system uptime"}
 
 
 def send_command(task):
-    cmd = COMMAND_MAPPER.get(task.host.platform, "show clock")
+    command_mapper = {"junos": "show system uptime"}
+    cmd = command_mapper.get(task.host.platform, "show clock")
     try:
         task.run(task=networking.netmiko_send_command, command_string=cmd)
     except NornirSubTaskError as e:
         if isinstance(e.result.exception, NetMikoAuthenticationException):
+            # For failed devices reset the password to the correct value using environment var
             task.host.password = os.environ[
                 "NORNIR_PASSWORD"
-            ]  # set via env var for testing purposes
+            ]
+
+            # Force Nornir to close stale connections
             try:
                 task.host.close_connections()
             except ValueError:
                 pass
+
             task.run(task=networking.netmiko_send_command, command_string=cmd)
         else:
             return f"Unhandled exception: {e}"

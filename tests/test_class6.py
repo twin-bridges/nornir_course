@@ -56,7 +56,7 @@ def test_class6_ex1b():
     assert return_code == 0
     assert std_out.count("syntax error, expecting <command>.") == 2
     assert std_out.count("ValueError") == 2
-    assert std_err.count("ValueError") == 2
+    assert std_err == ""
 
 
 def test_class6_ex2a():
