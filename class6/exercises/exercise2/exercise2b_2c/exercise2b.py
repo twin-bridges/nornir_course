@@ -9,7 +9,7 @@ def render_configurations(task):
     try:
         task.run(task=text.template_file, template="loopback.j2", path=".", **task.host)
     except NornirSubTaskError:
-        return "Eh, its okay...."
+        return "Templating error occurred, but its okay...."
 
 
 def main():
@@ -17,6 +17,7 @@ def main():
     nr = nr.filter(F(groups__contains="nxos"))
     agg_result = nr.run(task=render_configurations)
     print_result(agg_result)
+    import ipdb; ipdb.set_trace()
 
 
 if __name__ == "__main__":

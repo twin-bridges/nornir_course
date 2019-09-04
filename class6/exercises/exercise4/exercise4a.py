@@ -12,6 +12,7 @@ def main():
     nr = nr.filter(F(groups__contains="nxos"))
     for hostname, host_obj in nr.inventory.hosts.items():
         host_obj.password = PASSWORD
+
     nr.run(
         task=networking.netmiko_send_command,
         command_string="show mac address-table",

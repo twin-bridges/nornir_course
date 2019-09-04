@@ -37,9 +37,20 @@ def remove_log_files(exercise_dir):
         os.remove(file)
 
 
-def test_class6_ex1():
+def test_class6_ex1a():
     base_path = "../class6/exercises/exercise1/"
-    cmd_list = ["python", "exercise1.py"]
+    cmd_list = ["python", "exercise1a.py"]
+
+    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
+    assert return_code == 0
+    assert std_out.count("syntax error, expecting <command>.") == 2
+    assert std_out.count("ValueError") == 0
+    assert std_err == ""
+
+
+def test_class6_ex1b():
+    base_path = "../class6/exercises/exercise1/"
+    cmd_list = ["python", "exercise1b.py"]
 
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
@@ -50,7 +61,7 @@ def test_class6_ex1():
 
 def test_class6_ex2a():
     base_path = "../class6/exercises/exercise2/exercise2a/"
-    cmd_list = ["python", "exercise2.py"]
+    cmd_list = ["python", "exercise2a.py"]
 
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
@@ -66,7 +77,7 @@ def test_class6_ex2b():
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
     assert "  ip address 1.2.3.1 255.255.255.255" in std_out
-    assert "Eh, its okay...." in std_out
+    assert "Templating error occurred, but its okay" in std_out
     assert "Host 'nxos2': task 'template_file' failed with traceback:" in std_err
     assert "jinja2.exceptions.UndefinedError: 'loopbacks' is undefined" in std_err
 
@@ -83,13 +94,25 @@ def test_class6_ex2c():
     assert "jinja2.exceptions.UndefinedError: 'loopbacks' is undefined" in std_err
 
 
-def test_class6_ex3():
+def test_class6_ex3a():
     base_path = "../class6/exercises/exercise3/"
-    cmd_list = ["python", "exercise3.py"]
+    cmd_list = ["python", "exercise3a.py"]
 
     remove_log_files(base_path)
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
-    assert os.stat(f"{base_path}my_log.log")
+    assert os.path.exists(f"{base_path}my_log.log")
+    assert return_code == 0
+    assert std_err == ""
+    remove_log_files(base_path)
+
+
+def test_class6_ex3b():
+    base_path = "../class6/exercises/exercise3/"
+    cmd_list = ["python", "exercise3b.py"]
+
+    remove_log_files(base_path)
+    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
+    assert os.path.exists(f"{base_path}my_log.log")
     assert return_code == 0
     assert std_err == ""
     remove_log_files(base_path)

@@ -8,7 +8,7 @@ def send_command(task):
         task=networking.netmiko_send_command, command_string="show ip interface brief"
     )
     if "syntax error" in mul_result.result:
-        raise ValueError
+        raise ValueError("Invalid Junos command")
 
 
 def main():
