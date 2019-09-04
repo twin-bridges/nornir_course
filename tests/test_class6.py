@@ -78,8 +78,7 @@ def test_class6_ex2b():
     assert return_code == 0
     assert "  ip address 1.2.3.1 255.255.255.255" in std_out
     assert "Templating error occurred, but its okay" in std_out
-    assert "Host 'nxos2': task 'template_file' failed with traceback:" in std_err
-    assert "jinja2.exceptions.UndefinedError: 'loopbacks' is undefined" in std_err
+    assert std_err == ""
 
 
 def test_class6_ex2c():
@@ -89,9 +88,8 @@ def test_class6_ex2c():
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
     assert "  ip address 1.2.3.1 255.255.255.255" in std_out
-    assert "Encountered Jinja2 error Undefined Variable" in std_out
-    assert "Host 'nxos2': task 'template_file' failed with traceback:" in std_err
-    assert "jinja2.exceptions.UndefinedError: 'loopbacks' is undefined" in std_err
+    assert "Encountered Jinja2 error" in std_out
+    assert std_err == ""
 
 
 def test_class6_ex3a():
