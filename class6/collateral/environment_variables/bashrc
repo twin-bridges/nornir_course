@@ -1,0 +1,2 @@
+export NORNIR_USERNAME=pyclass
+export NORNIR_PASSWORD=bogus
