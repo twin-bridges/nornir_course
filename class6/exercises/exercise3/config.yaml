@@ -3,7 +3,7 @@ inventory:
   options:
     host_file: "~/nornir_inventory/hosts.yaml"
     group_file: "~/nornir_inventory/groups.yaml"
-    defaults_file: "~/nornir_inventory/defaults.yaml"
+    defaults_file: "defaults.yaml"
 
 logging:
   enabled: True
