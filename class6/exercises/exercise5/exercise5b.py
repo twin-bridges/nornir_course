@@ -17,6 +17,9 @@ def send_command(task):
         task.run(task=networking.netmiko_send_command, command_string=cmd)
     except NornirSubTaskError as e:
         if isinstance(e.result.exception, NetMikoAuthenticationException):
+            # Remove the failed task (so ultimately the Nornir print output is cleaner)
+            task.results.pop()
+
             # For failed devices reset the password to the correct value using environment var
             task.host.password = os.environ["NORNIR_PASSWORD"]
 

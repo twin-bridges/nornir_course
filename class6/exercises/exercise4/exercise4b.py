@@ -9,6 +9,7 @@ PASSWORD = os.environ.get("NORNIR_PASSWORD", "bogus")
 
 def log_send_command(task):
     log_file = f"{task.host}_session.log"
+    # Obtain the group object using the "refs" attribute
     group = task.host.groups.refs[0]
     group.connection_options["netmiko"].extras["session_log"] = log_file
     task.run(
