@@ -13,7 +13,7 @@ def netmiko_prompting(task):
     # Manually create Netmiko connection
     net_connect = task.host.get_connection("netmiko", task.nornir.config)
 
-    filename = "test_file.txt"
+    filename = "cisco.txt"
     del_cmd = f"del flash:/{filename}"
 
     cmd_list = [del_cmd, "\n", "y"]
