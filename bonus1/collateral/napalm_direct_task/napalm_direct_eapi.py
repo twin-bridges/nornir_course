@@ -4,11 +4,13 @@ from pprint import pprint
 
 
 def direct(task):
-    
+
     # Manually create NAPALM connection
-    import ipdb; ipdb.set_trace()
+    import ipdb
+
+    ipdb.set_trace()
     napalm = task.host.get_connection("napalm", task.nornir.config)
-    eapi_conn = napalm.device 
+    eapi_conn = napalm.device
 
     show_version = eapi_conn.enable("show version")
     pprint(show_version)

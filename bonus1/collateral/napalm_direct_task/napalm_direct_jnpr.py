@@ -5,10 +5,10 @@ from nornir.core.filter import F
 
 
 def direct(task):
-    
+
     # Manually create NAPALM connection
     napalm = task.host.get_connection("napalm", task.nornir.config)
-    jnpr_conn = napalm.device 
+    jnpr_conn = napalm.device
     xml_output = jnpr_conn.rpc.get_software_information()
     print(xml_output)
     print(lxml.etree.tostring(xml_output, pretty_print=True).decode())

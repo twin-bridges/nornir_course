@@ -3,11 +3,13 @@ from nornir.core.filter import F
 
 
 def direct(task):
-    
+
     # Manually create NAPALM connection
-    import ipdb; ipdb.set_trace()
+    import ipdb
+
+    ipdb.set_trace()
     napalm = task.host.get_connection("napalm", task.nornir.config)
-    conn = napalm.device 
+    conn = napalm.device    # noqa
 
 
 if __name__ == "__main__":

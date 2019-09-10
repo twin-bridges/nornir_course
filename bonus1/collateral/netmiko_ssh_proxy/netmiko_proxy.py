@@ -2,7 +2,7 @@ from nornir import InitNornir
 
 
 def netmiko_direct(task):
-    
+
     # Manually create Netmiko connection
     net_connect = task.host.get_connection("netmiko", task.nornir.config)
     print(net_connect.find_prompt())
