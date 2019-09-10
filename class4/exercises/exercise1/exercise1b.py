@@ -31,6 +31,8 @@ def parse_uptime(uptime_str):
     (years, weeks, days, hours, minutes) = (0, 0, 0, 0, 0)
 
     uptime_str = uptime_str.strip()
+    # Replace 'and' in Arista uptime with a comma so values get split appropriately
+    uptime_str = uptime_str.replace("and", ",")
     time_list = uptime_str.split(",")
     for element in time_list:
         if re.search("year", element):
