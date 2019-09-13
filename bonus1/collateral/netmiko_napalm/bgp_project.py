@@ -12,9 +12,7 @@ DEBUG = False
 def render_configs(task):
     """Generate BGP configs from Jinja2 template."""
     template = "bgp.j2"
-    result = task.run(
-        task=text.template_file, template=template, path=".", **task.host
-    )
+    result = task.run(task=text.template_file, template=template, path=".", **task.host)
     rendered_config = result[0].result
     task.host["rendered_config"] = rendered_config
 
@@ -47,10 +45,14 @@ def napalm_merge_cfg(task):
 
 
 def verify_bgp(task):
-    multi_result = task.run(task=netmiko_send_command, command_string="show ip bgp summary | inc Estab")
+    multi_result = task.run(
+        task=netmiko_send_command, command_string="show ip bgp summary | inc Estab"
+    )
     output = multi_result[0].result
     bgp_peers = output.count("Estab")
-    multi_result = task.run(task=netmiko_send_command, command_string="show ip route bgp | inc Vlan1")
+    multi_result = task.run(
+        task=netmiko_send_command, command_string="show ip route bgp | inc Vlan1"
+    )
     output = multi_result[0].result
     bgp_route_count = output.count("Vlan1")
 
@@ -62,7 +64,7 @@ def verify_bgp(task):
         # Hide the router command output
         task.results.pop()
         task.results.pop()
-    
+
         # Print a verification message
         msg = f"""
 ****************************************
@@ -74,8 +76,8 @@ Verified BGP Route Count...OK
 
 """
         return msg
-    
- 
+
+
 if __name__ == "__main__":
     nr = InitNornir(config_file="config.yaml")
     eos_filter = F(groups__contains="eos")
