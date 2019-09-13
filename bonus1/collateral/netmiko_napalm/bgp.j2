@@ -1,0 +1,15 @@
+
+ip route {{ static_route }}{{ route_mask }} Null0
+
+router bgp {{ bgp_local_as }}
+   router-id {{ bgp_local_ip }}
+   {%- for peer in bgp_peers %}
+     {%- if peer.ip != bgp_local_ip %}
+
+   neighbor {{ peer.ip }} remote-as {{ peer.as }}
+   neighbor {{ peer.ip }} maximum-routes 12000 
+     {%- endif %}
+   {%- endfor %}
+
+   network {{ static_route }}{{ route_mask }}
+

@@ -1,0 +1,65 @@
+---
+cisco3:
+    hostname: cisco3.lasthop.io
+    groups:
+      - ios
+
+cisco4:
+    hostname: cisco4.lasthop.io
+    groups:
+      - ios
+
+nxos1:
+    hostname: nxos1.lasthop.io
+    groups:
+      - nxos
+
+nxos2:
+    hostname: nxos2.lasthop.io
+    groups:
+      - nxos
+
+arista1:
+    hostname: arista1.lasthop.io
+    groups:
+      - eos
+    data:
+      bgp_local_as: 28
+      bgp_local_ip: 10.220.88.28
+      static_route: 172.31.28.0
+      route_mask: /24
+
+arista2:
+    hostname: arista2.lasthop.io
+    groups:
+      - eos
+    data:
+      bgp_local_as: 29
+      bgp_local_ip: 10.220.88.29
+      static_route: 172.31.29.0
+      route_mask: /24
+
+arista3:
+    hostname: arista3.lasthop.io
+    groups:
+      - eos
+    data:
+      bgp_local_as: 30
+      bgp_local_ip: 10.220.88.30
+      static_route: 172.31.30.0
+      route_mask: /24
+
+arista4:
+    hostname: arista4.lasthop.io
+    groups:
+      - eos
+    data:
+      bgp_local_as: 31
+      bgp_local_ip: 10.220.88.31
+      static_route: 172.31.31.0
+      route_mask: /24
+
+srx2:
+    hostname: srx2.lasthop.io
+    groups:
+      - junos
