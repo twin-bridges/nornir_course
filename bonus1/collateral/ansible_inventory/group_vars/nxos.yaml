@@ -8,3 +8,7 @@ connection_options:
     port: 8443
     extras:
       optional_args: {}
+data:
+  ntp_server: 1.2.3.4
+
+dns_server: 8.8.8.8
