@@ -9,7 +9,7 @@ def direct(task):
 
     ipdb.set_trace()
     napalm = task.host.get_connection("napalm", task.nornir.config)
-    conn = napalm.device    # noqa
+    conn = napalm.device  # noqa
 
 
 if __name__ == "__main__":
