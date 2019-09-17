@@ -87,9 +87,21 @@ def test_class_bonus1_ex2b():
     assert std_err == ""
 
 
-def test_class_bonus1_ex5():
+def test_class_bonus1_ex5a():
     base_path = "../bonus1/exercises/exercise5/"
-    cmd_list = ["python", "exercise5.py"]
+    cmd_list = ["python", "exercise5a.py"]
+
+    os.environ["PYTHONWARNINGS"] = "ignore::Warning"
+    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
+    assert return_code == 0
+    assert "hostname nxos1" in std_out
+    assert "hostname nxos2" in std_out
+    assert std_err == ""
+
+
+def test_class_bonus1_ex5b():
+    base_path = "../bonus1/exercises/exercise5/"
+    cmd_list = ["python", "exercise5b.py"]
 
     backups_dir = Path(f"{base_path}backups")
     nxos1_checkpoint = Path(f"{base_path}backups/nxos1_checkpoint")
@@ -98,6 +110,8 @@ def test_class_bonus1_ex5():
     os.environ["PYTHONWARNINGS"] = "ignore::Warning"
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
+    assert "hostname nxos1" in std_out
+    assert "hostname nxos2" in std_out
     assert nxos1_checkpoint.is_file()
     assert nxos2_checkpoint.is_file()
     assert std_err == ""

@@ -8,9 +8,11 @@ from nornir.plugins.functions.text import print_result
 def get_checkpoint_file(task):
     napalm_conn = task.host.get_connection("napalm", task.nornir.config)
     checkpoint = napalm_conn._get_checkpoint_file()
+    task.host["backup"] = checkpoint
     Path("backups").mkdir(exist_ok=True)
     with open(f"backups/{task.host.name}_checkpoint", "w") as f:
         f.write(checkpoint)
+    return checkpoint
 
 
 def main():
