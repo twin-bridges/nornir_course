@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 import subprocess
 
 
@@ -83,4 +84,38 @@ def test_class_bonus1_ex2b():
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
     assert std_out.count("'pyclass'") == 9
+    assert std_err == ""
+
+
+def test_class_bonus1_ex5():
+    base_path = "../bonus1/exercises/exercise5/"
+    cmd_list = ["python", "exercise5.py"]
+
+    backups_dir = Path(f"{base_path}backups")
+    nxos1_checkpoint = Path(f"{base_path}backups/nxos1_checkpoint")
+    nxos2_checkpoint = Path(f"{base_path}backups/nxos2_checkpoint")
+
+    os.environ["PYTHONWARNINGS"] = "ignore::Warning"
+    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
+    assert return_code == 0
+    assert nxos1_checkpoint.is_file()
+    assert nxos2_checkpoint.is_file()
+    assert std_err == ""
+
+    nxos1_checkpoint.unlink()
+    nxos2_checkpoint.unlink()
+    backups_dir.rmdir()
+
+
+def test_class_bonus1_ex6():
+    base_path = "../bonus1/exercises/exercise6/"
+    cmd_list = ["python", "exercise6.py"]
+
+    os.environ["PYTHONWARNINGS"] = "ignore::Warning"
+    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
+    assert return_code == 0
+    assert "<napalm.nxos_ssh.nxos_ssh.NXOSSSHDriver" in std_out
+    assert "<netmiko.cisco.cisco_nxos_ssh.CiscoNxosSSH" in std_out
+    assert "['RESPONSE_RETURN', 'RETURN', 'TELNET_RETURN'" in std_out
+    assert "nxos1#" in std_out
     assert std_err == ""
