@@ -83,7 +83,7 @@ def test_class_bonus1_ex2b():
     os.environ["PYTHONWARNINGS"] = "ignore::Warning"
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
-    assert std_out.count("'pyclass'") == 9
+    assert std_out.count("'facts'") == 5
     assert std_err == ""
 
 
