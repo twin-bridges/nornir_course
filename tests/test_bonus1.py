@@ -87,6 +87,36 @@ def test_class_bonus1_ex2b():
     assert std_err == ""
 
 
+def test_class_bonus1_ex3():
+    base_path = "../bonus1/exercises/exercise3/"
+    cmd_list = ["python", "exercise3.py"]
+
+    os.environ["PYTHONWARNINGS"] = "ignore::Warning"
+    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
+    assert return_code == 0
+    assert std_out.count("netmiko_direct") == 19
+    assert std_out.count("cisco3") == 2
+    assert std_out.count("cisco4") == 2
+    assert std_out.count("arista") == 8
+    assert std_out.count("nxos") == 4
+    assert std_out.count("srx2") == 2
+    assert std_err == ""
+
+
+def test_class_bonus1_ex4():
+    base_path = "../bonus1/exercises/exercise4/"
+    cmd_list = ["python", "exercise4.py"]
+
+    os.environ["PYTHONWARNINGS"] = "ignore::Warning"
+    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
+    assert return_code == 0
+    assert std_out.count("netmiko_file_transfer") == 3
+    assert std_out.count("del bootflash:/bonus1") == 1
+    assert std_out.count("Do you want to delete") == 1
+    assert std_out.count("nxos1") == 3
+    assert std_err == ""
+
+
 def test_class_bonus1_ex5a():
     base_path = "../bonus1/exercises/exercise5/"
     cmd_list = ["python", "exercise5a.py"]
