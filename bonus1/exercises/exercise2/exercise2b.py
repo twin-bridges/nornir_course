@@ -44,7 +44,7 @@ def transform_ansible_inventory(host):
 
 def main():
     nr = InitNornir(config_file="config_b.yaml")
-    nr = nr.filter(~F(name__contains="localhost") & ~F(groups__contains="arista"))
+    nr = nr.filter(F(groups__contains="nxos"))
     agg_result = nr.run(task=networking.napalm_get, getters=["facts"])
     print_result(agg_result)
 
