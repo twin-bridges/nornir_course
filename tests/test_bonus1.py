@@ -160,6 +160,5 @@ def test_class_bonus1_ex6():
     assert return_code == 0
     assert "<napalm.nxos_ssh.nxos_ssh.NXOSSSHDriver" in std_out
     assert "<netmiko.cisco.cisco_nxos_ssh.CiscoNxosSSH" in std_out
-    assert "['RESPONSE_RETURN', 'RETURN', 'TELNET_RETURN'" in std_out
     assert "nxos1#" in std_out
     assert std_err == ""

@@ -4,11 +4,17 @@ from nornir.plugins.functions.text import print_result
 
 def verify_napalm_nxos_ssh_connection(task):
     napalm_conn = task.host.get_connection("napalm", task.nornir.config)
-    print(napalm_conn)
     netmiko_conn = napalm_conn.device
-    print(netmiko_conn)
-    print(dir(netmiko_conn))
-    print(netmiko_conn.find_prompt())
+    prompt = netmiko_conn.find_prompt()
+
+    print()
+    print(f"NAPALM connection: {napalm_conn}")
+    print(f"Netmiko connection: {netmiko_conn}")
+    print()
+    print(f"Device prompt: {prompt}")
+    print()
+
+    return prompt
 
 
 def main():
