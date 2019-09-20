@@ -17,7 +17,7 @@ def transform_ansible_inventory(host):
         netmiko_params.platform = "cisco_ios"
     elif "arista" in host.groups:
         netmiko_params.platform = "arista_eos"
-        netmiko_params.extras["global_delay_factor"] = 4
+        netmiko_params.extras["global_delay_factor"] = 2
     elif "juniper" in host.groups:
         netmiko_params.platform = "juniper_junos"
     host.connection_options["netmiko"] = netmiko_params

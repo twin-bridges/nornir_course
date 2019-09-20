@@ -10,16 +10,20 @@ def main():
     nr = InitNornir(config_file="config.yaml")
     for host, host_obj in nr.inventory.hosts.items():
         host_obj.password = PASSWORD
-    print(nr.inventory.hosts)
     nxos1 = nr.inventory.hosts["nxos1"]
-    print(nxos1.username)
-    print(nxos1.password)
-    print(nxos1.port)
-    print(nxos1.platform)
-    print(nxos1.get_connection_parameters("napalm").port)
+
+    print()
+    print(nr.inventory.hosts)
+    print(f"Username: {nxos1.username}")
+    print(f"Password: {nxos1.password}")
+    print(f"Port: {nxos1.port}")
+    print(f"Platform: {nxos1.platform}")
+    print(f"NAPALM Port: {nxos1.get_connection_parameters('napalm').port}")
+    print()
 
     agg_results = nr.run(task=networking.napalm_get, getters=["ntp_servers"])
     print_result(agg_results)
+    print()
 
 
 if __name__ == "__main__":
