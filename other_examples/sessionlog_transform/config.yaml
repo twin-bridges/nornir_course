@@ -1,0 +1,10 @@
+inventory:
+  plugin: nornir.plugins.inventory.simple.SimpleInventory
+  options:
+    host_file: "~/nornir_inventory/hosts.yaml"
+    group_file: "~/nornir_inventory/groups.yaml"
+    defaults_file: "~/nornir_inventory/defaults.yaml"
+  transform_function: nornir_transform.transform_slog2
+
+logging:
+  enabled: False
