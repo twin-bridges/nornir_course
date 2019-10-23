@@ -108,11 +108,11 @@ def test_class5_ex5b():
 
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
-    assert "router bgp 22\n  router-id 1.1.1.1\n  neighbor 172.20.0.2" in std_out
+    assert "router bgp 22\n  router-id 172.20.0.1\n  neighbor 172.20.0.2" in std_out
     assert (
         "Ethernet1/4\n no switchport\n ip address 172.20.0.1 255.255.255.252" in std_out
     )
-    assert "router bgp 22\n  router-id 2.2.2.2\n  neighbor 172.20.0.1" in std_out
+    assert "router bgp 22\n  router-id 172.20.0.2\n  neighbor 172.20.0.1" in std_out
     assert (
         "Ethernet1/4\n no switchport\n ip address 172.20.0.1 255.255.255.252" in std_out
     )
@@ -125,13 +125,13 @@ def test_class5_ex5c():
 
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
-    assert "router bgp 22\n  router-id 1.1.1.1\n  neighbor 172.20.0.2" in std_out
+    assert "router bgp 22\n  router-id 172.20.0.1\n  neighbor 172.20.0.2" in std_out
     assert (
         "Ethernet1/4\n no switchport\n ip address 172.20.0.1 255.255.255.252" in std_out
     )
-    assert "router bgp 22\n  router-id 2.2.2.2\n  neighbor 172.20.0.1" in std_out
+    assert "router bgp 22\n  router-id 172.20.0.2\n  neighbor 172.20.0.1" in std_out
     assert (
         "Ethernet1/4\n no switchport\n ip address 172.20.0.1 255.255.255.252" in std_out
     )
-    assert std_out.count("Success BGP is up...") == 2
+    assert std_out.count("success BGP is up!") == 2
     assert std_err == ""

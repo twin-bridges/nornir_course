@@ -5,8 +5,10 @@ from nornir.plugins.tasks import networking
 
 def send_command(task):
     task.run(
-        task=networking.netmiko_send_command, command_string="show ip interface brief"
+        task=networking.netmiko_send_command,
+        command_string="set cli complete-on-space off",
     )
+    task.run(task=networking.netmiko_send_command, command_string="show ip interface")
 
 
 def main():

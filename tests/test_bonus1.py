@@ -56,9 +56,7 @@ def test_class_bonus1_ex1b():
     assert "pyclass" in std_out
     assert "None" in std_out
     assert "8443" in std_out
-    assert (
-        std_out.count("{'ntp_servers': {'130.126.24.24': {}, '152.2.21.1': {}}}") == 2
-    )
+    assert std_out.count("{'ntp_servers': {'") == 2
     assert std_err == ""
 
 

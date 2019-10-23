@@ -21,7 +21,7 @@ nxos:
 eos:
   platform: eos
   data:
-    file_name: arista_test.txt
+    file_name: arista_zzzzz.txt
   connection_options:
     netmiko:
       platform: arista_eos

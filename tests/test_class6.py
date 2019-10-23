@@ -43,7 +43,7 @@ def test_class6_ex1a():
 
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
-    assert std_out.count("syntax error, expecting <command>.") == 2
+    assert std_out.count("syntax error, expecting <command>.") == 1
     assert std_out.count("ValueError") == 0
     assert std_err == ""
 
@@ -54,7 +54,7 @@ def test_class6_ex1b():
 
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
-    assert std_out.count("syntax error, expecting <command>.") == 2
+    assert std_out.count("syntax error, expecting <command>.") == 1
     assert std_out.count("ValueError") == 2
     assert std_err == ""
 
