@@ -1,30 +1,21 @@
-from datetime import datetime
-
 from nornir import InitNornir
 from nornir.core.filter import F
 from nornir.core.task import Result
 from nornir.plugins.tasks.networking import netmiko_send_command
 
 
-class PrintResult:
+class SimpleProcessor:
     def task_started(self, task):
-        self.parent_task_start = datetime.now()
+        pass
 
     def task_completed(self, task, result):
-        parent_task_end = datetime.now()
-        print(
-            f">>> Parent Task Completed! Duration: {parent_task_end - self.parent_task_start}"
-        )
+        pass
 
     def task_instance_started(self, task, host):
-        task.task_start = datetime.now()
+        print(f"starting task instance for host {task.host}")
 
     def task_instance_completed(self, task, host, result):
-        task_end = datetime.now()
-        print(
-            f"  - {host.name} Result: - {result.result}\n\t"
-            f">>> Duration: {task_end - task.task_start}"
-        )
+        print(f"task instance completed for host {task.host}")
 
     def subtask_instance_started(self, task, host):
         pass
@@ -41,7 +32,7 @@ def get_version(task):
 def main():
     nr = InitNornir(config_file="config.yaml")
     nr = nr.filter(F(groups__contains="eos"))
-    nr_with_processors = nr.with_processors([PrintResult()])
+    nr_with_processors = nr.with_processors([SimpleProcessor()])
 
     nr_with_processors.run(task=get_version, num_workers=2)
 
