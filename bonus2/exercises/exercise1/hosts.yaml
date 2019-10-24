@@ -1,0 +1,72 @@
+---
+nxos1:
+  hostname: nxos1.lasthop.io
+  groups:
+    - nxos
+  data:
+    prep_configs:
+      - interface loopback 101
+      - ip address 172.31.101.101/32
+      - interface loopback 102
+      - ip address 172.31.102.101/32
+      - interface Ethernet1/4
+      - no switchport
+      - ip address 172.31.254.1/30
+    bgp_prefix_lists:
+      - Loopback101:
+        - seq: 5
+          action: permit
+          prefix: 172.31.101.101/32
+    bgp_route_maps:
+      - NXOS2_Peer:
+        - seq: 100
+          action: permit
+          match: Loopback101
+    bgp_config:
+      bgp_asn: 22
+      bgp_router_id: 172.31.101.101 
+      ipv4_unicast_prefixes:
+        - 172.31.101.101/32
+        - 172.31.102.101/32
+      neighbors:
+        - peer_ip: 172.31.254.2 
+          remote_as: 22
+          route_maps:
+            - direction: out
+              name: NXOS2_Peer
+
+nxos2:
+  hostname: nxos2.lasthop.io
+  groups:
+    - nxos
+  data:
+    prep_configs:
+      - interface loopback 101
+      - ip address 172.31.101.102/32
+      - interface loopback 102
+      - ip address 172.31.102.102/32
+      - interface Ethernet1/4
+      - no switchport
+      - ip address 172.31.254.2/30
+    bgp_prefix_lists:
+      - Loopback101:
+        - seq: 5
+          action: permit
+          prefix: 172.31.101.102/32
+    bgp_route_maps:
+      - NXOS1_Peer:
+        - seq: 100
+          action: permit
+          match: Loopback101
+    bgp_config:
+      bgp_asn: 22
+      bgp_router_id: 172.31.101.102
+      ipv4_unicast_prefixes:
+        - 172.31.101.102/32
+        - 172.31.102.102/32
+      neighbors:
+        - peer_ip: 172.31.254.1
+          remote_as: 22
+          route_maps:
+            - direction: out
+              name: NXOS1_Peer

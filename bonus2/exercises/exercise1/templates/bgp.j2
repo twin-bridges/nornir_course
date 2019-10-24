@@ -1,0 +1,15 @@
+router bgp {{ bgp_config.bgp_asn }}    
+  router-id {{ bgp_config.bgp_router_id }}
+  address-family ipv4 unicast
+{% for prefix in bgp_config.ipv4_unicast_prefixes %}
+    network {{ prefix }}
+{% endfor %}
+{% for neighbor in bgp_config.neighbors %}
+  neighbor {{ neighbor.peer_ip }}
+    description {{ neighbor.description | default("configured by nornir") }}
+    remote-as {{ neighbor.remote_as }}
+    address-family ipv4 unicast
+{% for route_map in neighbor.route_maps %}
+      route-map RM_BGP_{{ route_map.name }} {{ route_map.direction }}
+{% endfor %}
+{% endfor %}

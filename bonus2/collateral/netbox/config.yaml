@@ -1,0 +1,11 @@
+---
+inventory:
+  plugin: nornir.plugins.inventory.netbox.NBInventory
+  options:
+    nb_url: https://netbox.lasthop.io
+    nb_token: 1234567890123456789012345678901234567890
+    ssl_verify: False
+  transform_function: nbox.transform_netbox_group_custom_field
+
+logging:
+  enabled: False

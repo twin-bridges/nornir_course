@@ -1,0 +1,24 @@
+$ python nbox.py
+--Return--
+None
+> /home/carl/bonus2_netbox/nbox.py(15)main()
+     14     nr = InitNornir(config_file="config.yaml")
+---> 15     import ipdb; ipdb.set_trace()
+     16
+
+ipdb> nr.inventory.groups
+{}
+ipdb> nr.inventory.hosts['arista1'].groups
+['eos']
+ipdb> nr.inventory.add_group("eos")
+ipdb> nr.inventory.groups
+{'eos': Group: eos}
+ipdb> from nornir.core.filter import F
+ipdb>
+ipdb>
+ipdb> nr = nr.filter(F(groups__contains="eos"))
+ipdb> nr.inventory.groups
+{'eos': Group: eos}
+ipdb> nr.inventory.hosts
+{'arista1': Host: arista1}
+ipdb>
