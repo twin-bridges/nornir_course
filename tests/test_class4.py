@@ -43,7 +43,7 @@ def remove_ex2_flash_files():
     eos.run(task=networking.netmiko_send_command, command_string="terminal dont-ask")
     eos.run(
         task=networking.netmiko_send_command,
-        command_string="delete flash:arista_test.txt",
+        command_string="delete flash:arista_zzzzz.txt",
     )
 
 
