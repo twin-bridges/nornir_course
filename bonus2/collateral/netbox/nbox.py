@@ -1,21 +1,23 @@
-import ipdb
-
+import os
 from nornir import InitNornir
 
 
-def transform_netbox_group_custom_field(host):
-    if not host["Groups"]:
-        return
-    groups = host["Groups"].split()
-    for group in groups:
-        host.groups.append(group)
+NBOX_TOKEN = os.environ.get("NETBOX_TOKEN", "sad, no token")
+
+
+def nbox_task(task):
+    if task.host["site"] == "area52":
+        print("very sneaky switch!")
 
 
 def main():
-    nr = InitNornir(config_file="config.yaml")
-    ipdb.set_trace()
-    # return only to "use" nr variable to appease linters!
-    return nr
+    nr = InitNornir(
+        config_file="config.yaml",
+        inventory={
+            "options": {"nb_token": NBOX_TOKEN, "nb_url": "https://netbox.lasthop.io"}
+        },
+    )
+    nr.run(task=nbox_task)
 
 
 if __name__ == "__main__":
