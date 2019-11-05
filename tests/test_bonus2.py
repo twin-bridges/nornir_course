@@ -10,7 +10,7 @@ def subprocess_runner(cmd_list, exercise_dir):
 
 
 def test_class_bonus2_ex1():
-    base_path = "../bonus2/exercises/exercise1/"
+    base_path = "../bonus2/exercises/"
     cmd_list = ["python", "bgp_config_tool_final.py"]
 
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
