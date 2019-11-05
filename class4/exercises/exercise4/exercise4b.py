@@ -1,3 +1,7 @@
+# import napalm modules to avoid current locking issue with imports in NAPALM
+import napalm.eos  # noqa
+import napalm.nxos  # noqa
+
 from nornir import InitNornir
 from nornir.core.filter import F
 from nornir.plugins.functions.text import print_result
