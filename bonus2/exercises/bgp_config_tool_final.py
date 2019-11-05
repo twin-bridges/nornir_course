@@ -275,6 +275,8 @@ def main():
     nr = nr.filter(F(groups__contains="nxos"))
     for task in task_list:
         result = nr.run(task=task)
+        if any(v.changed for k, v in result.items()):
+            print(f">>> Task '{result.name.upper()}' changed...")
         if result.failed:
             print(f">>> Task '{result.name.upper()}' failed... result:")
             print_result(result)
