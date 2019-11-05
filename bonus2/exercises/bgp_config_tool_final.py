@@ -248,9 +248,8 @@ def push_updated_checkpoint(task, dry_run=False, diff=True):
         replace=True,
         dry_run=False,
     )
-    if result.diff:
-        with open(f"{task.host.name}_config_diff", "w") as f:
-            f.write(result.diff)
+    with open(f"{task.host.name}_config_diff", "w") as f:
+        f.write(result.diff)
 
 
 def main():
