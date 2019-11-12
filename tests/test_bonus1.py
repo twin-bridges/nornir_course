@@ -87,7 +87,7 @@ def test_class_bonus1_ex2b():
     assert std_err == ""
 
 
-@pytest.skipped
+@pytest.mark.skip()
 def test_class_bonus1_ex3():
     base_path = "../bonus1/exercises/exercise3/"
     cmd_list = ["python", "exercise3.py"]
