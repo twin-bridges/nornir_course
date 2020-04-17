@@ -1,4 +1,3 @@
-import subprocess
 from pathlib import Path
 import pytest
 
@@ -25,7 +24,6 @@ TEST_CASES = [
 @pytest.mark.parametrize("test_case_dir, inventory_check", TEST_CASES_INVENTORY)
 def test_runner_collateral_inv(test_case_dir, inventory_check):
     path_obj = Path(test_case_dir)
-    script = path_obj.name
     script_dir = path_obj.parents[0]
     nornir_inventory = gen_inventory_dict(script_dir)
     nr = InitNornir(inventory=nornir_inventory, logging=NORNIR_LOGGING)
@@ -34,9 +32,10 @@ def test_runner_collateral_inv(test_case_dir, inventory_check):
     if inventory_check == "all":
         assert nr.inventory.hosts
         assert nr.inventory.groups
-        assert  nr.inventory.defaults
+        assert nr.inventory.defaults
     elif inventory_check == "hosts":
         assert nr.inventory.hosts
+
 
 @pytest.mark.parametrize("test_case", TEST_CASES)
 def test_runner_collateral(test_case):
