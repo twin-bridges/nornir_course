@@ -14,13 +14,13 @@ NORNIR_LOGGING = {"enabled": False}
 TEST_CASES = [
     ("../class2/collateral/nornir_netmiko_plugins/netmiko_show_ip.py", "hosts-groups"),
     ("../class2/collateral/nornir_netmiko_plugins/netmiko_show_ip_2.py", "hosts-groups"),
+    ("../class2/collateral/netmiko_enable/netmiko_enable.py", "hosts-groups"),
 #./class2/collateral/nornir_napalm_plugins/napalm_example/napalm_arp.py
 #./class2/collateral/nornir_napalm_plugins/napalm_example/napalm_facts.py
 #./class2/collateral/nornir_napalm_plugins/napalm_example/napalm_lldp.py
 #./class2/collateral/nornir_napalm_plugins/enable/napalm_config.py
 #./class2/collateral/nornir_napalm_plugins/napalm_bgp/napalm_bgp.py
 #./class2/collateral/netmiko_save_config/netmiko_wrmem.py
-#./class2/collateral/netmiko_enable/netmiko_enable.py
 #./class2/collateral/results/results_example.py
 #./class2/collateral/configuration_options/base_example_cfg_file.py
 #./class2/collateral/configuration_options/base_example.py
