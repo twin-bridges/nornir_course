@@ -1,10 +1,60 @@
 import os
+import pytest
+from pathlib import Path
+
+import nornir
 from nornir import InitNornir
+
 from utilities import gen_inventory_dict
 from utilities import subprocess_runner
 
 
 NORNIR_LOGGING = {"enabled": False}
+
+TEST_CASES = [
+    ("../class2/collateral/nornir_netmiko_plugins/netmiko_show_ip.py", "hosts-groups"),
+    ("../class2/collateral/nornir_netmiko_plugins/netmiko_show_ip_2.py", "hosts-groups"),
+#./class2/collateral/nornir_napalm_plugins/napalm_example/napalm_arp.py
+#./class2/collateral/nornir_napalm_plugins/napalm_example/napalm_facts.py
+#./class2/collateral/nornir_napalm_plugins/napalm_example/napalm_lldp.py
+#./class2/collateral/nornir_napalm_plugins/enable/napalm_config.py
+#./class2/collateral/nornir_napalm_plugins/napalm_bgp/napalm_bgp.py
+#./class2/collateral/netmiko_save_config/netmiko_wrmem.py
+#./class2/collateral/netmiko_enable/netmiko_enable.py
+#./class2/collateral/results/results_example.py
+#./class2/collateral/configuration_options/base_example_cfg_file.py
+#./class2/collateral/configuration_options/base_example.py
+#./class2/collateral/configuration_options/base_example_cfg_in_code.py
+#./class2/collateral/failed_tasks/raise_on_err.py
+]
+
+
+@pytest.mark.parametrize("test_case_dir, inventory_check", TEST_CASES)
+def test_runner_collateral(test_case_dir, inventory_check):
+    path_obj = Path(test_case_dir)
+    script = path_obj.name
+    script_dir = path_obj.parents[0]
+
+    # Inventory Checks
+    nornir_inventory = gen_inventory_dict(script_dir)
+    nr = InitNornir(inventory=nornir_inventory, logging=NORNIR_LOGGING)
+    assert isinstance(nr, nornir.core.Nornir)
+    assert isinstance(nr.inventory.hosts, nornir.core.inventory.Hosts)
+    if inventory_check == "all":
+        assert nr.inventory.hosts
+        assert nr.inventory.groups
+        assert nr.inventory.defaults
+    elif inventory_check == "hosts":
+        assert nr.inventory.hosts
+    elif inventory_check == "hosts-groups":
+        assert nr.inventory.hosts
+        assert nr.inventory.groups
+
+    # Script Check
+    cmd_list = ["python", script]
+    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=script_dir)
+    assert return_code == 0
+    assert std_err == ""
 
 
 def test_class2_ex1a():
