@@ -1,7 +1,12 @@
 from nornir import InitNornir
 from nornir.core.filter import F
-from nornir.plugins.tasks.networking import napalm_get
-from nornir.plugins.functions.text import print_result
+from nornir_napalm.tasks import napalm_get
+from nornir_netmiko.tmp_glue import print_result
+
+# Disable SSL Warnings
+import urllib3
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
 def main():
