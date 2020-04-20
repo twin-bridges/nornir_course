@@ -1,5 +1,5 @@
 from nornir import InitNornir
-from nornir.plugins.tasks.networking import netmiko_send_config
+from nornir_netmiko import netmiko_send_config
 from nornir.core.filter import F
 
 

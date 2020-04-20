@@ -1,18 +1,18 @@
 from nornir import InitNornir
 from nornir.core.task import Result
-from nornir.plugins.functions.text import print_result
-from nornir.plugins.tasks import networking
+from nornir_netmiko.tmp_glue import print_result
+from nornir_netmiko import netmiko_send_command
 
 
 def my_task(task):
     changed = False
     if task.host.groups[0] == "ios":
         cmd = "show run | i hostname"
-        task.run(task=networking.netmiko_send_command, command_string=cmd)
+        task.run(task=netmiko_send_command, command_string=cmd)
         changed = True
     elif task.host.groups[0] == "junos":
         cmd = "show configuration system host-name "
-        task.run(task=networking.netmiko_send_command, command_string=cmd)
+        task.run(task=netmiko_send_command, command_string=cmd)
         changed = True
     return Result(host=task.host, changed=changed, failed=False, result="ran command")
 

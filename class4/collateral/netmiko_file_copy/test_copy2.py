@@ -1,5 +1,5 @@
 from nornir import InitNornir
-from nornir.plugins.tasks.networking import netmiko_file_transfer
+from nornir_netmiko import netmiko_file_transfer
 from nornir.core.filter import F
 
 

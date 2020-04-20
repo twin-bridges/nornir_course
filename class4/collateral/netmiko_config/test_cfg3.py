@@ -1,6 +1,5 @@
-import ipdb
 from nornir import InitNornir
-from nornir.plugins.tasks.networking import netmiko_send_config
+from nornir_netmiko import netmiko_send_config
 from nornir.core.filter import F
 
 
@@ -11,7 +10,8 @@ def custom_config(task):
     groupname = task.host.groups[0]
 
     # From external file
-    ipdb.set_trace()
+    # import ipdb
+    # ipdb.set_trace()
     file_name = f"{groupname}/{hostname}-intf.txt"
     print(file_name)
     results = task.run(task=netmiko_send_config, config_file=file_name)

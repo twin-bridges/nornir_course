@@ -1,11 +1,11 @@
-import ipdb
 from nornir import InitNornir
-from nornir.plugins.tasks.networking import netmiko_send_config
+from nornir_netmiko import netmiko_send_config
 
 
 def custom_config(task):
 
-    ipdb.set_trace()
+    # import ipdb
+    # ipdb.set_trace()
     print(task.host)
 
     # To force enable mode
