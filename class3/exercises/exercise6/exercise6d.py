@@ -3,12 +3,6 @@ from nornir import InitNornir
 from nornir_napalm.tasks import napalm_get
 
 
-# Disable SSL Warnings
-import urllib3
-
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-
-
 def main():
 
     # Exercise 6a

@@ -3,11 +3,6 @@ from nornir.core.filter import F
 from nornir_napalm.tasks import napalm_get
 from nornir_netmiko.tmp_glue import print_result
 
-# Disable SSL Warnings
-import urllib3
-
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-
 
 def main():
     nr = InitNornir(config_file="config.yaml")

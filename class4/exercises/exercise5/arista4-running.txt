@@ -27,12 +27,6 @@ vlan 2-7
 vlan 123
    name ntp_vlan
 !
-vlan 124
-   name ntp_vlan2
-!
-vlan 125
-   name ntp_vlan3
-!
 interface Ethernet1
    spanning-tree portfast
    spanning-tree cost 1
