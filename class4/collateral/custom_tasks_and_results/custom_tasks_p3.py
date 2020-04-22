@@ -24,9 +24,9 @@ def main():
     # print_result(result)
     nr = nr.filter(name="arista1")
     result = nr.run(task=new_task)
-    import ipdb
 
-    ipdb.set_trace()
+    # import ipdb
+    # ipdb.set_trace()
     print_result(result)
 
 

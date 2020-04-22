@@ -38,26 +38,13 @@ def test_runner_collateral(test_case_dir, inventory_check):
     # Inventory Checks
     if inventory_check is None:
         pass
-    else:
-        nornir_inventory = gen_inventory_dict(script_dir)
-        nr = InitNornir(inventory=nornir_inventory, logging=NORNIR_LOGGING)
-        assert isinstance(nr, nornir.core.Nornir)
-        assert isinstance(nr.inventory.hosts, nornir.core.inventory.Hosts)
-        if inventory_check == "all":
-            assert nr.inventory.hosts
-            assert nr.inventory.groups
-            assert nr.inventory.defaults
-        elif inventory_check == "hosts":
-            assert nr.inventory.hosts
-        elif inventory_check == "hosts-groups":
-            assert nr.inventory.hosts
-            assert nr.inventory.groups
 
     # Script Check
     cmd_list = ["python", script]
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=script_dir)
     assert return_code == 0
     assert std_err == ""
+
 
 def remove_ex2_flash_files():
     # prep to ensure test files do not exist on devices
