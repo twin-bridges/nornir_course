@@ -5,8 +5,8 @@ eos:
   connection_options:
     netmiko:
       platform: arista_eos
-      username: insecure
-      password: stillnotsecure
+      # username: insecure
+      # password: stillnotsecure
       extras:
         global_delay_factor: 2 
         secret: verysecure

@@ -1,10 +1,10 @@
 from nornir import InitNornir
-from nornir.plugins.functions.text import print_result
-from nornir.plugins.tasks import data
+from nornir_netmiko.tmp_glue import print_result
+from nornir_netmiko.tmp_glue import load_yaml
 
 
 def custom_task(task):
-    inyaml = task.run(task=data.load_yaml, file=f"nxos/{task.host.name}.yaml")
+    inyaml = task.run(task=load_yaml, file=f"nxos/{task.host.name}.yaml")
     print(inyaml.result)
 
 
