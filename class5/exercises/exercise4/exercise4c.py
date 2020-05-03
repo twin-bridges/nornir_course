@@ -1,13 +1,14 @@
 from nornir import InitNornir
-from nornir.plugins.tasks import text
-from nornir.plugins.tasks import data
+from nornir_netmiko.tmp_glue import load_yaml
+from nornir_netmiko.tmp_glue import template_file
+ 
 
 
 def junos_acl(task):
-    in_yaml = task.run(task=data.load_yaml, file="acl.yaml")
+    in_yaml = task.run(task=load_yaml, file="acl.yaml")
     in_yaml = in_yaml[0].result
     multi_result = task.run(
-        task=text.template_file, template="acl.j2", path=".", acls=in_yaml
+        task=template_file, template="acl.j2", path=".", acls=in_yaml
     )
     task.host["acl"] = multi_result.result
 

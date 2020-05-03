@@ -1,32 +1,53 @@
-import subprocess
+import os
+from pathlib import Path
+import pytest
 
+from utilities import subprocess_runner
+from utilities import gen_inventory_dict
+
+import nornir
+from nornir import InitNornir
 
 NORNIR_LOGGING = {"enabled": False}
 
+TEST_CASES = [
+    ("../class5/collateral/generic_data/generic_data.py", "all"),
+    ("../class5/collateral/connection_options/conn_options.py", "all"),
+    ("../class5/collateral/load_data/ingest_data.py", None),
+    ("../class5/collateral/jinja2_render/nornir_jinja2.py", None),
+    ("../class5/collateral/jinja2_config/nornir_jinja2.py", None),
+]
 
-def gen_inventory_dict(base_path):
-    """Dynamically create an inventory dictionary using exercise path."""
-    # BASE_PATH = "../class1/exercises/exercise1/"
-    NORNIR_HOSTS = f"{base_path}/hosts.yaml"
-    NORNIR_GROUPS = f"{base_path}/groups.yaml"
-    NORNIR_DEFAULTS = f"{base_path}/defaults.yaml"
-    NORNIR_INVENTORY = {
-        "plugin": "nornir.plugins.inventory.simple.SimpleInventory",
-        "options": {
-            "host_file": NORNIR_HOSTS,
-            "group_file": NORNIR_GROUPS,
-            "defaults_file": NORNIR_DEFAULTS,
-        },
-    }
-    return NORNIR_INVENTORY
+@pytest.mark.parametrize("test_case_dir, inventory_check", TEST_CASES)
+def test_runner_collateral(test_case_dir, inventory_check):
+    path_obj = Path(test_case_dir)
+    script = path_obj.name
+    script_dir = path_obj.parents[0]
 
+    # Inventory Checks
+    if inventory_check is None:
+        pass
+    else:
+        nornir_inventory = gen_inventory_dict(script_dir)
+        nr = InitNornir(inventory=nornir_inventory, logging=NORNIR_LOGGING)
+        assert isinstance(nr, nornir.core.Nornir)
+        assert isinstance(nr.inventory.hosts, nornir.core.inventory.Hosts)
+        if inventory_check == "all":
+            assert nr.inventory.hosts
+            assert nr.inventory.groups
+            assert nr.inventory.defaults
+        elif inventory_check == "hosts":
+            assert nr.inventory.hosts
+        elif inventory_check == "hosts-groups":
+            assert nr.inventory.hosts
+            assert nr.inventory.groups
 
-def subprocess_runner(cmd_list, exercise_dir):
-    with subprocess.Popen(
-        cmd_list, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=exercise_dir
-    ) as proc:
-        std_out, std_err = proc.communicate()
-    return (std_out.decode(), std_err.decode(), proc.returncode)
+    # Script Check
+    cmd_list = ["python", script]
+    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=script_dir)
+    assert return_code == 0
+    assert std_err == ""
+
 
 
 def test_class5_ex1():
