@@ -12,10 +12,12 @@ NORNIR_LOGGING = {"enabled": False}
 
 TEST_CASES = [
     ("../class6/collateral/enable_secret/enable_secret.py", None),
+    ("../class6/collateral/getpass_secret/getpass_secrets.py", None),
+    ("../class6/collateral/getpass_password/getpass_password.py", None),
+    ("../class6/collateral/environment_variables/env_var.py", None),
 ]
 
 TEST_CASES_STDIN = [
-    ("../class6/collateral/enable_secret/enable_secret.py", None),
 ]
 
 TEST_CASES_EXPECTED_FAIL = [
@@ -25,9 +27,6 @@ TEST_CASES_EXPECTED_FAIL = [
 ]
 
 """
-../class6/collateral/getpass_secret/getpass_secrets.py
-../class6/collateral/getpass_password/getpass_password.py
-../class6/collateral/environment_variables/env_var.py
 ../class6/collateral/ansible_vault/ans_vault.py
 ./class6/collateral/troubleshooting/test_netmiko_pdb.py
 ./class6/collateral/troubleshooting/test_napalm_slog.py

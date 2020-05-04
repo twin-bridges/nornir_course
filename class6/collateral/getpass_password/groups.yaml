@@ -25,7 +25,7 @@ eos:
     netmiko:
       platform: arista_eos
       extras:
-        global_delay_factor: 5
+        global_delay_factor: 1
     napalm:
       extras:
         optional_args: {}

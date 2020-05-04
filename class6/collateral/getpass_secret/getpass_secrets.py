@@ -4,7 +4,8 @@ from nornir import InitNornir
 from nornir_netmiko import netmiko_send_command
 
 
-SECRET = getpass()
+# Pass in SECRET from environment variable else us getpass (for automated tests)
+SECRET = os.getenv("NORNIR_PASSWORD") if os.getenv("NORNIR_PASSWORD") else getpass()
 
 
 def set_secret(nr, group):
@@ -15,11 +16,6 @@ def set_secret(nr, group):
 def main():
     nr = InitNornir(config_file="config.yaml")
     nr = nr.filter(name="cisco3")
-
-    # Pass in passwd-secret from environment variable so automated tests work properly
-    passwd_secret = os.environ["NORNIR_PASSWORD"]
-    # nr.inventory.defaults.password = passwd_secret
-    # nr.inventory.defaults.connection_options['netmiko'].extras['secret'] = passwd_secret
 
     set_secret(nr, "ios")
     agg_result = nr.run(
