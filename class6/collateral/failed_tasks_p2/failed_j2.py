@@ -1,18 +1,19 @@
 from nornir import InitNornir
-from nornir.plugins.tasks import text
+from nornir_netmiko.tmp_glue import template_file
+
 
 
 def render_configurations(task):
     """
-    The following line would fail due to "domain_name" being udnefined
-    task.run(task=text.template_file, template="eos.j2", path="templates", **task.host)
+    The following line would fail due to "domain_name" being undefined
+    task.run(task=template_file, template="eos.j2", path="templates", **task.host)
     """
     task.run(
-        task=text.template_file,
+        task=template_file,
         template="eos.j2",
         path="templates",
         **task.host,
-        domain_name="TEST"
+        # domain_name="TEST"
     )
 
 

@@ -1,4 +1,3 @@
-import os
 from pathlib import Path
 import pytest
 
@@ -17,6 +16,7 @@ TEST_CASES = [
     ("../class5/collateral/jinja2_render/nornir_jinja2.py", None),
     ("../class5/collateral/jinja2_config/nornir_jinja2.py", None),
 ]
+
 
 @pytest.mark.parametrize("test_case_dir, inventory_check", TEST_CASES)
 def test_runner_collateral(test_case_dir, inventory_check):
@@ -47,7 +47,6 @@ def test_runner_collateral(test_case_dir, inventory_check):
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=script_dir)
     assert return_code == 0
     assert std_err == ""
-
 
 
 def test_class5_ex1():

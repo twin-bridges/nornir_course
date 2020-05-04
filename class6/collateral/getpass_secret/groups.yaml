@@ -1,9 +1,12 @@
 ---
 ios:
   platform: ios
+  username: test9
   connection_options:
     netmiko:
       platform: cisco_ios
+      extras:
+        secret: bogus
     napalm:
       extras:
         optional_args: {}
@@ -26,7 +29,7 @@ eos:
       platform: arista_eos
       extras:
         secret: bogus
-        global_delay_factor: 5
+        global_delay_factor: 1
     napalm:
       extras:
         optional_args: {}
