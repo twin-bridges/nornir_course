@@ -7,7 +7,7 @@ def gen_inventory_dict(base_path):
     NORNIR_GROUPS = f"{base_path}/groups.yaml"
     NORNIR_DEFAULTS = f"{base_path}/defaults.yaml"
     NORNIR_INVENTORY = {
-        "plugin": "nornir.plugins.inventory.simple.SimpleInventory",
+        "plugin": "SimpleInventory",
         "options": {
             "host_file": NORNIR_HOSTS,
             "group_file": NORNIR_GROUPS,
