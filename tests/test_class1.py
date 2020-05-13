@@ -9,6 +9,7 @@ from utilities import subprocess_runner
 NORNIR_LOGGING = {"enabled": False}
 
 TEST_CASES_INVENTORY = [
+    ("../class1/collateral/first_task/test_nr.py", "hosts"),
     ("../class1/collateral/core_inventory_objects/invalid.py", "all"),
     ("../class1/collateral/first_task/invalid.py", "hosts"),
     ("../class1/collateral/inventory_overview/invalid.py", "hosts"),
@@ -69,7 +70,7 @@ def test_class1_ex2():
     for host_name, host_obj in nr.inventory.hosts.items():
         assert host_obj.hostname is not None
         assert len(host_obj.groups) == 1
-        assert host_obj.groups[0] == "ios"
+        assert host_obj.groups[0].name == "ios"
         assert host_obj.platform == "cisco_ios"
         assert host_obj.username == "pyclass"
         assert host_obj.password == "cisco123"
