@@ -1,6 +1,7 @@
 import random
 import time
 from nornir import InitNornir
+from nornir.plugins.runners import SerialRunner
 
 
 def my_task(task):
@@ -9,7 +10,8 @@ def my_task(task):
 
 
 def main():
-    nr = InitNornir(core={"num_workers": 1})
+    nr = InitNornir(config_file="config.yaml")
+    nr = nr.with_runner(SerialRunner())
     nr.run(task=my_task)
 
 
