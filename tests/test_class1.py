@@ -100,7 +100,7 @@ def test_class1_ex3():
     for host_name, host_obj in nr.inventory.hosts.items():
         assert host_obj.hostname is not None
         assert len(host_obj.groups) == 1
-        assert host_obj.groups[0] == "ios"
+        assert host_obj.groups[0].name == "ios"
         assert host_obj.platform == "cisco_ios"
         assert host_obj.username == "pyclass"
         assert host_obj.password == "cisco123"
@@ -132,7 +132,7 @@ def test_class1_ex4():
     for host_name, host_obj in nr.inventory.hosts.items():
         assert host_obj.hostname is not None
         assert len(host_obj.groups) == 1
-        assert host_obj.groups[0] == "ios"
+        assert host_obj.groups[0].name == "ios"
         assert host_obj.platform == "cisco_ios"
         assert host_obj.username == "pyclass"
         assert host_obj.password == "cisco123"
@@ -166,7 +166,7 @@ def test_class1_ex5():
     for host_name, host_obj in nr.inventory.hosts.items():
         assert host_obj.hostname is not None
         assert len(host_obj.groups) == 1
-        assert host_obj.groups[0] == "ios"
+        assert host_obj.groups[0].name == "ios"
         assert host_obj.platform == "cisco_ios"
         assert host_obj.username == "pyclass"
         assert host_obj.password == "cisco123"
