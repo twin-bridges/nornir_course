@@ -1,5 +1,7 @@
 ---
-core:
-  num_workers: 10
+inventory:
+  plugin: SimpleInventory
 logging:
   file: ""
+runner:
+  plugin: serial

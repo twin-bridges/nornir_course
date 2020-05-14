@@ -48,6 +48,7 @@ def test_runner_collateral(test_case):
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=script_dir)
     assert return_code == 0
     assert std_err == ""
+    assert "Traceback" not in std_out
 
 
 def test_class1_ex1():

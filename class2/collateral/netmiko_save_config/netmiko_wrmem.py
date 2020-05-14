@@ -1,7 +1,7 @@
 import os
 from nornir import InitNornir
 from nornir_netmiko import netmiko_save_config
-from nornir_netmiko.tmp_glue import print_result
+from nornir_utils.plugins.functions import print_result
 
 nr = InitNornir(config_file="nornir.yaml")
 

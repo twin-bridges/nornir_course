@@ -68,6 +68,7 @@ def test_runner_collateral(test_case_dir, inventory_check):
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=script_dir)
     assert return_code == 0
     assert std_err == ""
+    assert "Traceback" not in std_out
 
 
 def test_class2_ex1a():
@@ -76,7 +77,6 @@ def test_class2_ex1a():
 
     nornir_inventory = gen_inventory_dict(base_path)
     nr = InitNornir(inventory=nornir_inventory, logging=NORNIR_LOGGING)
-    assert nr.config.core.num_workers == 20
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
     assert "20" in std_out
