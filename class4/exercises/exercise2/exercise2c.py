@@ -19,7 +19,7 @@ def file_copy(task):
     if multi_result[0].result is True:
         return f"SCP get completed: {dest_file}"
     else:
-        return f"Failure...SCP get failed!!!"
+        return "Failure...SCP get failed!!!"
 
 
 def main():
