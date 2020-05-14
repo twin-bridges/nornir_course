@@ -4,3 +4,5 @@ inventory:
     host_file: "hosts.yaml"
     group_file: "groups.yaml"
     defaults_file: "defaults.yaml"
+runner:
+  plugin: serial

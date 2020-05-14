@@ -11,7 +11,6 @@ def my_task(task):
 
 def main():
     nr = InitNornir(config_file="config.yaml")
-    nr = nr.with_runner(SerialRunner())
     nr.run(task=my_task)
 
 
