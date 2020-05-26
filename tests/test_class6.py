@@ -17,8 +17,7 @@ TEST_CASES = [
     ("../class6/collateral/environment_variables/env_var.py", None),
 ]
 
-TEST_CASES_STDIN = [
-]
+TEST_CASES_STDIN = []
 
 TEST_CASES_EXPECTED_FAIL = [
     ("../class6/collateral/failed_tasks_p2/failed_netmiko.py", None),

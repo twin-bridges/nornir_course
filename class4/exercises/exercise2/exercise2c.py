@@ -1,6 +1,6 @@
 from nornir import InitNornir
 from nornir.core.filter import F
-from nornir_netmiko.tmp_glue import print_result
+from nornir_utils.plugins.functions import print_result
 from nornir_netmiko import netmiko_file_transfer
 
 
@@ -23,9 +23,12 @@ def file_copy(task):
 
 
 def main():
-    nr = InitNornir(config_file="config.yaml")
+    nr = InitNornir(
+        config_file="config.yaml",
+        runner={"plugin": "threaded", "options": {"num_workers": 10}},
+    )
     nr = nr.filter(F(groups__contains="eos"))
-    result = nr.run(task=file_copy, num_workers=10)
+    result = nr.run(task=file_copy)
     print_result(result)
 
 

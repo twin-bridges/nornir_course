@@ -1,5 +1,5 @@
 from nornir import InitNornir
-from nornir.plugins.functions.text import print_result
+from nornir_utils.plugins.functions import print_result
 
 
 def netmiko_direct(task):

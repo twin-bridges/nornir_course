@@ -1,5 +1,5 @@
 from nornir import InitNornir
-from nornir_netmiko.tmp_glue import print_result
+from nornir_utils.plugins.functions import print_result
 from nornir_napalm.tasks import napalm_get
 from nornir_napalm.tasks import napalm_configure
 
@@ -22,9 +22,7 @@ def main():
     arista1 = nr.filter(name="arista1")
     arista2 = nr.filter(name="arista2")
 
-    result = arista1.run(
-        task=napalm_configure, configuration=arista1_loopback
-    )
+    result = arista1.run(task=napalm_configure, configuration=arista1_loopback)
     print_result(result)
 
     result = arista2.run(task=napalm_configure, filename="arista2_loopback")
@@ -41,14 +39,10 @@ def main():
     )
     print_result(result)
 
-    result = arista1.run(
-        task=napalm_get, getters=["config"], retrieve="running"
-    )
+    result = arista1.run(task=napalm_get, getters=["config"], retrieve="running")
     arista1_running = result["arista1"].result["config"]["running"]
 
-    arista1.run(
-        task=napalm_configure, configuration="no interface loopback123"
-    )
+    arista1.run(task=napalm_configure, configuration="no interface loopback123")
 
     result = arista1.run(
         task=napalm_configure, configuration=arista1_running, replace=True

@@ -1,7 +1,7 @@
 import os
 from nornir import InitNornir
 from nornir.plugins.tasks import networking
-from nornir.plugins.functions.text import print_result
+from nornir_utils.plugins.functions import print_result
 
 PASSWORD = os.environ.get("NORNIR_PASSWORD", None)  # for testing purposes
 

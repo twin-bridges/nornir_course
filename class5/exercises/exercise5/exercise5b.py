@@ -3,13 +3,11 @@ from nornir.core.filter import F
 from nornir_netmiko.tmp_glue import load_yaml
 from nornir_netmiko.tmp_glue import template_file
 from nornir_netmiko.tmp_glue import write_file
-from nornir_netmiko.tmp_glue import print_result
+from nornir_utils.plugins.functions import print_result
 
 
 def render_configurations(task):
-    bgp = task.run(
-        task=template_file, template="bgp.j2", path="nxos/", **task.host
-    )
+    bgp = task.run(task=template_file, template="bgp.j2", path="nxos/", **task.host)
     intf = task.run(
         task=template_file, template="routed_int.j2", path="nxos/", **task.host
     )

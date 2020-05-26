@@ -3,7 +3,7 @@ import re
 from ciscoconfparse import CiscoConfParse
 from nornir import InitNornir
 from nornir.core.filter import F
-from nornir.plugins.functions.text import print_result
+from nornir_utils.plugins.functions import print_result
 from nornir.plugins.tasks import networking
 from nornir.plugins.tasks.text import template_file
 

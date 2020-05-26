@@ -4,7 +4,7 @@ import napalm.nxos  # noqa
 
 from nornir import InitNornir
 from nornir.core.filter import F
-from nornir_netmiko.tmp_glue import print_result
+from nornir_utils.plugins.functions import print_result
 from nornir_napalm.tasks import napalm_configure
 
 

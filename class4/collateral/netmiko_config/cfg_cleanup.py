@@ -20,6 +20,6 @@ def custom_config(task):
 
 if __name__ == "__main__":
 
-    nr = InitNornir(config_file="config.yaml")
+    nr = InitNornir(config_file="config.yaml",)
     nr = nr.filter(F(groups__contains="nxos"))
-    nr.run(task=custom_config, num_workers=10)
+    nr.run(task=custom_config)

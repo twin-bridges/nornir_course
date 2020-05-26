@@ -8,8 +8,12 @@ def my_task(task):
 
 
 def main():
-    nr = InitNornir(config_file="config.yaml", logging={"enabled": False})
-    nr.run(task=my_task, num_workers=1)
+    nr = InitNornir(
+        config_file="config.yaml",
+        logging={"enabled": False},
+        runner={"plugin": "serial", "options": {}},
+    )
+    nr.run(task=my_task)
 
 
 if __name__ == "__main__":

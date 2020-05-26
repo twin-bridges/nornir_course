@@ -24,6 +24,7 @@ def subprocess_runner(cmd_list, exercise_dir):
         std_out, std_err = proc.communicate()
     return (std_out.decode(), std_err.decode(), proc.returncode)
 
+
 def subprocess_runner_stdin(cmd_list, stdin_responses, exercise_dir):
     """Wrapper to execute subprocess including handling stdin."""
     if isinstance(stdin_responses, list):

@@ -1,6 +1,6 @@
 from nornir import InitNornir
 from nornir.core.filter import F
-from nornir_netmiko.tmp_glue import print_result
+from nornir_utils.plugins.functions import print_result
 from nornir_netmiko import netmiko_send_command
 from nornir_netmiko import netmiko_send_config
 
@@ -9,8 +9,7 @@ def configure_vlans(task, vlan_id, vlan_name):
 
     # Check current VLAN configuration
     multi_result = task.run(
-        task=netmiko_send_command,
-        command_string=f"show vlan brief | i {vlan_id}",
+        task=netmiko_send_command, command_string=f"show vlan brief | i {vlan_id}",
     )
 
     # Inspect results and return if already correct

@@ -1,6 +1,6 @@
 from nornir import InitNornir
 from nornir.core.task import Result
-from nornir_netmiko.tmp_glue import print_result
+from nornir_utils.plugins.functions import print_result
 from nornir_netmiko import netmiko_send_command
 
 
@@ -18,9 +18,13 @@ def my_task(task):
 
 
 def main():
-    nr = InitNornir(config_file="config.yaml", logging={"enabled": False})
+    nr = InitNornir(
+        config_file="config.yaml",
+        logging={"enabled": False},
+        runner={"plugin": "threaded", "options": {"num_workers": 15}},
+    )
     nr = nr.filter(name="srx2")
-    result = nr.run(task=my_task, num_workers=1)
+    result = nr.run(task=my_task)
     print_result(result)
 
     # import ipdb

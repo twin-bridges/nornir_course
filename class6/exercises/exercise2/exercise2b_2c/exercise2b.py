@@ -1,6 +1,6 @@
 from nornir import InitNornir
 from nornir.core.filter import F
-from nornir.plugins.functions.text import print_result
+from nornir_utils.plugins.functions import print_result
 from nornir.plugins.tasks import text
 from nornir.core.exceptions import NornirSubTaskError
 

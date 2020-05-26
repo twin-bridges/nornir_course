@@ -92,8 +92,11 @@ def uptime(task):
 
 
 def main():
-    nr = InitNornir(config_file="config.yaml")
-    nr.run(task=uptime, num_workers=10)
+    nr = InitNornir(
+        config_file="config.yaml",
+        runner={"plugin": "threaded", "options": {"num_workers": 10}},
+    )
+    nr.run(task=uptime)
 
 
 if __name__ == "__main__":

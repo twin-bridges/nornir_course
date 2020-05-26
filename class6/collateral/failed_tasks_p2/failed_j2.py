@@ -2,7 +2,6 @@ from nornir import InitNornir
 from nornir_netmiko.tmp_glue import template_file
 
 
-
 def render_configurations(task):
     """
     The following line would fail due to "domain_name" being undefined

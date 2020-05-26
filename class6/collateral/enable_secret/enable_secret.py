@@ -10,12 +10,10 @@ def main():
     # Pass in passwd-secret from environment variable so automated tests work properly
     passwd_secret = os.environ["NORNIR_PASSWORD"]
     nr.inventory.defaults.password = passwd_secret
-    nr.inventory.defaults.connection_options['netmiko'].extras['secret'] = passwd_secret
+    nr.inventory.defaults.connection_options["netmiko"].extras["secret"] = passwd_secret
 
     agg_result = nr.run(
-        task=netmiko_send_command,
-        command_string="show run | i hostname",
-        enable=True,
+        task=netmiko_send_command, command_string="show run | i hostname", enable=True,
     )
     print(agg_result["cisco3"].result)
 

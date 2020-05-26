@@ -17,9 +17,7 @@ set firewall family inet filter {{ acl }} term {{ entry['term_name'] }} then {{ 
 def junos_acl(task):
     in_yaml = task.run(task=load_yaml, file="acl.yaml")
     in_yaml = in_yaml[0].result
-    multi_result = task.run(
-        task=template_string, template=ACL_TEMPLATE, acls=in_yaml
-    )
+    multi_result = task.run(task=template_string, template=ACL_TEMPLATE, acls=in_yaml)
 
     print()
     print("#" * 80, end="")

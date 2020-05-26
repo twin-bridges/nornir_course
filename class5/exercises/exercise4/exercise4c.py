@@ -1,7 +1,6 @@
 from nornir import InitNornir
 from nornir_netmiko.tmp_glue import load_yaml
 from nornir_netmiko.tmp_glue import template_file
- 
 
 
 def junos_acl(task):
