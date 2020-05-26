@@ -1,6 +1,6 @@
 from nornir import InitNornir
 
-nr = InitNornir(config_file="config.yaml")
+nr = InitNornir()
 
 
 def my_first_task(task):
