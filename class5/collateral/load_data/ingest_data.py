@@ -1,5 +1,6 @@
 from nornir import InitNornir
 from nornir_utils.plugins.functions import print_result
+from nornir.core.filter import F
 from nornir_netmiko.tmp_glue import load_yaml
 
 
@@ -10,7 +11,7 @@ def custom_task(task):
 
 def main():
     nr = InitNornir(config_file="config.yaml", logging={"enabled": False})
-    nr = nr.filter(groups=["nxos"])
+    nr = nr.filter(F(groups__contains="nxos"))
     result = nr.run(task=custom_task)
     print_result(result)
 
