@@ -1,6 +1,5 @@
 from nornir import InitNornir
 from nornir.core.filter import F
-from nornir_netmiko.tmp_glue import load_yaml
 from nornir_netmiko.tmp_glue import template_file
 from nornir_netmiko.tmp_glue import write_file
 from nornir_utils.plugins.functions import print_result

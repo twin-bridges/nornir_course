@@ -76,7 +76,7 @@ def test_class2_ex1a():
     cmd_list = ["python", "exercise1a.py"]
 
     nornir_inventory = gen_inventory_dict(base_path)
-    nr = InitNornir(inventory=nornir_inventory, logging=NORNIR_LOGGING) # noqa
+    nr = InitNornir(inventory=nornir_inventory, logging=NORNIR_LOGGING)  # noqa
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
     assert "20" in std_out

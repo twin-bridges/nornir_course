@@ -1,7 +1,6 @@
 import random
 import time
 from nornir import InitNornir
-from nornir.plugins.runners import SerialRunner
 
 
 def my_task(task):

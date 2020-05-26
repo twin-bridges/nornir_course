@@ -1,6 +1,6 @@
 from nornir import InitNornir
 from nornir.core.filter import F
-from nornir_utils.plugins.functions import print_result # noqa
+from nornir_utils.plugins.functions import print_result  # noqa
 
 
 def netmiko_direct(task):

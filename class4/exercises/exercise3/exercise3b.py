@@ -35,9 +35,7 @@ def main():
 
     nr = InitNornir(config_file="config.yaml")
     nr = nr.filter(F(groups__contains="eos") | F(groups__contains="nxos"))
-    result = nr.run(
-        task=configure_vlans, vlan_id=VLAN_ID, vlan_name=VLAN_NAME
-    )
+    result = nr.run(task=configure_vlans, vlan_id=VLAN_ID, vlan_name=VLAN_NAME)
 
     print_result(result)
 
