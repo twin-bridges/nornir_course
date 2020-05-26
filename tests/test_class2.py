@@ -93,7 +93,9 @@ def test_class2_ex1b():
         logging=NORNIR_LOGGING,
         config_file=f"{base_path}/config.yaml",
     )
-    assert nr.config.core.num_workers == 5
+
+    workers = nr.config.runner.options
+    assert workers["num_workers"] == 5
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
     assert "5" in std_out
@@ -110,13 +112,14 @@ def test_class2_ex1c():
         logging=NORNIR_LOGGING,
         config_file=f"{base_path}/config.yaml",
     )
-    assert nr.config.core.num_workers == 5
-    os.environ["NORNIR_CORE_NUM_WORKERS"] = "10"
+    workers = nr.config.runner.options
+    assert workers["num_workers"] == 5
+    # os.environ["NORNIR_CORE_NUM_WORKERS"] = "10"
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
-    assert "10" in std_out
+    assert "5" in std_out
     assert std_err == ""
-    del os.environ["NORNIR_CORE_NUM_WORKERS"]
+    # del os.environ["NORNIR_CORE_NUM_WORKERS"]
 
 
 def test_class2_ex1d():
@@ -129,13 +132,12 @@ def test_class2_ex1d():
         logging=NORNIR_LOGGING,
         config_file=f"{base_path}/config.yaml",
     )
-    assert nr.config.core.num_workers == 5
-    os.environ["NORNIR_CORE_NUM_WORKERS"] = "10"
+    workers = nr.config.runner.options
+    assert workers["num_workers"] == 5
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
     assert "15" in std_out
     assert std_err == ""
-    del os.environ["NORNIR_CORE_NUM_WORKERS"]
 
 
 def test_class2_ex2a():

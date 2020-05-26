@@ -6,7 +6,10 @@ from nornir_netmiko import netmiko_send_command
 
 
 def main():
-    nr = InitNornir(config_file="config.yaml", core={"num_workers": 15})
+    nr = InitNornir(
+        config_file="config.yaml",
+        runner={"plugin": "threaded", "options": {"num_workers": 15}},
+    )
     ios_filt = F(groups__contains="ios")
     nr = nr.filter(ios_filt)
 
