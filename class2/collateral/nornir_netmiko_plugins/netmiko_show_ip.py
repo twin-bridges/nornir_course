@@ -1,10 +1,8 @@
 import os
 from nornir import InitNornir
-from nornir.plugins.runners import SerialRunner
 from nornir_netmiko import netmiko_send_command
 
 nr = InitNornir(config_file="nornir.yaml")
-nr = nr.with_runner(SerialRunner())
 
 # Code so automated tests will run properly
 nr.inventory.groups["cisco"].password = os.environ["NORNIR_PASSWORD"]

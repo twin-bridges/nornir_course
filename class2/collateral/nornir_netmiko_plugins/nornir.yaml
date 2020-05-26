@@ -4,4 +4,6 @@ inventory:
 logging:
   file: ""
 runner:
-  plugin: serial
+    plugin: threaded
+    options:
+         num_workers: 10

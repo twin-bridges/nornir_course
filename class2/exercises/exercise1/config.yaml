@@ -2,6 +2,6 @@
 inventory:
   plugin: SimpleInventory
 runner:
-  plugin: parallel
+  plugin: threaded
   options:
     num_workers: 5
