@@ -1,7 +1,7 @@
 import os
 from nornir import InitNornir
 from nornir.core.filter import F
-from nornir_napalm.tasks import napalm_get
+from nornir_napalm.plugins.tasks import napalm_get
 
 # Default to "10.220.88.1", but use environment variable to allow different lab pods
 DEFAULT_GATEWAY = os.environ.get("EOS_GATEWAY", "10.220.88.1")

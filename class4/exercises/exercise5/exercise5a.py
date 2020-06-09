@@ -1,5 +1,5 @@
 from nornir import InitNornir
-from nornir_napalm.tasks import napalm_get
+from nornir_napalm.plugins.tasks import napalm_get
 
 
 def main():

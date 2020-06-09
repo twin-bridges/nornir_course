@@ -138,8 +138,8 @@ def test_class3_ex6a():
     assert std_out.count("nxos2") == 5
     assert std_out.count("napalm_get") == 5
     assert std_out.count("candidate") == 2
-    assert std_out.count("running") == 4
-    assert std_out.count("startup") == 4
+    assert std_out.count("running") == 2
+    assert std_out.count("startup") == 2
     assert std_err == ""
 
 
@@ -154,7 +154,7 @@ def test_class3_ex6b():
     assert std_out.count("nxos2") == 3
     assert std_out.count("napalm_get") == 5
     assert std_out.count("candidate") == 2
-    assert std_out.count("running") == 4
+    assert std_out.count("running") == 2
     assert std_out.count("startup") == 2
     assert std_err == ""
 
@@ -171,7 +171,7 @@ def test_class3_ex6c():
     assert std_out.count("facts") == 2
     assert std_out.count("napalm_get") == 5
     assert std_out.count("candidate") == 2
-    assert std_out.count("running") == 4
+    assert std_out.count("running") == 2
     assert std_out.count("startup") == 2
     assert std_err == ""
 

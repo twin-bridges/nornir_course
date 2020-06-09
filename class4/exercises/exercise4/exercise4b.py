@@ -6,7 +6,7 @@ from nornir import InitNornir
 from nornir.core.filter import F
 from nornir_utils.plugins.functions import print_result
 
-from nornir_napalm.tasks import napalm_configure
+from nornir_napalm.plugins.tasks import napalm_configure
 
 
 def configure_vlan(task, vlan_id, vlan_name, dry_run=True):

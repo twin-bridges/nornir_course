@@ -1,7 +1,7 @@
 from pprint import pprint
 from nornir import InitNornir
 from nornir.core.filter import F
-from nornir_napalm.tasks import napalm_get
+from nornir_napalm.plugins.tasks import napalm_get
 
 
 def main():
