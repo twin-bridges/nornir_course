@@ -1,6 +1,6 @@
 ---
-core:
-  num_workers: 20
+runner:
+  plugin: serial
 logging:
   enabled: False
 inventory:

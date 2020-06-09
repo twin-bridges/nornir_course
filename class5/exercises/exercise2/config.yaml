@@ -1,6 +1,4 @@
 ---
-core:
-  num_workers: 20
 logging:
   enabled: False
 inventory:

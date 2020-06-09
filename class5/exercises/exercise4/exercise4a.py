@@ -1,6 +1,6 @@
 from nornir import InitNornir
 from nornir_netmiko.tmp_glue import load_yaml
-from nornir_netmiko.tmp_glue import template_string
+from nornir_jinja2.plugins.tasks import template_string
 
 
 ACL_TEMPLATE = """{%- for acl, rules in acls.items() %}
