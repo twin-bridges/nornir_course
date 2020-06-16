@@ -2,7 +2,7 @@ from getpass import getpass
 import os
 from nornir import InitNornir
 from nornir.core.filter import F
-from nornir.plugins.tasks import networking
+from nornir_netmiko import netmiko_send_command
 
 
 # Environment variable for automated testing purposes
@@ -18,7 +18,7 @@ def main():
     for hostname, host_obj in nr.inventory.hosts.items():
         host_obj.password = PASSWORD
     nr.run(
-        task=networking.netmiko_send_command, command_string="show mac address-table"
+        task=netmiko_send_command, command_string="show mac address-table"
     )
 
 

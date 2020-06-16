@@ -1,7 +1,7 @@
 from nornir import InitNornir
 from nornir_utils.plugins.functions import print_result
 from nornir.core.filter import F
-from nornir_netmiko.tmp_glue import load_yaml
+from nornir_utils.plugins.tasks.data import load_yaml
 
 
 def custom_task(task):

@@ -1,7 +1,7 @@
 import os
 from nornir import InitNornir
 from nornir.core.filter import F
-from nornir.plugins.tasks import networking
+from nornir_netmiko import netmiko_send_command
 
 
 PASSWORD = os.environ.get("NORNIR_PASSWORD", "bogus")
@@ -14,7 +14,7 @@ def main():
         host_obj.password = PASSWORD
 
     nr.run(
-        task=networking.netmiko_send_command,
+        task=netmiko_send_command,
         command_string="show mac address-table",
         num_workers=1,
     )

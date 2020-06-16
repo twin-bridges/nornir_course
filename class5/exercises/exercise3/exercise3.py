@@ -1,5 +1,5 @@
 from nornir import InitNornir
-from nornir_netmiko.tmp_glue import load_yaml
+from nornir_utils.plugins.tasks.data import load_yaml
 
 
 def junos_acl(task):

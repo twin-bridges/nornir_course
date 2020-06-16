@@ -1,5 +1,5 @@
 from nornir import InitNornir
-from nornir_netmiko.tmp_glue import template_file
+from nornir_jinja2.plugins.tasks import template_file
 
 
 def render_configurations(task):

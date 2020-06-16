@@ -1,7 +1,7 @@
 from nornir import InitNornir
 from nornir.core.filter import F
 from nornir_jinja2.plugins.tasks import template_file
-from nornir_netmiko.tmp_glue import write_file
+from nornir_utils.plugins.tasks.files import write_file
 from nornir_utils.plugins.functions import print_result
 from nornir_napalm.plugins.tasks import napalm_get, napalm_configure
 

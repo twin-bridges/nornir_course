@@ -15,14 +15,15 @@ TEST_CASES = [
     ("../class6/collateral/getpass_secret/getpass_secrets.py", None),
     ("../class6/collateral/getpass_password/getpass_password.py", None),
     ("../class6/collateral/environment_variables/env_var.py", None),
+    # Exception will still appear on stdout and not on stderr
+    ("../class6/collateral/failed_tasks_p2/failed_netmiko.py", None),
 ]
 
 TEST_CASES_STDIN = []
 
 TEST_CASES_EXPECTED_FAIL = [
-    ("../class6/collateral/failed_tasks_p2/failed_netmiko.py", None),
-    ("../class6/collateral/failed_tasks_p2/failed_creds.py", None),
-    ("../class6/collateral/failed_tasks_p2/failed_j2.py", None),
+#    ("../class6/collateral/failed_tasks_p2/failed_creds.py", None),
+#    ("../class6/collateral/failed_tasks_p2/failed_j2.py", None),
 ]
 
 """
