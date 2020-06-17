@@ -6,6 +6,4 @@ inventory:
     defaults_file: "~/nornir_inventory/defaults.yaml"
 
 runner:
-  plugin: threaded
-  options:
-    num_workers: 20
+  plugin: serial

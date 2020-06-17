@@ -1,6 +1,6 @@
 from nornir import InitNornir
 from nornir.core.filter import F
-from nornir.plugins.tasks.networking import napalm_get
+from nornir_napalm.plugins.tasks import napalm_get
 
 
 def napalm_custom(task):

@@ -1,6 +1,5 @@
-import ipdb
 from nornir import InitNornir
-from nornir.plugins.tasks import networking
+from nornir_netmiko import netmiko_send_command
 
 
 def uptime(task):
@@ -15,15 +14,15 @@ def uptime(task):
     platform = host.platform
     cmd = cmd_mapper[platform]
 
-    multi_result = task.run(task=networking.netmiko_send_command, command_string=cmd)
+    multi_result = task.run(task=netmiko_send_command, command_string=cmd)
     print(multi_result)
 
 
 def main():
-    nr = InitNornir(config_file="config.yaml")
+    nr = InitNornir(config_file="config_serial.yaml")
     nr = nr.filter(name="cisco3")
-    agg_result = nr.run(task=uptime, num_workers=1)
-    ipdb.set_trace()
+    agg_result = nr.run(task=uptime)
+    # import ipdb; ipdb.set_trace()
     for hostname, multi_result in agg_result.items():
         print()
         print("-" * 40)

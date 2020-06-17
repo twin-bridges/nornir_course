@@ -1,5 +1,5 @@
 from nornir import InitNornir
-from nornir.plugins.tasks import networking
+from nornir_netmiko import netmiko_send_command
 
 
 def uptime(task):
@@ -8,7 +8,7 @@ def uptime(task):
 
     # Dynamically set the session_log to be unique per host
     filename = f"{task.host}-output.txt"
-    group_object = task.host.groups.refs[0]
+    group_object = task.host.groups[0]
     group_object.connection_options["netmiko"].extras["session_log"] = filename
 
     cmd_mapper = {
@@ -20,13 +20,13 @@ def uptime(task):
     host = task.host
     platform = host.platform
     cmd = cmd_mapper[platform]
-    multi_result = task.run(task=networking.netmiko_send_command, command_string=cmd)
+    multi_result = task.run(task=netmiko_send_command, command_string=cmd)
     print(multi_result)
 
 
 def main():
     nr = InitNornir(config_file="config.yaml")
-    agg_result = nr.run(task=uptime, num_workers=20)
+    agg_result = nr.run(task=uptime)
     for hostname, multi_result in agg_result.items():
         print()
         print("-" * 40)

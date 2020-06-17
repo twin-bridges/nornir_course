@@ -15,6 +15,11 @@ TEST_CASES = [
     ("../class6/collateral/getpass_secret/getpass_secrets.py", None),
     ("../class6/collateral/getpass_password/getpass_password.py", None),
     ("../class6/collateral/environment_variables/env_var.py", None),
+    ("../class6/collateral/ansible_vault/ans_vault.py", None),
+    ("../class6/collateral/troubleshooting/test_netmiko_pdb.py", None),
+    ("../class6/collateral/troubleshooting/test_napalm_slog.py", None),
+    ("../class6/collateral/troubleshooting/test_netmiko_slog1.py", None),
+    ("../class6/collateral/troubleshooting/test_netmiko_slog2.py", None),
     # Exception will still appear on stdout and not on stderr
     ("../class6/collateral/failed_tasks_p2/failed_netmiko.py", None),
 ]
@@ -27,11 +32,6 @@ TEST_CASES_EXPECTED_FAIL = [
 ]
 
 """
-../class6/collateral/ansible_vault/ans_vault.py
-./class6/collateral/troubleshooting/test_netmiko_pdb.py
-./class6/collateral/troubleshooting/test_napalm_slog.py
-./class6/collateral/troubleshooting/test_netmiko_slog1.py
-./class6/collateral/troubleshooting/test_netmiko_slog2.py
 ./class6/collateral/logging/test_errors.py
 ./class6/collateral/logging/test_logging.py
 ./class6/collateral/logging/test_logging2.py
@@ -40,6 +40,7 @@ TEST_CASES_EXPECTED_FAIL = [
 
 @pytest.mark.parametrize("test_case_dir, inventory_check", TEST_CASES_STDIN)
 def test_runner_collateral_stdin(test_case_dir, inventory_check):
+
     path_obj = Path(test_case_dir)
     script = path_obj.name
     script_dir = path_obj.parents[0]
@@ -78,6 +79,10 @@ def test_runner_collateral_fail(test_case_dir, inventory_check):
 
 @pytest.mark.parametrize("test_case_dir, inventory_check", TEST_CASES)
 def test_runner_collateral(test_case_dir, inventory_check):
+    
+    # Needed for ansible-vault test
+    os.environ["VAULT_PASSWORD"] = "password"
+
     path_obj = Path(test_case_dir)
     script = path_obj.name
     script_dir = path_obj.parents[0]
