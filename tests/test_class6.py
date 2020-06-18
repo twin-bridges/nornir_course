@@ -20,18 +20,18 @@ TEST_CASES = [
     ("../class6/collateral/troubleshooting/test_napalm_slog.py", None),
     ("../class6/collateral/troubleshooting/test_netmiko_slog1.py", None),
     ("../class6/collateral/troubleshooting/test_netmiko_slog2.py", None),
-    ("../class6/collateral/logging/test_errors.py", None),
-    ("../class6/collateral/logging/test_logging.py", None),
     ("../class6/collateral/logging/test_logging2.py", None),
-    # Exception will still appear on stdout and not on stderr
-    ("../class6/collateral/failed_tasks_p2/failed_netmiko.py", None),
-    ("../class6/collateral/failed_tasks_p2/failed_creds.py", None),
-    ("../class6/collateral/failed_tasks_p2/failed_j2.py", None),
 ]
 
 TEST_CASES_STDIN = []
 
-TEST_CASES_EXPECTED_FAIL = []
+TEST_CASES_EXPECTED_FAIL = [
+    ("../class6/collateral/logging/test_errors.py", None),
+    ("../class6/collateral/logging/test_logging.py", None),
+    ("../class6/collateral/failed_tasks_p2/failed_creds.py", None),
+    ("../class6/collateral/failed_tasks_p2/failed_netmiko.py", None),
+    ("../class6/collateral/failed_tasks_p2/failed_j2.py", None),
+]
 
 
 @pytest.mark.parametrize("test_case_dir, inventory_check", TEST_CASES_STDIN)
