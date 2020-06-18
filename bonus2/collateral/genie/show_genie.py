@@ -7,9 +7,7 @@ def main():
     nr = InitNornir(config_file="config.yaml")
     nr = nr.filter(F(groups__contains="ios") | F(groups__contains="nxos"))
     agg_result = nr.run(
-        task=netmiko_send_command,
-        command_string="show version",
-        use_genie=True,
+        task=netmiko_send_command, command_string="show version", use_genie=True,
     )
     for host, multi_result in agg_result.items():
         print(host, type(multi_result.result))

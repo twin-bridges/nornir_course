@@ -16,7 +16,11 @@ def main():
         config_file="config.yaml",
         inventory={
             "plugin": "NBInventory",
-            "options": {"nb_token": NBOX_TOKEN, "nb_url": "https://netbox.lasthop.io", "ssl_verify": False}
+            "options": {
+                "nb_token": NBOX_TOKEN,
+                "nb_url": "https://netbox.lasthop.io",
+                "ssl_verify": False,
+            },
         },
     )
     nr.run(task=nbox_task)

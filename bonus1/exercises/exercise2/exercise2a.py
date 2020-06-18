@@ -26,9 +26,7 @@ def transform_ansible_inventory(host):
 def main():
     nr = InitNornir(config_file="config_a.yaml")
     nr = nr.filter(~F(name__contains="localhost"))
-    agg_result = nr.run(
-        task=netmiko_send_command, command_string="show version"
-    )
+    agg_result = nr.run(task=netmiko_send_command, command_string="show version")
     print_result(agg_result)
 
 

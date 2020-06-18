@@ -17,9 +17,7 @@ def main():
     nr = nr.filter(F(groups__contains="eos"))
     for hostname, host_obj in nr.inventory.hosts.items():
         host_obj.password = PASSWORD
-    nr.run(
-        task=netmiko_send_command, command_string="show mac address-table"
-    )
+    nr.run(task=netmiko_send_command, command_string="show mac address-table")
 
 
 if __name__ == "__main__":

@@ -11,9 +11,7 @@ def log_send_command(task):
     log_file = f"{task.host}_session.log"
     group = task.host.groups[0]
     group.connection_options["netmiko"].extras["session_log"] = log_file
-    task.run(
-        task=netmiko_send_command, command_string="show mac address-table"
-    )
+    task.run(task=netmiko_send_command, command_string="show mac address-table")
 
 
 def main():

@@ -19,9 +19,7 @@ def prepare_interfaces(task):
         task: nornir task object
 
     """
-    task.run(
-        task=netmiko_send_config, config_commands=task.host["prep_configs"]
-    )
+    task.run(task=netmiko_send_config, config_commands=task.host["prep_configs"])
 
 
 def ensure_config_flags(task):
@@ -43,8 +41,7 @@ def ensure_config_flags(task):
 
     """
     route_map = task.run(
-        task=netmiko_send_command,
-        command_string="show route-map | i RM_BGP_",
+        task=netmiko_send_command, command_string="show route-map | i RM_BGP_",
     )
     if not route_map.result:
         task.run(
@@ -53,8 +50,7 @@ def ensure_config_flags(task):
         )
 
     prefix_list = task.run(
-        task=netmiko_send_command,
-        command_string="show ip prefix-list | i PL_BGP_",
+        task=netmiko_send_command, command_string="show ip prefix-list | i PL_BGP_",
     )
     if not prefix_list.result:
         task.run(
