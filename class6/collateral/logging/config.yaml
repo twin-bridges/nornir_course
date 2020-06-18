@@ -1,7 +1,7 @@
 logging:
   enabled: True
   level: INFO
-  file: output.txt
+  log_file: output.txt
   to_console: True
 inventory:
   plugin: SimpleInventory
