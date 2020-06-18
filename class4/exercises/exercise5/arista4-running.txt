@@ -9,8 +9,6 @@ hostname arista4
 !
 ntp server 130.126.24.24
 !
-snmp-server chassis-id sea_datacenter-arista4
-!
 spanning-tree mode rapid-pvst
 !
 aaa authorization exec default local
