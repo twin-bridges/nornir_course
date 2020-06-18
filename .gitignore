@@ -111,6 +111,7 @@ venv.bak/
 nornir.log
 */nornir.log
 class4/exercises/exercise2/eos/*-saved.txt
+class4/exercises/exercise5/*.txt
 
 *.swp
 
