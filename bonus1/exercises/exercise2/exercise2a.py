@@ -1,7 +1,7 @@
 import os
 from nornir import InitNornir
 from nornir.core.filter import F
-from nornir.plugins.tasks import networking
+from nornir_netmiko import netmiko_send_command
 from nornir_utils.plugins.functions import print_result
 
 
@@ -27,7 +27,7 @@ def main():
     nr = InitNornir(config_file="config_a.yaml")
     nr = nr.filter(~F(name__contains="localhost"))
     agg_result = nr.run(
-        task=networking.netmiko_send_command, command_string="show version"
+        task=netmiko_send_command, command_string="show version"
     )
     print_result(agg_result)
 

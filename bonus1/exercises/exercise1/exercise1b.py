@@ -1,6 +1,6 @@
 import os
 from nornir import InitNornir
-from nornir.plugins.tasks import networking
+from nornir_napalm.plugins.tasks import napalm_get
 from nornir_utils.plugins.functions import print_result
 
 PASSWORD = os.environ.get("NORNIR_PASSWORD", None)  # for testing purposes
@@ -21,7 +21,7 @@ def main():
     print(f"NAPALM Port: {nxos1.get_connection_parameters('napalm').port}")
     print()
 
-    agg_results = nr.run(task=networking.napalm_get, getters=["ntp_servers"])
+    agg_results = nr.run(task=napalm_get, getters=["ntp_servers"])
     print_result(agg_results)
     print()
 

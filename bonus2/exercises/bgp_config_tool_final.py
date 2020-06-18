@@ -4,8 +4,9 @@ from ciscoconfparse import CiscoConfParse
 from nornir import InitNornir
 from nornir.core.filter import F
 from nornir_utils.plugins.functions import print_result
-from nornir.plugins.tasks import networking
-from nornir.plugins.tasks.text import template_file
+from nornir_jinja2.plugins.tasks import template_file
+from nornir_netmiko import netmiko_send_command, netmiko_send_config
+from nornir_napalm.plugins.tasks import napalm_configure
 
 
 def prepare_interfaces(task):
@@ -19,7 +20,7 @@ def prepare_interfaces(task):
 
     """
     task.run(
-        task=networking.netmiko_send_config, config_commands=task.host["prep_configs"]
+        task=netmiko_send_config, config_commands=task.host["prep_configs"]
     )
 
 
@@ -42,29 +43,29 @@ def ensure_config_flags(task):
 
     """
     route_map = task.run(
-        task=networking.netmiko_send_command,
+        task=netmiko_send_command,
         command_string="show route-map | i RM_BGP_",
     )
     if not route_map.result:
         task.run(
-            task=networking.netmiko_send_config,
+            task=netmiko_send_config,
             config_commands=["route-map RM_BGP_PLACEHOLDER permit 10"],
         )
 
     prefix_list = task.run(
-        task=networking.netmiko_send_command,
+        task=netmiko_send_command,
         command_string="show ip prefix-list | i PL_BGP_",
     )
     if not prefix_list.result:
         task.run(
-            task=networking.netmiko_send_config,
+            task=netmiko_send_config,
             config_commands=[
                 "ip prefix-list PL_BGP_PLACEHOLDER seq 5 permit 1.1.1.1/32"
             ],
         )
 
     task.run(
-        task=networking.napalm_configure,
+        task=napalm_configure,
         replace=False,
         configuration=f"""
 feature bgp
@@ -243,7 +244,7 @@ def push_updated_checkpoint(task, dry_run=False, diff=True):
 
     """
     result = task.run(
-        task=networking.napalm_configure,
+        task=napalm_configure,
         configuration=task.host["proposed_checkpoint"],
         replace=True,
         dry_run=False,

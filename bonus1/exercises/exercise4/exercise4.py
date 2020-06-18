@@ -1,6 +1,6 @@
 from nornir import InitNornir
 from nornir_utils.plugins.functions import print_result
-from nornir.plugins.tasks.networking import netmiko_file_transfer
+from nornir_netmiko import netmiko_file_transfer
 
 
 def delete_file(task, filename):

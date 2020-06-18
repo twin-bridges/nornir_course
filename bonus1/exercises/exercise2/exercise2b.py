@@ -1,7 +1,7 @@
 import os
 from nornir import InitNornir
 from nornir.core.filter import F
-from nornir.plugins.tasks import networking
+from nornir_napalm.plugins.tasks import napalm_get
 from nornir_utils.plugins.functions import print_result
 
 
@@ -33,7 +33,7 @@ def transform_ansible_inventory(host):
 def main():
     nr = InitNornir(config_file="config_b.yaml")
     nr = nr.filter(F(groups__contains="nxos"))
-    agg_result = nr.run(task=networking.napalm_get, getters=["facts"])
+    agg_result = nr.run(task=napalm_get, getters=["facts"])
     print_result(agg_result)
 
 
