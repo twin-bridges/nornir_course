@@ -1,0 +1,12 @@
+inventory:
+  plugin: SimpleInventory
+  options:
+    host_file: "~/nornir_inventory/hosts.yaml"
+    group_file: "groups.yaml"
+    defaults_file: "~/nornir_inventory/defaults.yaml"
+
+logging:
+  enabled: False
+
+runner:
+  plugin: serial

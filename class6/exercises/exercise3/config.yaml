@@ -8,4 +8,4 @@ inventory:
 logging:
   enabled: True
   level: DEBUG
-  file: my_log.log
+  log_file: my_log.log
