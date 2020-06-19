@@ -13,6 +13,7 @@ def render_configs(task):
         task=template_file, template=template, path=template_path, **task.host
     )
     rendered_config = result[0].result
+    import ipdb; ipdb.set_trace()
     task.host["rendered_config"] = rendered_config
 
 
