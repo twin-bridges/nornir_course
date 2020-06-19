@@ -6,4 +6,4 @@ runner:
   options:
     num_workers: 10
 logging:
-  file: ""
+  log_file: nornir.out

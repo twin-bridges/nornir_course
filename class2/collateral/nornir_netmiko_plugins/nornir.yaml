@@ -2,7 +2,7 @@
 inventory:
   plugin: SimpleInventory
 logging:
-  file: ""
+  log_file: nornir.out
 runner:
   plugin: threaded
   options:

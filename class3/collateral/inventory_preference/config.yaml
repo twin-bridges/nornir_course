@@ -7,4 +7,4 @@ inventory:
         defaults_file: "defaults.yaml"
 
 logging:
-    file: ""
+  log_file: nornir.out

@@ -110,6 +110,7 @@ venv.bak/
 # Nornir specific things
 nornir.log
 */nornir.log
+*/nornir.out
 class4/exercises/exercise2/eos/*-saved.txt
 class4/exercises/exercise5/*.txt
 
