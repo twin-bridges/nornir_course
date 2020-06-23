@@ -12,18 +12,18 @@ def transform_ansible_inventory(host):
     host.password = PASSWORD or host["ansible_ssh_pass"]
     netmiko_params = host.get_connection_parameters("netmiko")
     napalm_params = host.get_connection_parameters("napalm")
-    if "nxos" in host.groups:
+    if "nxos" == host.groups[0].name:
         netmiko_params.platform = "cisco_nxos"
         napalm_params.platform = "nxos"
         napalm_params.port = "8443"
-    elif "cisco" in host.groups:
+    elif "cisco" == host.groups[0].name:
         netmiko_params.platform = "cisco_ios"
         napalm_params.platform = "ios"
-    elif "arista" in host.groups:
+    elif "arista" == host.groups[0].name:
         netmiko_params.platform = "arista_eos"
         netmiko_params.extras["global_delay_factor"] = 4
         napalm_params.platform = "eos"
-    elif "juniper" in host.groups:
+    elif "juniper" == host.groups[0].name:
         netmiko_params.platform = "juniper_junos"
         napalm_params.platform = "junos"
     host.connection_options["netmiko"] = netmiko_params
@@ -33,6 +33,10 @@ def transform_ansible_inventory(host):
 def main():
     nr = InitNornir(config_file="config_b.yaml")
     nr = nr.filter(F(groups__contains="nxos"))
+
+    # Transform functions are overly complicated in 3.x...just do it yourself 
+    for host in nr.inventory.hosts.values():
+        transform_ansible_inventory(host)
     agg_result = nr.run(task=napalm_get, getters=["facts"])
     print_result(agg_result)
 

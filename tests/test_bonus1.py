@@ -99,9 +99,9 @@ def test_class_bonus1_ex2a():
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
     assert std_out.count("Arista vEOS") == 4
-    assert std_out.count("Cisco IOS XE Software, Version 16.08.01") == 2
+    assert std_out.count("Cisco IOS XE Software, Version 16.") == 2
     assert std_out.count("Cisco Nexus Operating System (NX-OS) Software") == 2
-    assert "Hostname: srx2" in std_out
+    assert "Hostname: srx" in std_out
     assert std_err == ""
 
 
