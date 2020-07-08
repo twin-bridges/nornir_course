@@ -13,7 +13,8 @@ echo "pylama ." \
 && black --check . \
 && echo "running pytest..." \
 && cd tests \
-&& py.test -s -v . \
+&& py.test -x -s -v test_class* \
+&& py.test -x -s -v test_bonus* \
 \
 || RETURN_CODE=1
 
