@@ -1,8 +1,6 @@
 ---
 inventory:
   plugin: nornir.plugins.inventory.netbox.NBInventory
-  options:
-    ssl_verify: False
 
 logging:
   enabled: False

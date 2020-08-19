@@ -14,7 +14,11 @@ def main():
     nr = InitNornir(
         config_file="config.yaml",
         inventory={
-            "options": {"nb_token": NBOX_TOKEN, "nb_url": "https://netbox.lasthop.io"}
+            "options": {
+                "nb_token": NBOX_TOKEN,
+                "nb_url": "https://netbox.lasthop.io",
+                "ssl_verify": False,
+            }
         },
     )
     nr.run(task=nbox_task)
