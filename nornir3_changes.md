@@ -4,7 +4,7 @@ See also:
 
 https://nornir.readthedocs.io/en/3.0.0/upgrading/2_to_3.html
 
-This document includes some additional changes that are not covered here.
+The referenced page includes some additional changes that are not covered here.
 
 
 ### Plugins are not included with Nornir Core
