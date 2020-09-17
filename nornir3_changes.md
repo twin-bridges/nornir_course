@@ -31,7 +31,7 @@ Here are some example code changes pertaining to this change:
 
 ### Inventory Plugin Names Simplified
 
-Inventory plugins are also plugins and consequently no longer distributed with Nornir Core. Consequently, you will generally need to PIP install Nornir inventory plugins (with the exception of SimpleInventory which is distributed with Nornir Core).
+Inventory plugins are also plugins and consequently no longer distributed with Nornir Core. You will need to PIP install Nornir inventory plugins (with the exception of SimpleInventory which is distributed with Nornir Core).
 
 Entry points are also now used for inventory plugins which simplifies their naming (see below):
 
