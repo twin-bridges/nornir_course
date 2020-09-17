@@ -1,6 +1,6 @@
 ## Nornir Version3 Incompatible Changes
 
-### Plugins are no included with Nornir Core
+### Plugins are not included with Nornir Core
 
 Most plugins are no longer included with Nornir Core. Consequently, you will need to separately PIP install these plugins and then update the imports in your code.
 
@@ -28,3 +28,42 @@ Here are some example code changes pertaining to this change:
 + from nornir_jinja2.plugins.tasks import template_file
 + from nornir_utils.plugins.tasks.files import write_file
 ```
+
+### Inventory Plugin Names Simplified
+
+Inventory plugins are also plugins and consequently no longer distributed with Nornir Core. Consequently, you will generally need to PIP install Nornir inventory plugins (with the exception of SimpleInventory which is distributed with Nornir Core).
+
+Entry points are also now used for inventory plugins which simplifies their naming (see below):
+
+```diff
+# Example Nornir config.yaml
+inventory:
+-  plugin: nornir.plugins.inventory.simple.SimpleInventory
++  plugin: SimpleInventory
+  options:
+    host_file: "hosts.yaml"
+    group_file: "groups.yaml"
+    defaults_file: "defaults.yaml"
+```
+
+Or in the case of in-line Python code using the NetBox Inventory plugin:
+
+```diff
+def main():
+    nr = InitNornir(
+        config_file="config.yaml",
+        inventory={
+-            "plugin": "nornir.plugins.inventory.netbox.NBInventory",
++            "plugin": "NBInventory",
+            "options": {
+                "nb_token": NBOX_TOKEN,
+                "nb_url": "https://netbox.domain.com",
+                "ssl_verify": False,
+            },
+        },
+    )
+    nr.run(task=nbox_task)
+```
+
+Note, the above is using the legacy NetBox inventory plugin (NBInventory). There is a newer NetBox inventory plugin (NetBoxInventory2). See https://github.com/wvandeun/nornir_netbox for more details on NetBoxInventory2.
+
