@@ -101,6 +101,18 @@ nr = InitNornir(
 
 Similarly, the `NORNIR_CORE_NUM_WORKERS` has been removed and replaced by the `NORNIR_RUNNER_PLUGIN` and the `NORNIR_RUNNER_OPTIONS` environment variables.
 
+### Logging Setting is now 'log_file"
+
+Example, Nornir config.yaml change:
+
+```diff
+logging:
+-  file: ""
++  log_file: nornir.out
+```
+
+Certain things did not like the use of the use of the generic term `file`. Consequently, this was updated to be `log_file` instead.
+
 ### Group Filtering and Group .refs
 
 Nornir version 2.x had a been of an obscure aspect where there was a difference between accessing the group name as a string versus accessing the Nornir group. For example (this is from `Nornir 2.5.0`):
