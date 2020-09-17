@@ -67,3 +67,34 @@ def main():
 
 Note, the above is using the legacy NetBox inventory plugin (NBInventory). There is a newer NetBox inventory plugin (NetBoxInventory2). See https://github.com/wvandeun/nornir_netbox for more details on NetBoxInventory2.
 
+### Runners and num_workers changes
+
+You can no longer specify `num_workers` as an argument directly to nr.run. The easiest mechanism of controlling the number of works is now through your Nornir config.yaml settings.
+
+This is done in the new `runners` section of config.yaml. For example,
+
+```yaml
+runner:
+  plugin: threaded
+  options:
+    num_workers: 10
+```
+
+Similarly, you can no longer toggle between serial execution and threaded execution by setting num_workers=1 instead you need to change the `runner` to be `plugin: serial`.
+
+For example:
+
+```yaml
+runner:
+  plugin: serial
+```
+
+The runner and associated arguments can also be specified using in-line Python code:
+
+```python
+nr = InitNornir(
+    config_file="config.yaml",
+    logging={"enabled": False},
+    runner={"plugin": "threaded", "options": {"num_workers": 15}},
+) 
+```
