@@ -1,5 +1,12 @@
 ## Nornir Version3 Incompatible Changes
 
+See also:
+
+https://nornir.readthedocs.io/en/3.0.0/upgrading/2_to_3.html
+
+This document includes some additional changes that are not covered here.
+
+
 ### Plugins are not included with Nornir Core
 
 Most plugins are no longer included with Nornir Core. Consequently, you will need to separately PIP install these plugins and then update the imports in your code.
