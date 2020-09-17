@@ -98,3 +98,58 @@ nr = InitNornir(
     runner={"plugin": "threaded", "options": {"num_workers": 15}},
 ) 
 ```
+
+Similarly, the `NORNIR_CORE_NUM_WORKERS` has been removed and replaced by the `NORNIR_RUNNER_PLUGIN` and the `NORNIR_RUNNER_OPTIONS` environment variables.
+
+### Group Filtering and Group .refs
+
+Nornir version 2.x had a been of an obscure aspect where there was a difference between accessing the group name as a string versus accessing the Nornir group. For example (this is from `Nornir 2.5.0`):
+
+```
+# This code returns the groups the given hosts belong to as a string
+ipdb> p task.host.groups                                                                     
+['nxos']
+ipdb> p task.host.groups[0]                                                                  
+'nxos'
+```
+
+If you wanted to actually access the Nornir Group object, you would have done accessed the `refs` attribute (once again in Nornir 2.x):
+
+```
+# Retrieve the Nornir Group object itself using .refs
+ipdb> p task.host.groups.refs                                                                
+[Group: nxos]
+ipdb> p task.host.groups.refs[0]                                                             
+Group: nxos
+```
+
+This `refs` behavior has been simplified such that accessing task.host.groups now returns the Nornir Group object and not a string (and the `.refs` attribute no longer exists).
+
+Example from Nornir 3.0.0
+
+```
+ipdb> p task.host.groups                                                                     
+[Group: nxos]
+ipdb> p task.host.groups[0]                                                                  
+Group: nxos
+```
+
+The `main implication` of this for Nornir end-users `is that certain group-filter patterns no longer work`.
+
+For example, in Nornir 2.X, you used to be able to do group filtering the following way:
+
+```python
+# Nornir 2.X example
+nr = nr.filter(groups=["nxos"])
+```
+
+Notice, here you are saying the groups this host belongs to exactly matches the list that contains the string "nxos". This pattern no longer works. I recommend you switch to the F-filter pattern instead.
+
+```python
+# Nornir 3.x example
+nr = nr.filter(F(groups__contains="nxos"))
+```
+
+Note, there is a minor difference between the two examples. The first example states belongs to this group and only this group whereas the second example just states belongs to this group.
+
+
