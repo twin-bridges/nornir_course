@@ -171,4 +171,28 @@ nr = nr.filter(F(groups__contains="nxos"))
 
 Note, there is a minor difference between the two examples. The first example states belongs to this group and only this group whereas the second example just states belongs to this group.
 
+### Transform Function is now an entry point
+
+I found the new Nornir transform function overly difficult to use so I am just converting my code over to create my own version of the Nornir 2.X transform function.
+
+My new Nornir 3.x pattern (to recreate the Nornir 2.X transform function behavior) will be similar to the following:
+
+```python
+nr = InitNornir(config_file="config.yaml")
+
+# Recreate Nornir 2.x transform function behavior
+for host in nr.inventory.hosts.values():
+    transform_func(host)
+```
+
+Where `transform_func` that I use to modify the Nornir host objects. For example:
+
+```python
+def transform_func(host):
+    password = os.environ["NORNIR_PASSWORD"]
+    host.password = password
+```
+
+This also implies that I will cease using `transform_function` in `config.yaml`
+
 
