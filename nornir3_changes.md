@@ -173,9 +173,9 @@ Note, there is a minor difference between the two examples. The first example st
 
 ### Transform Function is now an entry point
 
-I found the new Nornir transform function overly difficult to use so I am just converting my code over to create my own version of the Nornir 2.X transform function.
+I found the new Nornir 3.x transform function behavior overly difficult to use. Consequently, I just converted my code to a simpler pattern that largely recreated the Nornir 2.x behavior.
 
-My new Nornir 3.x pattern (to recreate the Nornir 2.X transform function behavior) will be similar to the following:
+My new Nornir 3.x pattern will be similar to the following:
 
 ```python
 nr = InitNornir(config_file="config.yaml")
@@ -185,7 +185,7 @@ for host in nr.inventory.hosts.values():
     transform_func(host)
 ```
 
-Where `transform_func` that I use to modify the Nornir host objects. For example:
+Where `transform_func` is a function that modifies the Nornir host objects. For example:
 
 ```python
 def transform_func(host):
@@ -193,6 +193,6 @@ def transform_func(host):
     host.password = password
 ```
 
-This also implies that I will cease using `transform_function` in `config.yaml`
+This also implies that I will cease using `transform_function` in the Nornir `config.yaml` file.
 
 
