@@ -31,7 +31,7 @@ ipython==7.4.0
 ipython-genutils==0.2.0
 isort==4.3.17
 jedi==0.13.3
-Jinja2==2.10.1
+Jinja2==2.11.3
 jsonrpclib==0.1.7
 jsonschema==3.0.1
 junos-eznc==2.2.0
