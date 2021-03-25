@@ -82,7 +82,7 @@ pyserial==3.4
 pysmi==0.3.4
 pysnmp==4.4.9
 pytest==4.4.1
-PyYAML==5.1
+PyYAML==5.4
 requests==2.21.0
 ruamel.yaml==0.15.92
 scp==0.13.2
