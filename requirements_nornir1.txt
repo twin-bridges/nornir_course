@@ -69,7 +69,7 @@ pydocstyle==3.0.0
 pyeapi==0.8.2
 pyflakes==2.1.1
 pygal==2.4.0
-Pygments==2.3.1
+Pygments==2.7.4
 pyIOSXR==0.53
 pylama==7.7.1
 pylint==2.3.1
