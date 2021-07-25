@@ -13,7 +13,7 @@ def main():
     nr.inventory.defaults.connection_options["netmiko"].extras["secret"] = passwd_secret
 
     agg_result = nr.run(
-        task=netmiko_send_command, command_string="show run | i hostname", enable=True,
+        task=netmiko_send_command, command_string="show run | i hostname", enable=True
     )
     print(agg_result["cisco3"].result)
 

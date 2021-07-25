@@ -17,7 +17,7 @@ def main():
     netmiko_results = nr.run(task=netmiko_send_command, command_string="show ip arp")
     print_result(netmiko_results)
     netmiko_results = nr.run(
-        task=netmiko_send_command, command_string="show run | i hostname", enable=True,
+        task=netmiko_send_command, command_string="show run | i hostname", enable=True
     )
     print_result(netmiko_results)
 

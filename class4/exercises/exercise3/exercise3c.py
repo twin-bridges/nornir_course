@@ -10,7 +10,7 @@ def configure_vlan(task, vlan_id, vlan_name):
 
     # Check current VLAN configuration
     multi_result = task.run(
-        task=netmiko_send_command, command_string=f"show vlan brief | i {vlan_id}",
+        task=netmiko_send_command, command_string=f"show vlan brief | i {vlan_id}"
     )
 
     # Inspect results and return if already correct
@@ -50,7 +50,7 @@ def main():
     VLAN_NAME = "ntp_vlan"
 
     nr = InitNornir(
-        config_file="config.yaml", runner={"plugin": "serial", "options": {}},
+        config_file="config.yaml", runner={"plugin": "serial", "options": {}}
     )
     nr = nr.filter(F(groups__contains="eos") | F(groups__contains="nxos"))
     result = nr.run(task=configure_vlan, vlan_id=VLAN_ID, vlan_name=VLAN_NAME)

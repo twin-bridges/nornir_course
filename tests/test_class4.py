@@ -54,9 +54,7 @@ def remove_ex2_flash_files():
 
     # remove test files from eos flash
     eos.run(task=netmiko_send_command, command_string="terminal dont-ask")
-    eos.run(
-        task=netmiko_send_command, command_string="delete flash:arista_zzzzz.txt",
-    )
+    eos.run(task=netmiko_send_command, command_string="delete flash:arista_zzzzz.txt")
 
 
 def remove_ex2_local_files(base_path):
@@ -88,7 +86,7 @@ def remove_loopback():
     nr = InitNornir(inventory=nornir_inventory, logging=NORNIR_LOGGING)
     ex5_host = nr.filter(name="arista4")
     ex5_host.run(
-        task=netmiko_send_config, config_commands=["no interface loopback 123"],
+        task=netmiko_send_config, config_commands=["no interface loopback 123"]
     )
 
 

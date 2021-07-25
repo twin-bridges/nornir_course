@@ -23,7 +23,7 @@ def main():
 
     # Completely resture the configuration using configure replace
     agg_result = nr.run(
-        task=napalm_configure, configuration=arista4_running_config, replace=True,
+        task=napalm_configure, configuration=arista4_running_config, replace=True
     )
     print_result(agg_result)
 

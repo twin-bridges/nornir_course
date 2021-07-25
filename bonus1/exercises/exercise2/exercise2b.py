@@ -34,7 +34,7 @@ def main():
     nr = InitNornir(config_file="config_b.yaml")
     nr = nr.filter(F(groups__contains="nxos"))
 
-    # Transform functions are overly complicated in 3.x...just do it yourself 
+    # Transform functions are overly complicated in 3.x...just do it yourself
     for host in nr.inventory.hosts.values():
         transform_ansible_inventory(host)
     agg_result = nr.run(task=napalm_get, getters=["facts"])

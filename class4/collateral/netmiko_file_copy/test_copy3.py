@@ -37,5 +37,5 @@ def file_copy(task):
 
 if __name__ == "__main__":
 
-    nr = InitNornir(config_file="config.yaml",)
+    nr = InitNornir(config_file="config.yaml")
     results = nr.run(task=file_copy)

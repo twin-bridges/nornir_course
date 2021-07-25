@@ -15,7 +15,7 @@ def main():
     # Transform functions are overly complicated in 3.X...just do it yourself
     for host in nr.inventory.hosts.values():
         transform_ansible(host)
-    
+
     napalm_params = nr.inventory.hosts["nxos1"].get_connection_parameters("napalm")
     print(napalm_params.dict())
 

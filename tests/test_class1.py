@@ -17,9 +17,7 @@ TEST_CASES_INVENTORY = [
     ("../class1/collateral/run_method/invalid.py", "hosts"),
 ]
 
-TEST_CASES = [
-    "../class1/collateral/run_method/example.py",
-]
+TEST_CASES = ["../class1/collateral/run_method/example.py"]
 
 
 @pytest.mark.parametrize("test_case_dir, inventory_check", TEST_CASES_INVENTORY)

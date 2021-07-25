@@ -9,7 +9,7 @@ def configure_vlans(task, vlan_id, vlan_name):
 
     # Check current VLAN configuration
     multi_result = task.run(
-        task=netmiko_send_command, command_string=f"show vlan brief | i {vlan_id}",
+        task=netmiko_send_command, command_string=f"show vlan brief | i {vlan_id}"
     )
 
     # Inspect results and return if already correct

@@ -27,7 +27,7 @@ def main():
     nr = InitNornir(config_file="config_a.yaml")
     nr = nr.filter(~F(name__contains="localhost"))
 
-    # Transform functions are overly complicated in 3.x...just do it yourself 
+    # Transform functions are overly complicated in 3.x...just do it yourself
     for host in nr.inventory.hosts.values():
         transform_ansible_inventory(host)
     agg_result = nr.run(task=netmiko_send_command, command_string="show version")

@@ -37,6 +37,6 @@ def file_copy(task):
 
 if __name__ == "__main__":
 
-    nr = InitNornir(config_file="config.yaml",)
+    nr = InitNornir(config_file="config.yaml")
     nr = nr.filter(F(groups__contains="ios") | F(groups__contains="eos"))
     results = nr.run(task=file_copy)

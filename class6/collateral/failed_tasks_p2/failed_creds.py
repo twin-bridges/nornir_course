@@ -6,9 +6,7 @@ from nornir.core.exceptions import NornirSubTaskError
 def netmiko_configure(task):
     try:
         print(task.host["loopback_config"])
-        task.run(
-            task=netmiko_send_config, config_commands=["interface lopback 123"],
-        )
+        task.run(task=netmiko_send_config, config_commands=["interface lopback 123"])
     except NornirSubTaskError:
         print("sad, we hit a subtask error.... :(")
 
