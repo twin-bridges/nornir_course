@@ -116,7 +116,6 @@ def test_class_bonus1_ex2b():
     assert std_err == ""
 
 
-@pytest.mark.skip()
 def test_class_bonus1_ex3():
     base_path = "../bonus1/exercises/exercise3/"
     cmd_list = ["python", "exercise3.py"]
@@ -129,7 +128,6 @@ def test_class_bonus1_ex3():
     assert std_out.count("cisco4") == 2
     assert std_out.count("arista") == 8
     assert std_out.count("nxos") == 4
-    assert std_out.count("srx2") == 2
     assert std_err == ""
 
 

@@ -223,7 +223,7 @@ def test_class6_ex5a():
     cmd_list = ["python", "exercise5a.py"]
 
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
-    assert std_out.count("Clock source: NTP server") == 4
+    assert std_out.count("Clock source: NTP server") >= 2
     assert std_out.count("Time source is NTP") == 2
     assert "Current time:" in std_out
     assert return_code == 0
@@ -235,7 +235,7 @@ def test_class6_ex5b():
     cmd_list = ["python", "exercise5b.py"]
 
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
-    assert std_out.count("Clock source: NTP server") == 4
+    assert std_out.count("Clock source: NTP server") >= 2
     assert std_out.count("Time source is NTP") == 2
     assert "Current time:" in std_out
     assert return_code == 0
@@ -248,7 +248,7 @@ def test_class6_ex5c():
 
     os.environ["NORNIR_VAULT_PASSWORD"] = "password"
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
-    assert std_out.count("Clock source: NTP server") == 4
+    assert std_out.count("Clock source: NTP server") >= 2
     assert std_out.count("Time source is NTP") == 2
     assert "Current time:" in std_out
     assert return_code == 0

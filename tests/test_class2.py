@@ -256,7 +256,7 @@ def test_class2_ex5b():
     os.environ["PYTHONWARNINGS"] = "ignore::Warning"
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
-    assert "Authentication failure" in std_out
+    assert "Authentication failed" in std_out
     assert "GigabitEthernet0/0/0   10.220.88.23" in std_out
     assert "Task failed hosts: {'cisco3'" in std_out
     assert "Global failed hosts: {'cisco3'}" in std_out
@@ -270,7 +270,7 @@ def test_class2_ex5c():
     os.environ["PYTHONWARNINGS"] = "ignore::Warning"
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
-    assert "Authentication failure" in std_out
+    assert "Authentication failed" in std_out
     assert "GigabitEthernet0/0/0   10.220.88.23" in std_out
     assert "Task failed hosts: {'cisco3'" in std_out
     assert std_out.count("Global failed hosts: {'cisco3'}", 2)
@@ -285,7 +285,7 @@ def test_class2_ex5d():
     os.environ["PYTHONWARNINGS"] = "ignore::Warning"
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
-    assert "Authentication failure" in std_out
+    assert "Authentication failed" in std_out
     assert "GigabitEthernet0/0/0   10.220.88.23" in std_out
     assert "Task failed hosts: {'cisco3'" in std_out
     assert std_out.count("Global failed hosts: {'cisco3'}", 2)
