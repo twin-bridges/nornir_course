@@ -17,6 +17,7 @@ paramiko==2.7.2
 textfsm==1.1.2
 pyats==21.6
 genie==21.6
+ansible==2.9.24
 
 nornir-netmiko==0.1.1
 nornir-utils==0.1.2
