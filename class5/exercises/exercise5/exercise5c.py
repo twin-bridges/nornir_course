@@ -1,17 +1,15 @@
 from nornir import InitNornir
 from nornir.core.filter import F
-from nornir.plugins.tasks import text
-from nornir.plugins.tasks import files
-from nornir.plugins.tasks import networking
-from nornir.plugins.functions.text import print_result
+from nornir_jinja2.plugins.tasks import template_file
+from nornir_utils.plugins.tasks.files import write_file
+from nornir_utils.plugins.functions import print_result
+from nornir_napalm.plugins.tasks import napalm_get, napalm_configure
 
 
 def render_configurations(task):
-    bgp = task.run(
-        task=text.template_file, template="bgp.j2", path="nxos/", **task.host
-    )
+    bgp = task.run(task=template_file, template="bgp.j2", path="nxos/", **task.host)
     intf = task.run(
-        task=text.template_file, template="routed_int.j2", path="nxos/", **task.host
+        task=template_file, template="routed_int.j2", path="nxos/", **task.host
     )
     task.host["bgp_config"] = bgp.result
     task.host["intf_config"] = intf.result
@@ -19,24 +17,24 @@ def render_configurations(task):
 
 def write_configurations(task):
     task.run(
-        task=files.write_file,
+        task=write_file,
         filename=f"rendered_configs/{task.host}_bgp",
         content=task.host["bgp_config"],
     )
     task.run(
-        task=files.write_file,
+        task=write_file,
         filename=f"rendered_configs/{task.host}_intf",
         content=task.host["intf_config"],
     )
 
 
 def deploy_configurations(task):
-    task.run(task=networking.napalm_configure, configuration=task.host["intf_config"])
-    task.run(task=networking.napalm_configure, configuration=task.host["bgp_config"])
+    task.run(task=napalm_configure, configuration=task.host["intf_config"])
+    task.run(task=napalm_configure, configuration=task.host["bgp_config"])
 
 
 def validate_bgp(task):
-    bgp_result = task.run(task=networking.napalm_get, getters=["bgp_neighbors"])
+    bgp_result = task.run(task=napalm_get, getters=["bgp_neighbors"])
     print()
     print("*" * 80)
     if not bgp_result.result["bgp_neighbors"]["global"]["peers"][task.host["bgp_peer"]][

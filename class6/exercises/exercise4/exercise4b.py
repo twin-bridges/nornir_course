@@ -1,7 +1,7 @@
 import os
 from nornir import InitNornir
 from nornir.core.filter import F
-from nornir.plugins.tasks import networking
+from nornir_netmiko import netmiko_send_command
 
 
 PASSWORD = os.environ.get("NORNIR_PASSWORD", "bogus")
@@ -9,12 +9,9 @@ PASSWORD = os.environ.get("NORNIR_PASSWORD", "bogus")
 
 def log_send_command(task):
     log_file = f"{task.host}_session.log"
-    # Obtain the group object using the "refs" attribute
-    group = task.host.groups.refs[0]
+    group = task.host.groups[0]
     group.connection_options["netmiko"].extras["session_log"] = log_file
-    task.run(
-        task=networking.netmiko_send_command, command_string="show mac address-table"
-    )
+    task.run(task=netmiko_send_command, command_string="show mac address-table")
 
 
 def main():

@@ -1,36 +1,65 @@
 import os
 from pathlib import Path
-import subprocess
-
 import pytest
+
+from utilities import subprocess_runner
+from utilities import gen_inventory_dict
+
+import nornir
+from nornir import InitNornir
 
 
 NORNIR_LOGGING = {"enabled": False}
 
-
-def gen_inventory_dict(base_path):
-    """Dynamically create an inventory dictionary using exercise path."""
-    # BASE_PATH = "../class1/exercises/exercise1/"
-    NORNIR_HOSTS = f"{base_path}/hosts.yaml"
-    NORNIR_GROUPS = f"{base_path}/groups.yaml"
-    NORNIR_DEFAULTS = f"{base_path}/defaults.yaml"
-    NORNIR_INVENTORY = {
-        "plugin": "nornir.plugins.inventory.simple.SimpleInventory",
-        "options": {
-            "host_file": NORNIR_HOSTS,
-            "group_file": NORNIR_GROUPS,
-            "defaults_file": NORNIR_DEFAULTS,
-        },
-    }
-    return NORNIR_INVENTORY
+TEST_CASES = [
+    ("../bonus1/collateral/netmiko_napalm/bgp_project.py", None),
+    ("../bonus1/collateral/napalm_direct_task/napalm_direct_jnpr.py", None),
+    ("../bonus1/collateral/napalm_direct_task/napalm_direct_eapi.py", None),
+    ("../bonus1/collateral/netmiko_prompting/netmiko_prompting.py", None),
+    ("../bonus1/collateral/netmiko_telnet/netmiko_telnet.py", None),
+    ("../bonus1/collateral/netmiko_ssh_proxy/netmiko_proxy.py", None),
+    ("../bonus1/collateral/netmiko_ssh_keys/netmiko_ssh_keys.py", None),
+    ("../bonus1/collateral/netmiko_direct_task/netmiko_direct.py", None),
+    ("../bonus1/collateral/napalm_nxos_ssh/napalm_nxos.py", None),
+    ("../bonus1/collateral/transform_function/ansible/nornir_transform.py", None),
+    ("../bonus1/collateral/transform_function/simple/nornir_transform.py", None),
+    ("../bonus1/collateral/ansible_inventory/ansible_inventory.py", None),
+]
 
 
-def subprocess_runner(cmd_list, exercise_dir):
-    with subprocess.Popen(
-        cmd_list, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=exercise_dir
-    ) as proc:
-        std_out, std_err = proc.communicate()
-    return (std_out.decode(), std_err.decode(), proc.returncode)
+@pytest.mark.parametrize("test_case_dir, inventory_check", TEST_CASES)
+def test_runner_collateral(test_case_dir, inventory_check):
+
+    # Needed for ansible-vault test
+    os.environ["VAULT_PASSWORD"] = "password"
+
+    path_obj = Path(test_case_dir)
+    script = path_obj.name
+    script_dir = path_obj.parents[0]
+
+    # Inventory Checks
+    if inventory_check is None:
+        pass
+    else:
+        nornir_inventory = gen_inventory_dict(script_dir)
+        nr = InitNornir(inventory=nornir_inventory, logging=NORNIR_LOGGING)
+        assert isinstance(nr, nornir.core.Nornir)
+        assert isinstance(nr.inventory.hosts, nornir.core.inventory.Hosts)
+        if inventory_check == "all":
+            assert nr.inventory.hosts
+            assert nr.inventory.groups
+            assert nr.inventory.defaults
+        elif inventory_check == "hosts":
+            assert nr.inventory.hosts
+        elif inventory_check == "hosts-groups":
+            assert nr.inventory.hosts
+            assert nr.inventory.groups
+
+    # Script Check
+    cmd_list = ["python", script]
+    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=script_dir)
+    assert return_code == 0
+    assert std_err == ""
 
 
 def test_class_bonus1_ex1a():
@@ -87,7 +116,6 @@ def test_class_bonus1_ex2b():
     assert std_err == ""
 
 
-@pytest.mark.skip()
 def test_class_bonus1_ex3():
     base_path = "../bonus1/exercises/exercise3/"
     cmd_list = ["python", "exercise3.py"]
@@ -100,7 +128,6 @@ def test_class_bonus1_ex3():
     assert std_out.count("cisco4") == 2
     assert std_out.count("arista") == 8
     assert std_out.count("nxos") == 4
-    assert std_out.count("srx2") == 2
     assert std_err == ""
 
 

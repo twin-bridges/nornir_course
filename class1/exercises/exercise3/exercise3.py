@@ -1,6 +1,6 @@
 from nornir import InitNornir
 
-nr = InitNornir()
+nr = InitNornir(config_file="config.yaml")
 
 for host_name, host_obj in nr.inventory.hosts.items():
     print()

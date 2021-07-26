@@ -1,6 +1,6 @@
 ---
 inventory:
-  plugin: nornir.plugins.inventory.ansible.AnsibleInventory
+  plugin: AnsibleInventory
   options:
     hostsfile: "inventory.yaml"
 

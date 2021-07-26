@@ -1,8 +1,8 @@
 inventory:
-  plugin: nornir.plugins.inventory.ansible.AnsibleInventory
+  plugin: AnsibleInventory
   options:
     hostsfile: "inventory.yaml"
-  #transform_function: nornir_transform.transform_ansible
+  #transform_function: transform_ansible
 
 logging:
   enabled: False

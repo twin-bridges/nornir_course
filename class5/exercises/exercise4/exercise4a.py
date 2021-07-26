@@ -1,6 +1,6 @@
 from nornir import InitNornir
-from nornir.plugins.tasks import text
-from nornir.plugins.tasks import data
+from nornir_utils.plugins.tasks.data import load_yaml
+from nornir_jinja2.plugins.tasks import template_string
 
 
 ACL_TEMPLATE = """{%- for acl, rules in acls.items() %}
@@ -15,11 +15,9 @@ set firewall family inet filter {{ acl }} term {{ entry['term_name'] }} then {{ 
 
 
 def junos_acl(task):
-    in_yaml = task.run(task=data.load_yaml, file="acl.yaml")
+    in_yaml = task.run(task=load_yaml, file="acl.yaml")
     in_yaml = in_yaml[0].result
-    multi_result = task.run(
-        task=text.template_string, template=ACL_TEMPLATE, acls=in_yaml
-    )
+    multi_result = task.run(task=template_string, template=ACL_TEMPLATE, acls=in_yaml)
 
     print()
     print("#" * 80, end="")

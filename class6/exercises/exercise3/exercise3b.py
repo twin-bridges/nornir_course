@@ -3,7 +3,7 @@ import logging
 import os
 from nornir import InitNornir
 from nornir.core.filter import F
-from nornir.plugins.tasks import networking
+from nornir_netmiko import netmiko_send_command
 
 
 LOGGER = logging.getLogger("nornir")
@@ -22,9 +22,7 @@ def main():
     for hostname, host_obj in nr.inventory.hosts.items():
         host_obj.password = PASSWORD
     LOGGER.critical("Passwords set, commence automation!")
-    nr.run(
-        task=networking.netmiko_send_command, command_string="show mac address-table"
-    )
+    nr.run(task=netmiko_send_command, command_string="show mac address-table")
     LOGGER.error("Oh no! We're all out of automation tasks :(")
     LOGGER.debug("Hey, what are you still doing here?")
 

@@ -109,10 +109,14 @@ venv.bak/
 
 # Nornir specific things
 nornir.log
+nornir.out
 */nornir.log
+*/nornir.out
 class4/exercises/exercise2/eos/*-saved.txt
+class4/exercises/exercise5/*.txt
 
 *.swp
 
 bonus2/exercises/*diff
-class4/exercises/exercise5/arista4-running.txt
+class6/collateral/troubleshooting/*.txt
+class6/collateral/logging/output.txt

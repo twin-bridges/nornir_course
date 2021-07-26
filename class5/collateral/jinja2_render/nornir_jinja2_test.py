@@ -1,5 +1,5 @@
 from nornir import InitNornir
-from nornir.plugins.tasks import text
+from nornir_jinja2.plugins.tasks import template_file
 
 
 TEMPLATE_STR = """interface loopback{{ int_num }}
@@ -9,7 +9,7 @@ TEMPLATE_STR = """interface loopback{{ int_num }}
 
 def my_task(task):
     result = task.run(
-        task=text.template_file, template="interfaces.j2", path=".", **task.host
+        task=template_file, template="interfaces.j2", path=".", **task.host
     )
     print(result[0].result)
 

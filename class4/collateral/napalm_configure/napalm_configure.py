@@ -1,6 +1,7 @@
 from nornir import InitNornir
-from nornir.plugins.functions.text import print_result
-from nornir.plugins.tasks import networking
+from nornir_utils.plugins.functions import print_result
+from nornir_napalm.plugins.tasks import napalm_get
+from nornir_napalm.plugins.tasks import napalm_configure
 
 
 arista1_loopback = """interface loopback123
@@ -21,36 +22,30 @@ def main():
     arista1 = nr.filter(name="arista1")
     arista2 = nr.filter(name="arista2")
 
-    result = arista1.run(
-        task=networking.napalm_configure, configuration=arista1_loopback
-    )
+    result = arista1.run(task=napalm_configure, configuration=arista1_loopback)
     print_result(result)
 
-    result = arista2.run(task=networking.napalm_configure, filename="arista2_loopback")
+    result = arista2.run(task=napalm_configure, filename="arista2_loopback")
     print_result(result)
 
     # Commenting out the "failure" test
     """
-    result = arista1.run(task=networking.napalm_configure, configuration=test_loopback)
+    result = arista1.run(task=napalm_configure, configuration=test_loopback)
     print_result(result)
     """
 
     result = arista2.run(
-        task=networking.napalm_configure, configuration=arista2_loopback, dry_run=False
+        task=napalm_configure, configuration=arista2_loopback, dry_run=False
     )
     print_result(result)
 
-    result = arista1.run(
-        task=networking.napalm_get, getters=["config"], retrieve="running"
-    )
+    result = arista1.run(task=napalm_get, getters=["config"], retrieve="running")
     arista1_running = result["arista1"].result["config"]["running"]
 
-    arista1.run(
-        task=networking.napalm_configure, configuration="no interface loopback123"
-    )
+    arista1.run(task=napalm_configure, configuration="no interface loopback123")
 
     result = arista1.run(
-        task=networking.napalm_configure, configuration=arista1_running, replace=True
+        task=napalm_configure, configuration=arista1_running, replace=True
     )
     print_result(result)
 

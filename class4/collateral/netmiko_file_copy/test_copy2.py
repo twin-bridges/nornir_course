@@ -1,5 +1,5 @@
 from nornir import InitNornir
-from nornir.plugins.tasks.networking import netmiko_file_transfer
+from nornir_netmiko import netmiko_file_transfer
 from nornir.core.filter import F
 
 
@@ -39,4 +39,4 @@ if __name__ == "__main__":
 
     nr = InitNornir(config_file="config.yaml")
     nr = nr.filter(F(groups__contains="ios") | F(groups__contains="eos"))
-    results = nr.run(task=file_copy, num_workers=10)
+    results = nr.run(task=file_copy)

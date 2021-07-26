@@ -1,5 +1,5 @@
 from nornir import InitNornir
-from nornir.plugins.tasks.networking import netmiko_send_config
+from nornir_netmiko import netmiko_send_config
 from nornir.core.filter import F
 
 
@@ -22,4 +22,4 @@ if __name__ == "__main__":
 
     nr = InitNornir(config_file="config.yaml")
     nr = nr.filter(F(groups__contains="nxos"))
-    nr.run(task=custom_config, num_workers=10)
+    nr.run(task=custom_config)

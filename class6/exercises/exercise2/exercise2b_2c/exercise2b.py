@@ -1,13 +1,13 @@
 from nornir import InitNornir
 from nornir.core.filter import F
-from nornir.plugins.functions.text import print_result
-from nornir.plugins.tasks import text
+from nornir_utils.plugins.functions import print_result
+from nornir_jinja2.plugins.tasks import template_file
 from nornir.core.exceptions import NornirSubTaskError
 
 
 def render_configurations(task):
     try:
-        task.run(task=text.template_file, template="loopback.j2", path=".", **task.host)
+        task.run(task=template_file, template="loopback.j2", path=".", **task.host)
     except NornirSubTaskError:
         return "Templating error occurred, but its okay...."
 

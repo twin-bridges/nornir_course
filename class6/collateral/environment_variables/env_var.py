@@ -7,7 +7,7 @@ def main():
     nr = nr.filter(name="srx2")
     for host, host_obj in nr.inventory.hosts.items():
         host_obj.password = os.environ.get("NORNIR_PASSWORD", "bogus")
-        host_obj.username = os.environ["NORNIR_USERNAME"]
+        host_obj.username = os.environ.get("NORNIR_USERNAME", "pyclass")
         print(host_obj.password)
         print(host_obj.username)
 

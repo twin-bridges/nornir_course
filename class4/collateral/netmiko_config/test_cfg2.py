@@ -1,11 +1,11 @@
-import ipdb
 from nornir import InitNornir
-from nornir.plugins.tasks.networking import netmiko_send_config
+from nornir_netmiko import netmiko_send_config
 
 
 def custom_config(task):
 
-    ipdb.set_trace()
+    # import ipdb
+    # ipdb.set_trace()
     print(task.host)
 
     # To force enable mode
@@ -22,6 +22,8 @@ def custom_config(task):
 
 if __name__ == "__main__":
 
-    nr = InitNornir(config_file="config.yaml")
+    nr = InitNornir(
+        config_file="config.yaml", runner={"plugin": "serial", "options": {}}
+    )
     nr = nr.filter(name="nxos1")
-    nr.run(task=custom_config, num_workers=1)
+    nr.run(task=custom_config)

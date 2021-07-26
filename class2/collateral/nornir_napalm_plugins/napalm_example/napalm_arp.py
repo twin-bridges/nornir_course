@@ -1,10 +1,14 @@
+import os
 from nornir import InitNornir
-from nornir.plugins.tasks.networking import napalm_get
+from nornir_napalm.plugins.tasks import napalm_get
 from pprint import pprint
 
 nr = InitNornir(config_file="nornir.yaml")
-results = nr.run(task=napalm_get, getters=["facts", "arp_table"])
 
+# Code so automated tests will run properly
+nr.inventory.groups["cisco"].password = os.environ["NORNIR_PASSWORD"]
+
+results = nr.run(task=napalm_get, getters=["facts", "arp_table"])
 print()
 for k, v in results.items():
     print("-" * 50)

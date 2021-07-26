@@ -1,16 +1,17 @@
 from nornir import InitNornir
-from nornir.plugins.functions.text import print_result
-from nornir.plugins.tasks import data
+from nornir_utils.plugins.functions import print_result
+from nornir.core.filter import F
+from nornir_utils.plugins.tasks.data import load_yaml
 
 
 def custom_task(task):
-    inyaml = task.run(task=data.load_yaml, file=f"nxos/{task.host.name}.yaml")
+    inyaml = task.run(task=load_yaml, file=f"nxos/{task.host.name}.yaml")
     print(inyaml.result)
 
 
 def main():
     nr = InitNornir(config_file="config.yaml", logging={"enabled": False})
-    nr = nr.filter(groups=["nxos"])
+    nr = nr.filter(F(groups__contains="nxos"))
     result = nr.run(task=custom_task)
     print_result(result)
 

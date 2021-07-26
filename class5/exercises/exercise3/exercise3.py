@@ -1,11 +1,11 @@
 from nornir import InitNornir
-from nornir.plugins.tasks import data
+from nornir_utils.plugins.tasks.data import load_yaml
 
 
 def junos_acl(task):
 
     # Load the YAML-ACL entries
-    in_yaml = task.run(task=data.load_yaml, file="acl.yaml")
+    in_yaml = task.run(task=load_yaml, file="acl.yaml")
     in_yaml = in_yaml[0].result
     rules = []
 

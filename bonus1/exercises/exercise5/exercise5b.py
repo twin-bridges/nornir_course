@@ -2,7 +2,7 @@ from pathlib import Path
 
 from nornir import InitNornir
 from nornir.core.filter import F
-from nornir.plugins.functions.text import print_result
+from nornir_utils.plugins.functions import print_result
 
 
 def get_checkpoint_file(task):

@@ -12,5 +12,5 @@ def my_task(task):
 
 
 if __name__ == "__main__":
-    nr = InitNornir()
+    nr = InitNornir(config_file="config.yaml")
     nr.run(task=my_task)

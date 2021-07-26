@@ -1,5 +1,5 @@
 inventory:
-  plugin: nornir.plugins.inventory.simple.SimpleInventory
+  plugin: SimpleInventory
   options:
     host_file: "~/nornir_inventory/hosts.yaml"
     group_file: "~/nornir_inventory/groups.yaml"
@@ -8,4 +8,4 @@ inventory:
 logging:
   enabled: True
   level: DEBUG
-  file: my_log.log
+  log_file: my_log.log

@@ -1,5 +1,9 @@
 ---
-core:
-  num_workers: 10
+inventory:
+  plugin: SimpleInventory
+runner:
+  plugin: threaded
+  options:
+    num_workers: 10
 logging:
-  file: ""
+  log_file: nornir.out

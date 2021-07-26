@@ -3,7 +3,7 @@ from ansible.parsing.vault import VaultLib, VaultSecret
 from ansible.cli import CLI
 from ansible.parsing.dataloader import DataLoader
 from nornir import InitNornir
-from nornir.plugins.tasks import networking
+from nornir_netmiko import netmiko_send_command
 
 
 def load_vaulted_pass(
@@ -30,9 +30,9 @@ def main():
     nr = InitNornir(config_file="config.yaml")
     nr = nr.filter(name="arista1")
     for hostname, host_obj in nr.inventory.hosts.items():
-        host_obj.password = load_vaulted_pass()
+        host_obj.password = load_vaulted_pass(vault_password_file="vaultpass.sh")
     agg_result = nr.run(
-        task=networking.netmiko_send_command, command_string="show run | i hostname"
+        task=netmiko_send_command, command_string="show run | i hostname"
     )
     print(agg_result["arista1"].result)
 

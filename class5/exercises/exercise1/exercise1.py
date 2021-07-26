@@ -1,7 +1,7 @@
 from nornir import InitNornir
 from nornir.core.filter import F
-from nornir.plugins.tasks import networking
-from nornir.plugins.functions.text import print_result
+from nornir_netmiko import netmiko_send_config
+from nornir_utils.plugins.functions import print_result
 
 
 def set_snmp_id(task):
@@ -11,7 +11,7 @@ def set_snmp_id(task):
         snmp_config = [f"snmp-server chassis-id {task.host['snmp_id']}"]
     else:
         return False
-    task.run(task=networking.netmiko_send_config, config_commands=snmp_config)
+    task.run(task=netmiko_send_config, config_commands=snmp_config)
 
 
 def main():

@@ -2,15 +2,18 @@ from nornir import InitNornir
 
 
 def my_task(task):
-    import ipdb
-
-    ipdb.set_trace()
+    # import ipdb
+    # ipdb.set_trace()
     print("Hello, World!")
 
 
 def main():
-    nr = InitNornir(config_file="config.yaml", logging={"enabled": False})
-    nr.run(task=my_task, num_workers=1)
+    nr = InitNornir(
+        config_file="config.yaml",
+        logging={"enabled": False},
+        runner={"plugin": "serial", "options": {}},
+    )
+    nr.run(task=my_task)
 
 
 if __name__ == "__main__":

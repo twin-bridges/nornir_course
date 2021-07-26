@@ -1,7 +1,7 @@
 from nornir import InitNornir
 from nornir.core.filter import F
-from nornir.plugins.functions.text import print_result
-from nornir.plugins.tasks import networking
+from nornir_utils.plugins.functions import print_result
+from nornir_netmiko import netmiko_file_transfer
 
 
 def file_copy(task):
@@ -10,7 +10,7 @@ def file_copy(task):
     filename = host["file_name"]
     source_file = f"{platform}/{filename}"
     task.run(
-        task=networking.netmiko_file_transfer,
+        task=netmiko_file_transfer,
         source_file=source_file,
         dest_file=filename,
         direction="put",

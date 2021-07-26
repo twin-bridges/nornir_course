@@ -1,0 +1,6 @@
+interface loopback123
+ description ntp source loopback
+ no shut
+interface loopback10
+ description primary loopback
+ no shut

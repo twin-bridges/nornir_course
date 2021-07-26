@@ -1,16 +1,16 @@
 from nornir import InitNornir
 from nornir.core.task import Result
-from nornir.plugins.functions.text import print_result
-from nornir.plugins.tasks import networking
+from nornir_utils.plugins.functions import print_result
+from nornir_netmiko import netmiko_send_command
 
 
 def my_task(task):
     if task.host.groups[0] == "ios":
         cmd = "show run"
-        task.run(task=networking.netmiko_send_command, command_string=cmd)
+        task.run(task=netmiko_send_command, command_string=cmd)
     elif task.host.groups[0] == "junos":
         cmd = "show configuration"
-        task.run(task=networking.netmiko_send_command, command_string=cmd)
+        task.run(task=netmiko_send_command, command_string=cmd)
 
 
 def new_task(task):
@@ -24,9 +24,9 @@ def main():
     # print_result(result)
     nr = nr.filter(name="arista1")
     result = nr.run(task=new_task)
-    import ipdb
 
-    ipdb.set_trace()
+    # import ipdb
+    # ipdb.set_trace()
     print_result(result)
 
 

@@ -1,8 +1,8 @@
 import logging
 from nornir import InitNornir
 from nornir.core.filter import F
-from nornir.plugins.functions.text import print_result  # noqa
-from nornir.plugins.tasks.networking import netmiko_send_command
+from nornir_utils.plugins.functions import print_result  # noqa
+from nornir_netmiko import netmiko_send_command
 
 logger = logging.getLogger("nornir")
 

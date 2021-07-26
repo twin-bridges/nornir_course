@@ -1,16 +1,16 @@
 from nornir import InitNornir
 from nornir.core.filter import F
-from nornir.plugins.functions.text import print_result
-from nornir.plugins.tasks import text
-from nornir.plugins.tasks import files
-from nornir.plugins.tasks import networking
+from nornir_utils.plugins.functions import print_result
+from nornir_jinja2.plugins.tasks import template_file
+from nornir_utils.plugins.tasks.files import write_file
+from nornir_napalm.plugins.tasks import napalm_configure
 
 
 def render_configs(task):
     template_path = f"templates/{task.host.platform}/"
     template = "interfaces.j2"
     result = task.run(
-        task=text.template_file, template=template, path=template_path, **task.host
+        task=template_file, template=template, path=template_path, **task.host
     )
     rendered_config = result[0].result
     task.host["rendered_config"] = rendered_config
@@ -20,14 +20,14 @@ def write_configs(task):
     cfg_path = f"configs/{task.host.platform}/"
     filename = f"{cfg_path}{task.host.name}_interfaces"
     content = task.host["rendered_config"]
-    task.run(task=files.write_file, filename=filename, content=content)
+    task.run(task=write_file, filename=filename, content=content)
 
 
 def deploy_configs(task):
     filename = f"configs/{task.host.platform}/{task.host.name}_interfaces"
     with open(filename, "r") as f:
         cfg = f.read()
-    result = task.run(task=networking.napalm_configure, configuration=cfg)
+    result = task.run(task=napalm_configure, configuration=cfg)
     return result
 
 

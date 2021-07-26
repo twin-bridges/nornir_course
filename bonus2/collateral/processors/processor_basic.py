@@ -1,7 +1,7 @@
 from nornir import InitNornir
 from nornir.core.filter import F
 from nornir.core.task import Result
-from nornir.plugins.tasks.networking import netmiko_send_command
+from nornir_netmiko import netmiko_send_command
 
 
 class SimpleProcessor:
@@ -33,8 +33,7 @@ def main():
     nr = InitNornir(config_file="config.yaml")
     nr = nr.filter(F(groups__contains="eos"))
     nr_with_processors = nr.with_processors([SimpleProcessor()])
-
-    nr_with_processors.run(task=get_version, num_workers=2)
+    nr_with_processors.run(task=get_version)
 
 
 if __name__ == "__main__":

@@ -6,9 +6,9 @@ from ansible.cli import CLI
 from ansible.parsing.dataloader import DataLoader
 from netmiko.ssh_exception import NetMikoAuthenticationException
 from nornir import InitNornir
-from nornir.plugins.functions.text import print_result
-from nornir.plugins.tasks import networking
 from nornir.core.exceptions import NornirSubTaskError
+from nornir_utils.plugins.functions import print_result
+from nornir_netmiko import netmiko_send_command
 
 
 BAD_PASSWORD = "bogus"
@@ -51,7 +51,7 @@ def send_command(task):
     command_mapper = {"junos": "show system uptime"}
     cmd = command_mapper.get(task.host.platform, "show clock")
     try:
-        task.run(task=networking.netmiko_send_command, command_string=cmd)
+        task.run(task=netmiko_send_command, command_string=cmd)
     except NornirSubTaskError as e:
         if isinstance(e.result.exception, NetMikoAuthenticationException):
             task.results.pop()
@@ -63,7 +63,7 @@ def send_command(task):
                 task.host.close_connections()
             except ValueError:
                 pass
-            task.run(task=networking.netmiko_send_command, command_string=cmd)
+            task.run(task=netmiko_send_command, command_string=cmd)
         else:
             return f"Unhandled exception: {e}"
 

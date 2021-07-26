@@ -1,5 +1,5 @@
 inventory:
-  plugin: nornir.plugins.inventory.simple.SimpleInventory
+  plugin: SimpleInventory
   options:
     host_file: "~/nornir_inventory/hosts.yaml"
     group_file: "groups.yaml"

@@ -1,12 +1,15 @@
 import os
 from nornir import InitNornir
 from nornir.core.filter import F
-from nornir.plugins.functions.text import print_result
-from nornir.plugins.tasks.networking import netmiko_send_command
+from nornir_utils.plugins.functions import print_result
+from nornir_netmiko import netmiko_send_command
 
 
 def main():
-    nr = InitNornir(config_file="config.yaml", core={"num_workers": 15})
+    nr = InitNornir(
+        config_file="config.yaml",
+        runner={"plugin": "threaded", "options": {"num_workers": 15}},
+    )
     ios_filt = F(groups__contains="ios")
     nr = nr.filter(ios_filt)
 

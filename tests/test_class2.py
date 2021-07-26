@@ -1,34 +1,74 @@
 import os
-import subprocess
+import pytest
+from pathlib import Path
+
+import nornir
 from nornir import InitNornir
+
+from utilities import gen_inventory_dict
+from utilities import subprocess_runner
 
 
 NORNIR_LOGGING = {"enabled": False}
 
+TEST_CASES = [
+    ("../class2/collateral/nornir_netmiko_plugins/netmiko_show_ip.py", "hosts-groups"),
+    (
+        "../class2/collateral/nornir_netmiko_plugins/netmiko_show_ip_2.py",
+        "hosts-groups",
+    ),
+    ("../class2/collateral/netmiko_enable/netmiko_enable.py", "hosts-groups"),
+    ("../class2/collateral/netmiko_save_config/netmiko_wrmem.py", "hosts-groups"),
+    (
+        "../class2/collateral/nornir_napalm_plugins/napalm_example/napalm_arp.py",
+        "hosts-groups",
+    ),
+    (
+        "../class2/collateral/nornir_napalm_plugins/napalm_example/napalm_facts.py",
+        "hosts-groups",
+    ),
+    (
+        "../class2/collateral/nornir_napalm_plugins/napalm_example/napalm_lldp.py",
+        "hosts-groups",
+    ),
+    (
+        "../class2/collateral/nornir_napalm_plugins/enable/napalm_config.py",
+        "hosts-groups",
+    ),
+    (
+        "../class2/collateral/nornir_napalm_plugins/napalm_bgp/napalm_bgp.py",
+        "hosts-groups",
+    ),
+]
 
-def gen_inventory_dict(base_path):
-    """Dynamically create an inventory dictionary using exercise path."""
-    # BASE_PATH = "../class1/exercises/exercise1/"
-    NORNIR_HOSTS = f"{base_path}/hosts.yaml"
-    NORNIR_GROUPS = f"{base_path}/groups.yaml"
-    NORNIR_DEFAULTS = f"{base_path}/defaults.yaml"
-    NORNIR_INVENTORY = {
-        "plugin": "nornir.plugins.inventory.simple.SimpleInventory",
-        "options": {
-            "host_file": NORNIR_HOSTS,
-            "group_file": NORNIR_GROUPS,
-            "defaults_file": NORNIR_DEFAULTS,
-        },
-    }
-    return NORNIR_INVENTORY
 
+@pytest.mark.parametrize("test_case_dir, inventory_check", TEST_CASES)
+def test_runner_collateral(test_case_dir, inventory_check):
+    path_obj = Path(test_case_dir)
+    script = path_obj.name
+    script_dir = path_obj.parents[0]
 
-def subprocess_runner(cmd_list, exercise_dir):
-    with subprocess.Popen(
-        cmd_list, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=exercise_dir
-    ) as proc:
-        std_out, std_err = proc.communicate()
-    return (std_out.decode(), std_err.decode(), proc.returncode)
+    # Inventory Checks
+    nornir_inventory = gen_inventory_dict(script_dir)
+    nr = InitNornir(inventory=nornir_inventory, logging=NORNIR_LOGGING)
+    assert isinstance(nr, nornir.core.Nornir)
+    assert isinstance(nr.inventory.hosts, nornir.core.inventory.Hosts)
+    if inventory_check == "all":
+        assert nr.inventory.hosts
+        assert nr.inventory.groups
+        assert nr.inventory.defaults
+    elif inventory_check == "hosts":
+        assert nr.inventory.hosts
+    elif inventory_check == "hosts-groups":
+        assert nr.inventory.hosts
+        assert nr.inventory.groups
+
+    # Script Check
+    cmd_list = ["python", script]
+    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=script_dir)
+    assert return_code == 0
+    assert std_err == ""
+    assert "Traceback" not in std_out
 
 
 def test_class2_ex1a():
@@ -36,8 +76,7 @@ def test_class2_ex1a():
     cmd_list = ["python", "exercise1a.py"]
 
     nornir_inventory = gen_inventory_dict(base_path)
-    nr = InitNornir(inventory=nornir_inventory, logging=NORNIR_LOGGING)
-    assert nr.config.core.num_workers == 20
+    nr = InitNornir(inventory=nornir_inventory, logging=NORNIR_LOGGING)  # noqa
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
     assert "20" in std_out
@@ -54,7 +93,9 @@ def test_class2_ex1b():
         logging=NORNIR_LOGGING,
         config_file=f"{base_path}/config.yaml",
     )
-    assert nr.config.core.num_workers == 5
+
+    workers = nr.config.runner.options
+    assert workers["num_workers"] == 5
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
     assert "5" in std_out
@@ -71,13 +112,14 @@ def test_class2_ex1c():
         logging=NORNIR_LOGGING,
         config_file=f"{base_path}/config.yaml",
     )
-    assert nr.config.core.num_workers == 5
-    os.environ["NORNIR_CORE_NUM_WORKERS"] = "10"
+    workers = nr.config.runner.options
+    assert workers["num_workers"] == 5
+    # os.environ["NORNIR_CORE_NUM_WORKERS"] = "10"
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
-    assert "10" in std_out
+    assert "5" in std_out
     assert std_err == ""
-    del os.environ["NORNIR_CORE_NUM_WORKERS"]
+    # del os.environ["NORNIR_CORE_NUM_WORKERS"]
 
 
 def test_class2_ex1d():
@@ -90,13 +132,12 @@ def test_class2_ex1d():
         logging=NORNIR_LOGGING,
         config_file=f"{base_path}/config.yaml",
     )
-    assert nr.config.core.num_workers == 5
-    os.environ["NORNIR_CORE_NUM_WORKERS"] = "10"
+    workers = nr.config.runner.options
+    assert workers["num_workers"] == 5
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
     assert "15" in std_out
     assert std_err == ""
-    del os.environ["NORNIR_CORE_NUM_WORKERS"]
 
 
 def test_class2_ex2a():
@@ -215,7 +256,7 @@ def test_class2_ex5b():
     os.environ["PYTHONWARNINGS"] = "ignore::Warning"
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
-    assert "Authentication failure" in std_out
+    assert "Authentication failed" in std_out
     assert "GigabitEthernet0/0/0   10.220.88.23" in std_out
     assert "Task failed hosts: {'cisco3'" in std_out
     assert "Global failed hosts: {'cisco3'}" in std_out
@@ -229,7 +270,7 @@ def test_class2_ex5c():
     os.environ["PYTHONWARNINGS"] = "ignore::Warning"
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
-    assert "Authentication failure" in std_out
+    assert "Authentication failed" in std_out
     assert "GigabitEthernet0/0/0   10.220.88.23" in std_out
     assert "Task failed hosts: {'cisco3'" in std_out
     assert std_out.count("Global failed hosts: {'cisco3'}", 2)
@@ -244,7 +285,7 @@ def test_class2_ex5d():
     os.environ["PYTHONWARNINGS"] = "ignore::Warning"
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
-    assert "Authentication failure" in std_out
+    assert "Authentication failed" in std_out
     assert "GigabitEthernet0/0/0   10.220.88.23" in std_out
     assert "Task failed hosts: {'cisco3'" in std_out
     assert std_out.count("Global failed hosts: {'cisco3'}", 2)

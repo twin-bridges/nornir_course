@@ -1,0 +1,3 @@
+interface loopback93
+ description legacy; delete
+ shut

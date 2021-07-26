@@ -1,16 +1,16 @@
 from nornir import InitNornir
 from nornir.core.task import Result
 from nornir.core.filter import F
-from nornir.plugins.functions.text import print_result
-from nornir.plugins.tasks import networking
+from nornir_utils.plugins.functions import print_result
+from nornir_netmiko import netmiko_send_command
+from nornir_netmiko import netmiko_send_config
 
 
 def configure_vlan(task, vlan_id, vlan_name):
 
     # Check current VLAN configuration
     multi_result = task.run(
-        task=networking.netmiko_send_command,
-        command_string=f"show vlan brief | i {vlan_id}",
+        task=netmiko_send_command, command_string=f"show vlan brief | i {vlan_id}"
     )
 
     # Inspect results and return if already correct
@@ -26,7 +26,7 @@ def configure_vlan(task, vlan_id, vlan_name):
 
     changed = True
     multi_result = task.run(
-        task=networking.netmiko_send_config,
+        task=netmiko_send_config,
         config_commands=[f"vlan {vlan_id}", f"name {vlan_name}"],
     )
     if (
@@ -49,11 +49,11 @@ def main():
     VLAN_ID = "123"
     VLAN_NAME = "ntp_vlan"
 
-    nr = InitNornir(config_file="config.yaml")
-    nr = nr.filter(F(groups__contains="eos") | F(groups__contains="nxos"))
-    result = nr.run(
-        task=configure_vlan, vlan_id=VLAN_ID, vlan_name=VLAN_NAME, num_workers=1
+    nr = InitNornir(
+        config_file="config.yaml", runner={"plugin": "serial", "options": {}}
     )
+    nr = nr.filter(F(groups__contains="eos") | F(groups__contains="nxos"))
+    result = nr.run(task=configure_vlan, vlan_id=VLAN_ID, vlan_name=VLAN_NAME)
     print_result(result)
 
 

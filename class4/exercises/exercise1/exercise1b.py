@@ -2,7 +2,7 @@ import re
 import colorama
 
 from nornir import InitNornir
-from nornir.plugins.tasks import networking
+from nornir_netmiko import netmiko_send_command
 
 HOUR_SECONDS = 3600
 DAY_SECONDS = 24 * HOUR_SECONDS
@@ -68,7 +68,7 @@ def uptime(task):
         "junos": "show system uptime | match System",
     }
     cmd = cmd_mapper[platform]
-    multi_result = task.run(task=networking.netmiko_send_command, command_string=cmd)
+    multi_result = task.run(task=netmiko_send_command, command_string=cmd)
     uptime_output = multi_result[0].result
 
     uptime_sec = parse_uptime(uptime_output)
@@ -92,8 +92,11 @@ def uptime(task):
 
 
 def main():
-    nr = InitNornir(config_file="config.yaml")
-    nr.run(task=uptime, num_workers=10)
+    nr = InitNornir(
+        config_file="config.yaml",
+        runner={"plugin": "threaded", "options": {"num_workers": 10}},
+    )
+    nr.run(task=uptime)
 
 
 if __name__ == "__main__":

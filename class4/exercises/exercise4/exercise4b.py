@@ -4,16 +4,15 @@ import napalm.nxos  # noqa
 
 from nornir import InitNornir
 from nornir.core.filter import F
-from nornir.plugins.functions.text import print_result
-from nornir.plugins.tasks import networking
+from nornir_utils.plugins.functions import print_result
+
+from nornir_napalm.plugins.tasks import napalm_configure
 
 
 def configure_vlan(task, vlan_id, vlan_name, dry_run=True):
     config_string = f"""vlan {vlan_id}
   name {vlan_name}"""
-    task.run(
-        task=networking.napalm_configure, configuration=config_string, dry_run=dry_run
-    )
+    task.run(task=napalm_configure, configuration=config_string, dry_run=dry_run)
 
 
 def main():

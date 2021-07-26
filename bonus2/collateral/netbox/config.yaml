@@ -1,6 +1,3 @@
 ---
-inventory:
-  plugin: nornir.plugins.inventory.netbox.NBInventory
-
 logging:
   enabled: False

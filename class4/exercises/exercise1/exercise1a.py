@@ -1,5 +1,5 @@
 from nornir import InitNornir
-from nornir.plugins.tasks import networking
+from nornir_netmiko import netmiko_send_command
 
 
 def uptime(task):
@@ -12,7 +12,7 @@ def uptime(task):
     host = task.host
     platform = host.platform
     cmd = cmd_mapper[platform]
-    task.run(task=networking.netmiko_send_command, command_string=cmd)
+    task.run(task=netmiko_send_command, command_string=cmd)
 
 
 def main():

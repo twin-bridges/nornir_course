@@ -1,14 +1,11 @@
 from nornir import InitNornir
-from nornir.plugins.functions.text import print_result
-from nornir.plugins.tasks import networking
+from nornir_utils.plugins.functions import print_result
+from nornir_netmiko import netmiko_send_command
 
 
 def send_command(task):
-    task.run(
-        task=networking.netmiko_send_command,
-        command_string="set cli complete-on-space off",
-    )
-    task.run(task=networking.netmiko_send_command, command_string="show ip interface")
+    task.run(task=netmiko_send_command, command_string="set cli complete-on-space off")
+    task.run(task=netmiko_send_command, command_string="show ip interface")
 
 
 def main():

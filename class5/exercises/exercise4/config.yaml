@@ -1,10 +1,10 @@
 ---
-core:
-  num_workers: 20
+runner:
+  plugin: serial
 logging:
   enabled: False
 inventory:
-  plugin: nornir.plugins.inventory.simple.SimpleInventory
+  plugin: SimpleInventory
   options:
     host_file: "~/nornir_inventory/hosts.yaml"
     group_file: "~/nornir_inventory/groups.yaml"

@@ -1,11 +1,15 @@
+import os
 from pprint import pprint
 from nornir import InitNornir
-from nornir.plugins.tasks.networking import napalm_get
+from nornir_napalm.plugins.tasks import napalm_get
 
 
 nr = InitNornir(config_file="nornir.yaml")
-results = nr.run(task=napalm_get, getters=["bgp_neighbors"])
 
+# Code so automated tests will run properly
+nr.inventory.groups["nxos"].password = os.environ["NORNIR_PASSWORD"]
+
+results = nr.run(task=napalm_get, getters=["bgp_neighbors"])
 print()
 for k, v in results.items():
     print("-" * 50)

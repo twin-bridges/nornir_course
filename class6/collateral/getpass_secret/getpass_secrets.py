@@ -1,9 +1,11 @@
+import os
 from getpass import getpass
 from nornir import InitNornir
-from nornir.plugins.tasks import networking
+from nornir_netmiko import netmiko_send_command
 
 
-SECRET = getpass()
+# Pass in SECRET from environment variable else us getpass (for automated tests)
+SECRET = os.getenv("NORNIR_PASSWORD") if os.getenv("NORNIR_PASSWORD") else getpass()
 
 
 def set_secret(nr, group):
@@ -13,14 +15,13 @@ def set_secret(nr, group):
 
 def main():
     nr = InitNornir(config_file="config.yaml")
-    nr = nr.filter(name="arista1")
-    set_secret(nr, "eos")
+    nr = nr.filter(name="cisco3")
+
+    set_secret(nr, "ios")
     agg_result = nr.run(
-        task=networking.netmiko_send_command,
-        command_string="show run | i hostname",
-        enable=True,
+        task=netmiko_send_command, command_string="show run | i hostname", enable=True
     )
-    print(agg_result["arista1"].result)
+    print(agg_result["cisco3"].result)
 
 
 if __name__ == "__main__":

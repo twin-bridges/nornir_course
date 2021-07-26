@@ -1,16 +1,14 @@
 from nornir import InitNornir
 from nornir.core.filter import F
-from nornir.plugins.tasks import text
-from nornir.plugins.tasks import files
-from nornir.plugins.functions.text import print_result
+from nornir_jinja2.plugins.tasks import template_file
+from nornir_utils.plugins.tasks.files import write_file
+from nornir_utils.plugins.functions import print_result
 
 
 def render_configurations(task):
-    bgp = task.run(
-        task=text.template_file, template="bgp.j2", path="nxos/", **task.host
-    )
+    bgp = task.run(task=template_file, template="bgp.j2", path="nxos/", **task.host)
     intf = task.run(
-        task=text.template_file, template="routed_int.j2", path="nxos/", **task.host
+        task=template_file, template="routed_int.j2", path="nxos/", **task.host
     )
     task.host["bgp_config"] = bgp.result
     task.host["intf_config"] = intf.result
@@ -18,12 +16,12 @@ def render_configurations(task):
 
 def write_configurations(task):
     task.run(
-        task=files.write_file,
+        task=write_file,
         filename=f"rendered_configs/{task.host}_bgp",
         content=task.host["bgp_config"],
     )
     task.run(
-        task=files.write_file,
+        task=write_file,
         filename=f"rendered_configs/{task.host}_intf",
         content=task.host["intf_config"],
     )

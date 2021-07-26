@@ -1,10 +1,10 @@
 from nornir import InitNornir
-from nornir.plugins.tasks import networking
+from nornir_netmiko import netmiko_send_config
 
 
 def netmiko_configure(task):
     output = task.run(
-        task=networking.netmiko_send_config, config_commands=["interface lopback 123"]
+        task=netmiko_send_config, config_commands=["interface lopback 123"]
     )
     if "% Invalid input detected" in output.result:
         raise ValueError("Bad things happening!")

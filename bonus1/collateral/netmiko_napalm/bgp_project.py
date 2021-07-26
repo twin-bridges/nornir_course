@@ -1,9 +1,10 @@
 from nornir import InitNornir
 from nornir.core.filter import F
-from nornir.plugins.tasks import text
-from nornir.plugins.tasks.networking import napalm_configure
-from nornir.plugins.tasks.networking import netmiko_send_command
-from nornir.plugins.functions.text import print_result
+
+from nornir_utils.plugins.functions import print_result
+from nornir_jinja2.plugins.tasks import template_file
+from nornir_napalm.plugins.tasks import napalm_configure
+from nornir_netmiko import netmiko_send_command
 
 
 DEBUG = False
@@ -12,7 +13,7 @@ DEBUG = False
 def render_configs(task):
     """Generate BGP configs from Jinja2 template."""
     template = "bgp.j2"
-    result = task.run(task=text.template_file, template=template, path=".", **task.host)
+    result = task.run(task=template_file, template=template, path=".", **task.host)
     rendered_config = result[0].result
     task.host["rendered_config"] = rendered_config
 

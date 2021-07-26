@@ -1,13 +1,15 @@
 from pprint import pprint
 from nornir import InitNornir
-from nornir.plugins.tasks.networking import napalm_get
+from nornir.core.filter import F
+from nornir_napalm.plugins.tasks import napalm_get
 
 
 def main():
 
     # Exercise 6a
     nr = InitNornir(config_file="config.yaml")
-    nr = nr.filter(groups=["nxos"])
+    nr = nr.filter(F(groups__contains="nxos"))
+
     agg_result = nr.run(
         task=napalm_get,
         getters=["config", "facts"],

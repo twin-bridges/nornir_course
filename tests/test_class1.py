@@ -1,33 +1,52 @@
-import subprocess
+from pathlib import Path
+import pytest
+
 from nornir import InitNornir
 import nornir
+from utilities import gen_inventory_dict
+from utilities import subprocess_runner
 
 NORNIR_LOGGING = {"enabled": False}
 
+TEST_CASES_INVENTORY = [
+    ("../class1/collateral/first_task/test_nr.py", "hosts"),
+    ("../class1/collateral/core_inventory_objects/invalid.py", "all"),
+    ("../class1/collateral/first_task/invalid.py", "hosts"),
+    ("../class1/collateral/inventory_overview/invalid.py", "hosts"),
+    ("../class1/collateral/inventory_resolution/invalid.py", "all"),
+    ("../class1/collateral/run_method/invalid.py", "hosts"),
+]
 
-def gen_inventory_dict(base_path):
-    """Dynamically create an inventory dictionary using exercise path."""
-    # BASE_PATH = "../class1/exercises/exercise1/"
-    NORNIR_HOSTS = f"{base_path}/hosts.yaml"
-    NORNIR_GROUPS = f"{base_path}/groups.yaml"
-    NORNIR_DEFAULTS = f"{base_path}/defaults.yaml"
-    NORNIR_INVENTORY = {
-        "plugin": "nornir.plugins.inventory.simple.SimpleInventory",
-        "options": {
-            "host_file": NORNIR_HOSTS,
-            "group_file": NORNIR_GROUPS,
-            "defaults_file": NORNIR_DEFAULTS,
-        },
-    }
-    return NORNIR_INVENTORY
+TEST_CASES = ["../class1/collateral/run_method/example.py"]
 
 
-def subprocess_runner(cmd_list, exercise_dir):
-    with subprocess.Popen(
-        cmd_list, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=exercise_dir
-    ) as proc:
-        std_out, std_err = proc.communicate()
-    return (std_out.decode(), std_err.decode(), proc.returncode)
+@pytest.mark.parametrize("test_case_dir, inventory_check", TEST_CASES_INVENTORY)
+def test_runner_collateral_inv(test_case_dir, inventory_check):
+    path_obj = Path(test_case_dir)
+    script_dir = path_obj.parents[0]
+    nornir_inventory = gen_inventory_dict(script_dir)
+    nr = InitNornir(inventory=nornir_inventory, logging=NORNIR_LOGGING)
+    assert isinstance(nr, nornir.core.Nornir)
+    assert isinstance(nr.inventory.hosts, nornir.core.inventory.Hosts)
+    if inventory_check == "all":
+        assert nr.inventory.hosts
+        assert nr.inventory.groups
+        assert nr.inventory.defaults
+    elif inventory_check == "hosts":
+        assert nr.inventory.hosts
+
+
+@pytest.mark.parametrize("test_case", TEST_CASES)
+def test_runner_collateral(test_case):
+    path_obj = Path(test_case)
+    script = path_obj.name
+    script_dir = path_obj.parents[0]
+
+    cmd_list = ["python", script]
+    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=script_dir)
+    assert return_code == 0
+    assert std_err == ""
+    assert "Traceback" not in std_out
 
 
 def test_class1_ex1():
@@ -50,7 +69,7 @@ def test_class1_ex2():
     for host_name, host_obj in nr.inventory.hosts.items():
         assert host_obj.hostname is not None
         assert len(host_obj.groups) == 1
-        assert host_obj.groups[0] == "ios"
+        assert host_obj.groups[0].name == "ios"
         assert host_obj.platform == "cisco_ios"
         assert host_obj.username == "pyclass"
         assert host_obj.password == "cisco123"
@@ -80,7 +99,7 @@ def test_class1_ex3():
     for host_name, host_obj in nr.inventory.hosts.items():
         assert host_obj.hostname is not None
         assert len(host_obj.groups) == 1
-        assert host_obj.groups[0] == "ios"
+        assert host_obj.groups[0].name == "ios"
         assert host_obj.platform == "cisco_ios"
         assert host_obj.username == "pyclass"
         assert host_obj.password == "cisco123"
@@ -112,7 +131,7 @@ def test_class1_ex4():
     for host_name, host_obj in nr.inventory.hosts.items():
         assert host_obj.hostname is not None
         assert len(host_obj.groups) == 1
-        assert host_obj.groups[0] == "ios"
+        assert host_obj.groups[0].name == "ios"
         assert host_obj.platform == "cisco_ios"
         assert host_obj.username == "pyclass"
         assert host_obj.password == "cisco123"
@@ -146,7 +165,7 @@ def test_class1_ex5():
     for host_name, host_obj in nr.inventory.hosts.items():
         assert host_obj.hostname is not None
         assert len(host_obj.groups) == 1
-        assert host_obj.groups[0] == "ios"
+        assert host_obj.groups[0].name == "ios"
         assert host_obj.platform == "cisco_ios"
         assert host_obj.username == "pyclass"
         assert host_obj.password == "cisco123"
