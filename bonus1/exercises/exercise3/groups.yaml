@@ -7,7 +7,7 @@ ios:
       username: student1
       extras:
         use_keys: True
-        key_file: "/home/kbyers/.ssh/student_key"
+        key_file: "~/.ssh/student_key"
     napalm:
       extras:
         optional_args: {}
