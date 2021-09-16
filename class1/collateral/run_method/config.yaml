@@ -4,5 +4,13 @@ inventory:
     host_file: "hosts.yaml"
     group_file: "groups.yaml"
     defaults_file: "defaults.yaml"
+
+# No concurrency
+# runner:
+  # plugin: serial
+
+# 10-Concurrent Threads 
 runner:
-  plugin: serial
+  plugin: threaded
+  options:
+    num_workers: 10
