@@ -1,3 +1,7 @@
+"""
+The code in this file is probably GPL due to the import and use of the
+ansible packages (which are GPL).
+"""
 import yaml
 from ansible.parsing.vault import VaultLib, VaultSecret
 from ansible.cli import CLI
