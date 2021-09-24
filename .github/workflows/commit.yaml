@@ -1,0 +1,43 @@
+--- 
+name: build
+on: [push, pull_request]
+jobs:
+  std_tests:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: [3.6, 3.7, 3.8, 3.9]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+          pip install -r requirements.txt
+
+      - name: Run black
+        run: |
+          black --check .
+
+      - name: Run linter
+        run: |
+          pylama .
+
+      - name: Run Tests
+        run: |
+          cd tests
+          py.test -s -v test_class1.py
+          py.test -s -v test_class2.py::test_class2_ex1a
+          py.test -s -v test_class2.py::test_class2_ex1b
+          py.test -s -v test_class2.py::test_class2_ex1c
+          py.test -s -v test_class2.py::test_class2_ex1d
+
