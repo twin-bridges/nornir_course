@@ -1,5 +1,5 @@
-import time
 import random
+import time
 from nornir import InitNornir
 
 
@@ -9,8 +9,8 @@ def my_task(task):
 
 
 def main():
-    nr = InitNornir(config_file="config.yaml")
-    # nr = InitNornir()
+    nr = InitNornir(runner={"plugin": "threaded", "options": {"num_workers": 10}})
+    # nr = InitNornir(runner={"plugin": "serial"})
     nr.run(task=my_task)
 
 

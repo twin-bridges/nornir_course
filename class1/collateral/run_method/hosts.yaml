@@ -1,9 +1,9 @@
 ---
-localhost:
+my_host1:
   hostname: localhost
-localhost1:
-  hostname: localhost1
-localhost2:
-  hostname: localhost2
-localhost3:
-  hostname: localhost3
+my_host2:
+  hostname: localhost
+my_host3:
+  hostname: localhost
+my_host4:
+  hostname: localhost
