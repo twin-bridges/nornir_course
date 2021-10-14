@@ -12,6 +12,9 @@ from utilities import subprocess_runner
 NORNIR_LOGGING = {"enabled": False}
 
 TEST_CASES = [
+    ("../class2/collateral/configuration_options/base_example_cfg_file.py", None),
+    ("../class2/collateral/configuration_options/base_example_cfg_in_code.py", None),
+    ("../class2/collateral/results/results_example.py", None),
     ("../class2/collateral/nornir_netmiko_plugins/netmiko_show_ip.py", "hosts-groups"),
     (
         "../class2/collateral/nornir_netmiko_plugins/netmiko_show_ip_2.py",
@@ -41,6 +44,26 @@ TEST_CASES = [
     ),
 ]
 
+TEST_CASES_EXPECTED_FAIL = [
+    ("../class2/collateral/configuration_options/base_example.py", None), 
+]
+
+@pytest.mark.parametrize("test_case_dir, inventory_check", TEST_CASES_EXPECTED_FAIL)
+def test_runner_collateral_fail(test_case_dir, inventory_check):
+    path_obj = Path(test_case_dir)
+    script = path_obj.name
+    script_dir = path_obj.parents[0]
+
+    # Inventory Checks
+    if inventory_check is None:
+        pass
+
+    # Script Check
+    cmd_list = ["python", script]
+    std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=script_dir)
+    assert return_code != 0
+    assert std_err != ""
+
 
 @pytest.mark.parametrize("test_case_dir, inventory_check", TEST_CASES)
 def test_runner_collateral(test_case_dir, inventory_check):
@@ -49,19 +72,22 @@ def test_runner_collateral(test_case_dir, inventory_check):
     script_dir = path_obj.parents[0]
 
     # Inventory Checks
-    nornir_inventory = gen_inventory_dict(script_dir)
-    nr = InitNornir(inventory=nornir_inventory, logging=NORNIR_LOGGING)
-    assert isinstance(nr, nornir.core.Nornir)
-    assert isinstance(nr.inventory.hosts, nornir.core.inventory.Hosts)
-    if inventory_check == "all":
-        assert nr.inventory.hosts
-        assert nr.inventory.groups
-        assert nr.inventory.defaults
-    elif inventory_check == "hosts":
-        assert nr.inventory.hosts
-    elif inventory_check == "hosts-groups":
-        assert nr.inventory.hosts
-        assert nr.inventory.groups
+    if inventory_check is None:
+        pass
+    else:
+        nornir_inventory = gen_inventory_dict(script_dir)
+        nr = InitNornir(inventory=nornir_inventory, logging=NORNIR_LOGGING)
+        assert isinstance(nr, nornir.core.Nornir)
+        assert isinstance(nr.inventory.hosts, nornir.core.inventory.Hosts)
+        if inventory_check == "all":
+            assert nr.inventory.hosts
+            assert nr.inventory.groups
+            assert nr.inventory.defaults
+        elif inventory_check == "hosts":
+            assert nr.inventory.hosts
+        elif inventory_check == "hosts-groups":
+            assert nr.inventory.hosts
+            assert nr.inventory.groups
 
     # Script Check
     cmd_list = ["python", script]
