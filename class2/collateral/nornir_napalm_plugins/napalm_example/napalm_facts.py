@@ -1,4 +1,5 @@
 import os
+from rich import print
 from nornir import InitNornir
 from nornir_napalm.plugins.tasks import napalm_get
 
