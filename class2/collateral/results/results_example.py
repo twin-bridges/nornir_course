@@ -1,4 +1,4 @@
-import ipdb
+import ipdb  # noqa
 from nornir import InitNornir
 
 
@@ -12,7 +12,7 @@ def main():
     mulresult = aggresult["localhost2"]
     result = mulresult[0]
     print(result)
-    ipdb.set_trace()
+    # ipdb.set_trace()
 
 
 if __name__ == "__main__":
