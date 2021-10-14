@@ -1,11 +1,12 @@
-import ipdb
+"""This code will fail due to missing hosts.yaml file."""
+import pdbr
 from nornir import InitNornir
 
 
 def main():
     nr = InitNornir()
     print(nr)
-    ipdb.set_trace()
+    pdbr.set_trace()
 
 
 if __name__ == "__main__":

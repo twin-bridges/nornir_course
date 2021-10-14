@@ -1,11 +1,12 @@
-import ipdb
+import pdbr # noqa
 from nornir import InitNornir
 
 
 def main():
     nr = InitNornir(config_file="config.yaml")
     print(nr)
-    ipdb.set_trace()
+    print(nr.inventory.hosts)
+    # pdbr.set_trace()
 
 
 if __name__ == "__main__":
