@@ -1,10 +1,10 @@
+import ipdb  # noqa
+from rich import print
 from nornir import InitNornir
 from nornir_netmiko import netmiko_send_command
 from nornir.core.filter import F
-from pprint import pprint
 
 nr = InitNornir(config_file="config.yaml")
-# import ipdb
 # ipdb.set_trace()
 ios = nr.filter(F(groups__contains="ios"))
 results = ios.run(
@@ -12,5 +12,5 @@ results = ios.run(
 )
 
 print()
-pprint(results["cisco3"][0].result)
+print(results["cisco3"][0].result)
 print()
