@@ -108,6 +108,14 @@ nr = InitNornir(
 
 Similarly, the `NORNIR_CORE_NUM_WORKERS` has been removed and replaced by the `NORNIR_RUNNER_PLUGIN` and the `NORNIR_RUNNER_OPTIONS` environment variables.
 
+### Nornir Configuration Precedence Changed
+
+In Nornir Version3, the configuration precedence (from highest precedence to lowest precedence) is:
+
+```
+Inline Python > Configuration File > Environment Vars
+```
+
 ### Logging Setting is now 'log_file"
 
 Example, Nornir config.yaml change:
