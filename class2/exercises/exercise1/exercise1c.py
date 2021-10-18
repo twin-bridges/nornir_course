@@ -2,10 +2,10 @@ from nornir import InitNornir
 
 
 def main():
-    nr = InitNornir(config_file="config.yaml")
+    nr = InitNornir(config_file="config1c.yaml")
 
     # New Nornir 3.x format
-    # Environment variable "NORNIR_CORE_NUM_WORKERS" deprecated in Nornir 3.x
+    # export NORNIR_RUNNER_OPTIONS='{"num_workers": 100}' 
     workers = nr.config.runner.options
     print(f"\nNumber of workers: {workers['num_workers']}\n")
 

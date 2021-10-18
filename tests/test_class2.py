@@ -46,6 +46,9 @@ TEST_CASES = [
 
 TEST_CASES_EXPECTED_FAIL = [
     ("../class2/collateral/configuration_options/base_example.py", None), 
+    (
+        "../class2/collateral/failed_tasks/raise_on_error.py", None
+    ),
 ]
 
 @pytest.mark.parametrize("test_case_dir, inventory_check", TEST_CASES_EXPECTED_FAIL)
@@ -120,8 +123,8 @@ def test_class2_ex1b():
         config_file=f"{base_path}/config.yaml",
     )
 
-    workers = nr.config.runner.options
-    assert workers["num_workers"] == 5
+    options = nr.config.runner.options
+    assert options["num_workers"] == 5
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
     assert "5" in std_out
@@ -136,16 +139,15 @@ def test_class2_ex1c():
     nr = InitNornir(
         inventory=nornir_inventory,
         logging=NORNIR_LOGGING,
-        config_file=f"{base_path}/config.yaml",
+        config_file=f"{base_path}/config1c.yaml",
     )
-    workers = nr.config.runner.options
-    assert workers["num_workers"] == 5
-    # os.environ["NORNIR_CORE_NUM_WORKERS"] = "10"
+    assert nr.config.runner.options == {}
+    os.environ["NORNIR_RUNNER_OPTIONS"] = '{"num_workers": 100}'
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
-    assert "5" in std_out
+    assert "100" in std_out
     assert std_err == ""
-    # del os.environ["NORNIR_CORE_NUM_WORKERS"]
+    del os.environ["NORNIR_RUNNER_OPTIONS"]
 
 
 def test_class2_ex1d():
@@ -158,8 +160,8 @@ def test_class2_ex1d():
         logging=NORNIR_LOGGING,
         config_file=f"{base_path}/config.yaml",
     )
-    workers = nr.config.runner.options
-    assert workers["num_workers"] == 5
+    options = nr.config.runner.options
+    assert options["num_workers"] == 5
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
     assert "15" in std_out
