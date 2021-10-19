@@ -238,30 +238,12 @@ def test_class2_ex4():
     os.environ["PYTHONWARNINGS"] = "ignore::Warning"
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
-    assert (
-        "cisco3, Gateway: {'interface': 'GigabitEthernet0/0/0', 'mac': '00:62:EC:29:70"
-        in std_out
-    )
-    assert (
-        "cisco4, Gateway: {'interface': 'GigabitEthernet0/0/0', 'mac': '00:62:EC:29:70:"
-        in std_out
-    )
-    assert (
-        "arista1, Gateway: {'interface': 'Vlan1, Ethernet1', 'mac': '00:62:EC:29:70:FE"
-        in std_out
-    )
-    assert (
-        "arista2, Gateway: {'interface': 'Vlan1, Ethernet1', 'mac': '00:62:EC:29:70:FE"
-        in std_out
-    )
-    assert (
-        "arista3, Gateway: {'interface': 'Vlan1, Ethernet1', 'mac': '00:62:EC:29:70:FE"
-        in std_out
-    )
-    assert (
-        "arista4, Gateway: {'interface': 'Vlan1, Ethernet1', 'mac': '00:62:EC:29:70:FE"
-        in std_out
-    )
+    assert "cisco3, Gateway: {'interface': 'GigabitEthernet0/0/0'" in std_out
+    assert "cisco4, Gateway: {'interface': 'GigabitEthernet0/0/0'" in std_out
+    assert "arista1, Gateway: {'interface': 'Vlan1, Ethernet1'" in std_out
+    assert "arista2, Gateway: {'interface': 'Vlan1, Ethernet1'" in std_out
+    assert "arista3, Gateway: {'interface': 'Vlan1, Ethernet1'" in std_out
+    assert "arista4, Gateway: {'interface': 'Vlan1, Ethernet1'" in std_out
     assert std_err == ""
 
 
