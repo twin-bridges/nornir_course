@@ -1,2 +1,2 @@
-export NORNIR_INVENTORY_PLUGIN="nornir.plugins.inventory.simple.SimpleInventory"
+export NORNIR_INVENTORY_PLUGIN="SimpleInventory"
 export NORNIR_INVENTORY_OPTIONS='{"host_file": "inventory.yaml"}'
