@@ -45,11 +45,10 @@ TEST_CASES = [
 ]
 
 TEST_CASES_EXPECTED_FAIL = [
-    ("../class2/collateral/configuration_options/base_example.py", None), 
-    (
-        "../class2/collateral/failed_tasks/raise_on_error.py", None
-    ),
+    ("../class2/collateral/configuration_options/base_example.py", None),
+    ("../class2/collateral/failed_tasks/raise_on_error.py", None),
 ]
+
 
 @pytest.mark.parametrize("test_case_dir, inventory_check", TEST_CASES_EXPECTED_FAIL)
 def test_runner_collateral_fail(test_case_dir, inventory_check):
