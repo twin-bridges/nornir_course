@@ -14,7 +14,9 @@ TEST_CASES = [
     ("../class3/collateral/netmiko_textfsm/test_tfsm.py", None),
     ("../class3/collateral/inventory_preference/inv_pref.py", "all"),
     ("../class3/collateral/inventory_filtering/filtering.py", "all"),
+    ("../class3/collateral/resolution_and_preference_extras/filtering.py", None),
     ("../class3/collateral/napalm_getters/getters.py", "all"),
+    ("../class3/collateral/nornir_pdb/nr_test", None)
 ]
 
 
