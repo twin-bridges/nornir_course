@@ -13,19 +13,19 @@ from utilities import gen_inventory_dict
 NORNIR_LOGGING = {"enabled": False}
 
 TEST_CASES = [
-    ("../class4/collateral/netmiko_config/test_cfg1.py", None),
-    ("../class4/collateral/netmiko_config/test_cfg2.py", None),
-    ("../class4/collateral/netmiko_config/test_cfg3.py", None),
-    ("../class4/collateral/netmiko_config/cfg_cleanup.py", None),
-    ("../class4/collateral/netmiko_file_copy/test_copy1.py", None),
-    ("../class4/collateral/netmiko_file_copy/test_copy2.py", None),
-    ("../class4/collateral/netmiko_file_copy/test_copy3.py", None),
-    ("../class4/collateral/netmiko_file_copy/test_get.py", None),
-    ("../class4/collateral/napalm_configure/napalm_configure.py", None),
     ("../class4/collateral/custom_tasks_and_results/custom_tasks_p1.py", None),
     ("../class4/collateral/custom_tasks_and_results/custom_tasks_p2.py", None),
     ("../class4/collateral/custom_tasks_and_results/custom_tasks_p3.py", None),
     ("../class4/collateral/custom_tasks_and_results/custom_tasks_p4.py", None),
+    ("../class4/collateral/netmiko_file_copy/test_copy1.py", None),
+    ("../class4/collateral/netmiko_file_copy/test_copy2.py", None),
+    ("../class4/collateral/netmiko_file_copy/test_copy3.py", None),
+    ("../class4/collateral/netmiko_file_copy/test_get.py", None),
+    ("../class4/collateral/netmiko_config/test_cfg1.py", None),
+    ("../class4/collateral/netmiko_config/test_cfg2.py", None),
+    ("../class4/collateral/netmiko_config/test_cfg3.py", None),
+    ("../class4/collateral/netmiko_config/cfg_cleanup.py", None),
+    ("../class4/collateral/napalm_configure/napalm_configure.py", None),
 ]
 
 

@@ -22,6 +22,9 @@ def main():
     arista1 = nr.filter(name="arista1")
     arista2 = nr.filter(name="arista2")
 
+    # import pdbr
+    # pdbr.set_trace()
+
     result = arista1.run(task=napalm_configure, configuration=arista1_loopback)
     print_result(result)
 
@@ -29,10 +32,8 @@ def main():
     print_result(result)
 
     # Commenting out the "failure" test
-    """
-    result = arista1.run(task=napalm_configure, configuration=test_loopback)
-    print_result(result)
-    """
+    # result = arista1.run(task=napalm_configure, configuration=test_loopback)
+    # print_result(result)
 
     result = arista2.run(
         task=napalm_configure, configuration=arista2_loopback, dry_run=False
