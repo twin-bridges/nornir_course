@@ -15,7 +15,7 @@ def my_task(task):
 
 def new_task(task):
     result = "this task succeeded"
-    return Result(host=task.host, result=result, failed=True, changed=True)
+    return Result(host=task.host, result=result, failed=False, changed=True)
 
 
 def main():
@@ -25,8 +25,8 @@ def main():
     nr = nr.filter(name="arista1")
     result = nr.run(task=new_task)
 
-    # import ipdb
-    # ipdb.set_trace()
+    # import pdbr
+    # pdbr.set_trace()
     print_result(result)
 
 

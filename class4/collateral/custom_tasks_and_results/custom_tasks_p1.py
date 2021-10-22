@@ -2,8 +2,8 @@ from nornir import InitNornir
 
 
 def my_task(task):
-    # import ipdb
-    # ipdb.set_trace()
+    # import pdbr
+    # pdbr.set_trace()
     print("Hello, World!")
 
 

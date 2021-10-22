@@ -4,10 +4,10 @@ from nornir_netmiko import netmiko_send_command
 
 
 def my_task(task):
-    if task.host.groups[0] == "ios":
+    if task.host.groups[0].name == "ios":
         cmd = "show run"
         task.run(task=netmiko_send_command, command_string=cmd)
-    elif task.host.groups[0] == "junos":
+    elif task.host.groups[0].name == "junos":
         cmd = "show configuration"
         task.run(task=netmiko_send_command, command_string=cmd)
 

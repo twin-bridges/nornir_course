@@ -6,11 +6,11 @@ from nornir_netmiko import netmiko_send_command
 
 def my_task(task):
     changed = False
-    if task.host.groups[0] == "ios":
+    if task.host.groups[0].name == "ios":
         cmd = "show run | i hostname"
         task.run(task=netmiko_send_command, command_string=cmd)
         changed = True
-    elif task.host.groups[0] == "junos":
+    elif task.host.groups[0].name == "junos":
         cmd = "show configuration system host-name "
         task.run(task=netmiko_send_command, command_string=cmd)
         changed = True
@@ -27,8 +27,8 @@ def main():
     result = nr.run(task=my_task)
     print_result(result)
 
-    # import ipdb
-    # ipdb.set_trace()
+    # import pdbr
+    # pdbr.set_trace()
 
 
 if __name__ == "__main__":
