@@ -4,7 +4,7 @@ from nornir_netmiko import netmiko_file_transfer
 
 def file_copy(task):
     # Obtain the group_name
-    group_name = task.host.groups[0]
+    group_name = task.host.groups[0].name
 
     # Set the filename based on the platform (ios, eos, et cetera)
     base_file = "test_file1.txt"
