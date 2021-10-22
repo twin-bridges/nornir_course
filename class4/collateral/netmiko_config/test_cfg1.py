@@ -10,7 +10,7 @@ if __name__ == "__main__":
     # Direct inline configs
     commands = ["interface loopback90", "ip address 172.31.90.1/32"]
 
-    # import ipdb
-    # ipdb.set_trace()
+    # import pdbr
+    # pdbr.set_trace()
     results = nr.run(task=netmiko_send_config, config_commands=commands)
     print(results["nxos1"][0].result)

@@ -7,7 +7,7 @@ def custom_config(task):
 
     print(task.host)
     hostname = task.host.name
-    groupname = task.host.groups[0]
+    groupname = task.host.groups[0].name
 
     # From external file
     file_name = f"{groupname}/{hostname}-cleanup.txt"

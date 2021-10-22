@@ -7,11 +7,11 @@ def custom_config(task):
 
     print(task.host)
     hostname = task.host.name
-    groupname = task.host.groups[0]
+    groupname = task.host.groups[0].name
 
     # From external file
-    # import ipdb
-    # ipdb.set_trace()
+    # import pdbr
+    # pdbr.set_trace()
     file_name = f"{groupname}/{hostname}-intf.txt"
     print(file_name)
     results = task.run(task=netmiko_send_config, config_file=file_name)

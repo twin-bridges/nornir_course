@@ -4,8 +4,8 @@ from nornir_netmiko import netmiko_send_config
 
 def custom_config(task):
 
-    # import ipdb
-    # ipdb.set_trace()
+    # import pdbr
+    # pdbr.set_trace()
     print(task.host)
 
     # To force enable mode
