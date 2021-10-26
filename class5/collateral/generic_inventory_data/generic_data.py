@@ -6,8 +6,8 @@ def main():
     nr = nr.filter(name="cisco3")
     cisco3 = nr.inventory.hosts["cisco3"]
     print(cisco3)
-    # import ipdb
-    # ipdb.set_trace()
+    # import pdbr
+    # pdbr.set_trace()
 
 
 if __name__ == "__main__":
