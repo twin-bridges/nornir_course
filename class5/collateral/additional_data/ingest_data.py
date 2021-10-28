@@ -1,10 +1,12 @@
 from nornir import InitNornir
 from nornir_utils.plugins.functions import print_result
 from nornir.core.filter import F
-from nornir_utils.plugins.tasks.data import load_yaml
+from nornir_utils.plugins.tasks.data import load_yaml, load_json
 
 
 def custom_task(task):
+    # injson = task.run(task=load_json, file=f"nxos/{task.host.name}.json")
+    # print(injson.result)
     inyaml = task.run(task=load_yaml, file=f"nxos/{task.host.name}.yaml")
     print(inyaml.result)
 

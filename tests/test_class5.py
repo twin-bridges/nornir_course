@@ -10,11 +10,11 @@ from nornir import InitNornir
 NORNIR_LOGGING = {"enabled": False}
 
 TEST_CASES = [
-    ("../class5/collateral/generic_data/generic_data.py", "all"),
-    ("../class5/collateral/connection_options/conn_options.py", "all"),
-    ("../class5/collateral/load_data/ingest_data.py", None),
-    ("../class5/collateral/jinja2_render/nornir_jinja2_test.py", None),
-    ("../class5/collateral/jinja2_config/nornir_jinja2_test.py", None),
+#    ("../class5/collateral/generic_inventory_data/generic_data.py", "all"),
+#    ("../class5/collateral/connection_options/conn_options.py", "all"),
+    ("../class5/collateral/additional_data/ingest_data.py", None),
+#    ("../class5/collateral/jinja2_render/nornir_jinja2_test.py", None),
+#    ("../class5/collateral/jinja2_config/nornir_jinja2_test.py", None),
 ]
 
 
