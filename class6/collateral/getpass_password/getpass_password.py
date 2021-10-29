@@ -4,6 +4,7 @@ from nornir import InitNornir
 from nornir_netmiko import netmiko_send_command
 
 
+# The environment variable is for automated testing (else use getpass())
 PASSWORD = os.getenv("NORNIR_PASSWORD") if os.getenv("NORNIR_PASSWORD") else getpass()
 
 

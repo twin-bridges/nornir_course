@@ -35,6 +35,7 @@ def main():
     nr = nr.filter(name="arista1")
     for hostname, host_obj in nr.inventory.hosts.items():
         host_obj.password = load_vaulted_pass(vault_password_file="vaultpass.sh")
+        # host_obj.password = load_vaulted_pass(vault_password="****")
     agg_result = nr.run(
         task=netmiko_send_command, command_string="show run | i hostname"
     )
