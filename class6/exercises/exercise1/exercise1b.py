@@ -4,7 +4,6 @@ from nornir_netmiko import netmiko_send_command
 
 
 def send_command(task):
-    task.run(task=netmiko_send_command, command_string="set cli complete-on-space off")
     mul_result = task.run(task=netmiko_send_command, command_string="show ip interface")
     if "syntax error" in mul_result.result:
         raise ValueError("Invalid Junos command")

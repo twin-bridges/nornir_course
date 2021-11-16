@@ -4,7 +4,6 @@ from nornir_netmiko import netmiko_send_command
 
 
 def send_command(task):
-    task.run(task=netmiko_send_command, command_string="set cli complete-on-space off")
     task.run(task=netmiko_send_command, command_string="show ip interface")
 
 

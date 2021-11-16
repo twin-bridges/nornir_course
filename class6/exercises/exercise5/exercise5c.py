@@ -14,7 +14,7 @@ from nornir_netmiko import netmiko_send_command
 BAD_PASSWORD = "bogus"
 # Encrypted YAML file
 VAULT_FILE = "vaulted_password.yaml"
-VAULT_PASSWORD = os.environ.get("NORNIR_VAULT_PASSWORD", "bogus")
+VAULT_PASSWORD = os.environ["NORNIR_VAULT_PASSWORD"]
 
 
 def decrypt_vault(
@@ -59,10 +59,6 @@ def send_command(task):
                 filename=VAULT_FILE, vault_password=VAULT_PASSWORD
             )
             task.host.password = vault_contents["password"]
-            try:
-                task.host.close_connections()
-            except ValueError:
-                pass
             task.run(task=netmiko_send_command, command_string=cmd)
         else:
             return f"Unhandled exception: {e}"

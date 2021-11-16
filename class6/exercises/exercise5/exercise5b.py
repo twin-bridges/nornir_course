@@ -22,13 +22,7 @@ def send_command(task):
 
             # For failed devices reset the password to the correct value using environment var
             task.host.password = os.environ["NORNIR_PASSWORD"]
-
-            # Force Nornir to close stale connections
-            try:
-                task.host.close_connections()
-            except ValueError:
-                pass
-
+            # Try again (with the correct password)
             task.run(task=netmiko_send_command, command_string=cmd)
         else:
             return f"Unhandled exception: {e}"
