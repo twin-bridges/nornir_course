@@ -11,26 +11,26 @@ from nornir import InitNornir
 NORNIR_LOGGING = {"enabled": False}
 
 TEST_CASES = [
-    ("../class6/collateral/enable_secret/enable_secret.py", None),
-    ("../class6/collateral/getpass_secret/getpass_secrets.py", None),
-    ("../class6/collateral/getpass_password/getpass_password.py", None),
-    ("../class6/collateral/environment_variables/env_var.py", None),
-    ("../class6/collateral/ansible_vault/ans_vault.py", None),
-    ("../class6/collateral/troubleshooting/test_netmiko_pdb.py", None),
-    ("../class6/collateral/troubleshooting/test_napalm_slog.py", None),
-    ("../class6/collateral/troubleshooting/test_netmiko_slog1.py", None),
-    ("../class6/collateral/troubleshooting/test_netmiko_slog2.py", None),
+#    ("../class6/collateral/failed_tasks/failed_creds.py", None),
+#    ("../class6/collateral/getpass_password/getpass_password.py", None),
+#    ("../class6/collateral/ansible_vault/ans_vault.py", None),
+#    ("../class6/collateral/enable_secret/enable_secret.py", None),
+#    ("../class6/collateral/getpass_secret/getpass_secrets.py", None),
+#    ("../class6/collateral/environment_variables/env_var.py", None),
+    ("../class6/collateral/logging/test_errors.py", None),
+    ("../class6/collateral/logging/test_logging.py", None),
     ("../class6/collateral/logging/test_logging2.py", None),
+#    ("../class6/collateral/troubleshooting/test_netmiko_pdb.py", None),
+#    ("../class6/collateral/troubleshooting/test_napalm_slog.py", None),
+#    ("../class6/collateral/troubleshooting/test_netmiko_slog1.py", None),
+#    ("../class6/collateral/troubleshooting/test_netmiko_slog2.py", None),
 ]
 
 TEST_CASES_STDIN = []
 
 TEST_CASES_EXPECTED_FAIL = [
-    ("../class6/collateral/logging/test_errors.py", None),
-    ("../class6/collateral/logging/test_logging.py", None),
-    ("../class6/collateral/failed_tasks_p2/failed_creds.py", None),
-    ("../class6/collateral/failed_tasks_p2/failed_netmiko.py", None),
-    ("../class6/collateral/failed_tasks_p2/failed_j2.py", None),
+#    ("../class6/collateral/failed_tasks/failed_netmiko.py", None),
+#    ("../class6/collateral/failed_tasks/failed_j2.py", None),
 ]
 
 
