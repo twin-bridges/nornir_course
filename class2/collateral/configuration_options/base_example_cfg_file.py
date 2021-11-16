@@ -1,4 +1,4 @@
-import pdbr # noqa
+import pdbr  # noqa
 from nornir import InitNornir
 
 

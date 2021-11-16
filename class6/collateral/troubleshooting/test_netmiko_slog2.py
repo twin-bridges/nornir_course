@@ -1,4 +1,4 @@
-import pdbr # noqa
+import pdbr  # noqa
 from nornir import InitNornir
 from nornir_netmiko import netmiko_send_command
 

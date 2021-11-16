@@ -1,4 +1,4 @@
-import ipdb     # noqa
+import ipdb  # noqa
 from nornir import InitNornir
 from nornir.core.filter import F
 from nornir_napalm.plugins.tasks import napalm_get
