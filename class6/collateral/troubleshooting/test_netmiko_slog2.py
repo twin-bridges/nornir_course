@@ -1,10 +1,11 @@
+import pdbr # noqa
 from nornir import InitNornir
 from nornir_netmiko import netmiko_send_command
 
 
 def uptime(task):
 
-    # import ipdb; ipdb.set_trace()
+    # pdbr.set_trace()
 
     # Dynamically set the session_log to be unique per host
     filename = f"{task.host}-output.txt"
@@ -25,7 +26,7 @@ def uptime(task):
 
 
 def main():
-    nr = InitNornir(config_file="config.yaml")
+    nr = InitNornir(config_file="config_serial.yaml")
     agg_result = nr.run(task=uptime)
     for hostname, multi_result in agg_result.items():
         print()

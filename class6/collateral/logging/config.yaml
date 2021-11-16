@@ -2,7 +2,7 @@ logging:
   enabled: True
   level: INFO
   log_file: output.txt
-  to_console: True
+  to_console: False
 inventory:
   plugin: SimpleInventory
   options:

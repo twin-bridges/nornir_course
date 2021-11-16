@@ -4,9 +4,6 @@ from nornir.core.exceptions import NornirSubTaskError
 
 
 def netmiko_configure(task):
-    # Note, you can control whether the task.run exception shows up on standard error
-    # by enabling/disabling logging. If logging is enabled, it will show up in the
-    # log, but not on std_err.
     try:
         print(task.host["loopback_config"])
         task.run(task=netmiko_send_config, config_commands=["interface lopback 123"])

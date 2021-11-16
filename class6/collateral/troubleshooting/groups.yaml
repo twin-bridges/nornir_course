@@ -5,6 +5,8 @@ ios:
     netmiko:
       platform: cisco_ios
       extras: {}
+      # extras:
+      #  session_log: my_output.txt
     napalm:
       extras:
         optional_args: {}

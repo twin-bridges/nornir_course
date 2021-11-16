@@ -12,8 +12,8 @@ def uptime(task):
     host = task.host
     platform = host.platform
     cmd = cmd_mapper[platform]
-    # import ipdb
-    # ipdb.set_trace()
+    # import pdbr
+    # pdbr.set_trace()
     multi_result = task.run(task=netmiko_send_command, command_string=cmd)
     print(multi_result)
     print(multi_result)
