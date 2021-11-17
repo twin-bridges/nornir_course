@@ -1,5 +1,6 @@
 inventory:
   plugin: SimpleInventory
+  transform_function: transform_func
   options:
     host_file: "~/nornir_inventory/hosts.yaml"
     group_file: "~/nornir_inventory/groups.yaml"
@@ -7,3 +8,4 @@ inventory:
 
 logging:
   enabled: False
+

@@ -2,6 +2,8 @@ inventory:
   plugin: AnsibleInventory
   options:
     hostsfile: "inventory.yaml"
+  transform_function: transform_func
+
 
 logging:
   enabled: False
