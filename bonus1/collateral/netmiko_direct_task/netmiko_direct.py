@@ -1,3 +1,4 @@
+import pdbr  # noqa
 from nornir import InitNornir
 from nornir.core.filter import F
 from nornir_utils.plugins.functions import print_result  # noqa
@@ -17,7 +18,8 @@ def netmiko_direct(task):
 
 
 if __name__ == "__main__":
-    nr = InitNornir(config_file="config.yaml")
-    ios_filt = F(groups__contains="ios")
-    nr = nr.filter(ios_filt)
-    nr.run(task=netmiko_direct, num_workers=1)
+    # Use a context-manager so connections are gracefully closed
+    with InitNornir(config_file="config.yaml") as nr:
+        ios_filt = F(groups__contains="ios")
+        nr_ios = nr.filter(ios_filt)
+        nr_ios.run(task=netmiko_direct)
