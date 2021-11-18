@@ -12,6 +12,7 @@ def netmiko_direct(task):
 
 
 if __name__ == "__main__":
-    nr = InitNornir(config_file="config.yaml")
-    nr = nr.filter(name="cisco4")
-    nr.run(task=netmiko_direct)
+    # Use a context-manager so connections are gracefully closed
+    with InitNornir(config_file="config.yaml") as nr:
+        nr_cisco4 = nr.filter(name="cisco4")
+        nr_cisco4.run(task=netmiko_direct)

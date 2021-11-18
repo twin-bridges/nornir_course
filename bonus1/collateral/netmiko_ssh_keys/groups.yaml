@@ -4,9 +4,10 @@ ios:
   connection_options:
     netmiko:
       platform: cisco_ios
+      username: student1
       extras:
         use_keys: True
-        key_file: "/home/kbyers/.ssh/test_rsa"
+        key_file: "/home/ktbyers/.ssh/student_key"
     napalm:
       extras:
         optional_args: {}
