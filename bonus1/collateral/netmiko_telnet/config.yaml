@@ -1,5 +1,6 @@
 logging:
-  enabled: True
+  enabled: False
+
 inventory:
   plugin: SimpleInventory
   options:

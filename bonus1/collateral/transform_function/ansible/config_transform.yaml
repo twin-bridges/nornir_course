@@ -4,6 +4,5 @@ inventory:
     hostsfile: "inventory.yaml"
   transform_function: transform_func
 
-
 logging:
   enabled: False

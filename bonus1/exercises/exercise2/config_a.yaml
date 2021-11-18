@@ -2,7 +2,7 @@ inventory:
   plugin: AnsibleInventory
   options:
     hostsfile: "ansible-hosts"
-  #transform_function: exercise2a.transform_ansible_inventory
+  # transform_function: exercise2a.transform_ansible_inventory
 
 logging:
   enabled: False
