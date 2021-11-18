@@ -1,3 +1,4 @@
+import time
 from nornir import InitNornir
 from nornir.core.filter import F
 
@@ -80,12 +81,17 @@ Verified BGP Route Count...OK
 
 
 if __name__ == "__main__":
-    nr = InitNornir(config_file="config.yaml")
-    eos_filter = F(groups__contains="eos")
-    eos_devices = nr.filter(eos_filter)
-    result = eos_devices.run(task=render_configs, num_workers=10)
-    print_result(result)
-    result = eos_devices.run(task=napalm_merge_cfg, num_workers=10)
-    print_result(result)
-    result = eos_devices.run(task=verify_bgp, num_workers=10)
-    print_result(result)
+    with InitNornir(config_file="config.yaml") as nr:
+        eos_filter = F(groups__contains="eos")
+        eos_devices = nr.filter(eos_filter)
+        result = eos_devices.run(task=render_configs)
+        print_result(result)
+        result = eos_devices.run(task=napalm_merge_cfg)
+        print_result(result)
+        # BGP might take some time to reach Established State
+        print("-" * 80)
+        print("Sleeping 60 Seconds...")
+        print("-" * 80)
+        time.sleep(60)
+        result = eos_devices.run(task=verify_bgp)
+        print_result(result)
