@@ -1,3 +1,4 @@
+import pdbr  # noqa
 from nornir import InitNornir
 
 
@@ -13,15 +14,13 @@ def netmiko_prompting(task):
     # Manually create Netmiko connection
     net_connect = task.host.get_connection("netmiko", task.nornir.config)
 
-    filename = "cisco.txt"
+    filename = "exercise1.txt"
     del_cmd = f"del flash:/{filename}"
 
     cmd_list = [del_cmd, "\n", "y"]
     output = ""
 
-    import ipdb
-
-    ipdb.set_trace()
+    # pdbr.set_trace()
     for cmd in cmd_list:
         # Use timing mode
         output += net_connect.send_command_timing(
@@ -38,6 +37,7 @@ def netmiko_prompting(task):
 
 
 if __name__ == "__main__":
-    nr = InitNornir(config_file="config.yaml")
-    nr = nr.filter(name="cisco4")
-    nr.run(task=netmiko_prompting, num_workers=1)
+    # Use a context-manager so connections are gracefully closed
+    with InitNornir(config_file="config.yaml") as nr:
+        cisco4_nr = nr.filter(name="cisco4")
+        cisco4_nr.run(task=netmiko_prompting)
