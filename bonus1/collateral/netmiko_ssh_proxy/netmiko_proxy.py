@@ -1,3 +1,8 @@
+"""
+In order for this script to work properly:
+1. ~/.ssh/config needs setup correctly
+2. SSH trust needs established to the intermediate server.
+"""
 from nornir import InitNornir
 
 
@@ -12,6 +17,7 @@ def netmiko_direct(task):
 
 
 if __name__ == "__main__":
-    nr = InitNornir(config_file="config.yaml")
-    nr = nr.filter(name="cisco4")
-    nr.run(task=netmiko_direct)
+    # Use a context-manager so connections are gracefully closed
+    with InitNornir(config_file="config.yaml") as nr:
+        nr = nr.filter(name="cisco4")
+        nr.run(task=netmiko_direct)

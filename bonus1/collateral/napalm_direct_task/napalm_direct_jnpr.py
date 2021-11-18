@@ -15,7 +15,7 @@ def direct(task):
 
 
 if __name__ == "__main__":
-    nr = InitNornir(config_file="config.yaml")
-    filt = F(groups__contains="junos")
-    nr = nr.filter(filt)
-    nr.run(task=direct, num_workers=1)
+    with InitNornir(config_file="config.yaml") as nr:
+        filt = F(groups__contains="junos")
+        nr = nr.filter(filt)
+        nr.run(task=direct)
