@@ -10,14 +10,14 @@ def netmiko_direct(task):
     host_obj = task.host
     net_connect = host_obj.get_connection("netmiko", task.nornir.config)
     print(net_connect.find_prompt())
-    pdbr.set_trace()
+    # pdbr.set_trace()
 
 
 def netmiko_direct2(task):
     host_obj = task.host
     net_connect = host_obj.get_connection("netmiko", task.nornir.config)
     print(net_connect.find_prompt())
-    pdbr.set_trace()
+    # pdbr.set_trace()
 
 
 if __name__ == "__main__":
@@ -27,5 +27,5 @@ if __name__ == "__main__":
         nr_ios.run(task=netmiko_direct)
         nr_ios.run(task=netmiko_direct2)
 
-    pdbr.set_trace()
+    # pdbr.set_trace()
     print("Outside context manager")

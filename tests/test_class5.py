@@ -15,6 +15,10 @@ TEST_CASES = [
     ("../class5/collateral/additional_data/ingest_data.py", None),
     ("../class5/collateral/jinja2_render/nornir_jinja2_test.py", None),
     ("../class5/collateral/jinja2_config/nornir_jinja2_test.py", None),
+    ("../class5/collateral/closing_conns/conn_close1.py", None),
+    ("../class5/collateral/closing_conns/conn_close2.py", None),
+    ("../class5/collateral/closing_conns/conn_close3.py", None),
+    ("../class5/collateral/closing_conns/conn_close4.py", None),
 ]
 
 

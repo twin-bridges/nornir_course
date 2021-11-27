@@ -18,7 +18,7 @@ if __name__ == "__main__":
     ios_filt = F(groups__contains="ios")
     nr = nr.filter(ios_filt)
     nr.run(task=netmiko_direct)
-    pdbr.set_trace()
+    # pdbr.set_trace()
     print(nr.inventory.hosts["cisco3"].connections)
     nr.close_connections()
     print(nr.inventory.hosts["cisco3"].connections)

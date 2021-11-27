@@ -18,11 +18,11 @@ if __name__ == "__main__":
         ios_filt = F(groups__contains="ios")
         nr_ios = nr.filter(ios_filt)
         nr_ios.run(task=netmiko_direct)
-        pdbr.set_trace()
+        # pdbr.set_trace()
         print(nr_ios.inventory.hosts["cisco3"].connections)
         print(nr_ios.inventory.hosts["cisco4"].connections)
 
-    pdbr.set_trace()
+    # pdbr.set_trace()
     print("Outside context manager")
     print(nr_ios.inventory.hosts["cisco3"].connections)
     print(nr_ios.inventory.hosts["cisco4"].connections)
