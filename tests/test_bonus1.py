@@ -12,18 +12,21 @@ from nornir import InitNornir
 NORNIR_LOGGING = {"enabled": False}
 
 TEST_CASES = [
-    ("../bonus1/collateral/netmiko_napalm/bgp_project.py", None),
-    ("../bonus1/collateral/napalm_direct_task/napalm_direct_jnpr.py", None),
-    ("../bonus1/collateral/napalm_direct_task/napalm_direct_eapi.py", None),
+    ("../bonus1/collateral/ansible_inventory/ansible_inventory.py", None),
+    ("../bonus1/collateral/ansible_inventory/ansible_inventory2.py", None),
+    ("../bonus1/collateral/transform_function/simple/nornir_transform.py", None),
+    ("../bonus1/collateral/transform_function/simple/nornir_transform2.py", None),
+    ("../bonus1/collateral/transform_function/ansible/nornir_transform.py", None),
+    ("../bonus1/collateral/transform_function/ansible/nornir_transform2.py", None),
+    ("../bonus1/collateral/netmiko_direct_task/netmiko_direct.py", None),
     ("../bonus1/collateral/netmiko_prompting/netmiko_prompting.py", None),
     ("../bonus1/collateral/netmiko_telnet/netmiko_telnet.py", None),
-    ("../bonus1/collateral/netmiko_ssh_proxy/netmiko_proxy.py", None),
     ("../bonus1/collateral/netmiko_ssh_keys/netmiko_ssh_keys.py", None),
-    ("../bonus1/collateral/netmiko_direct_task/netmiko_direct.py", None),
+    ("../bonus1/collateral/netmiko_ssh_proxy/netmiko_proxy.py", None),
+    ("../bonus1/collateral/napalm_direct_task/napalm_direct_jnpr.py", None),
+    ("../bonus1/collateral/napalm_direct_task/napalm_direct_eapi.py", None),
     ("../bonus1/collateral/napalm_nxos_ssh/napalm_nxos.py", None),
-    ("../bonus1/collateral/transform_function/ansible/nornir_transform.py", None),
-    ("../bonus1/collateral/transform_function/simple/nornir_transform.py", None),
-    ("../bonus1/collateral/ansible_inventory/ansible_inventory.py", None),
+    ("../bonus1/collateral/netmiko_napalm/bgp_project.py", None),
 ]
 
 
