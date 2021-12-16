@@ -5,3 +5,5 @@ inventory:
     group_file: "~/nornir_inventory/groups.yaml"
     defaults_file: "~/nornir_inventory/defaults.yaml"
 
+logging:
+  enabled: False

@@ -18,10 +18,10 @@ def verify_napalm_nxos_ssh_connection(task):
 
 
 def main():
-    nr = InitNornir(config_file="config.yaml")
-    nr = nr.filter(name="nxos1")
-    agg_result = nr.run(task=verify_napalm_nxos_ssh_connection)
-    print_result(agg_result)
+    with InitNornir(config_file="config.yaml") as nr:
+        nr = nr.filter(name="nxos1")
+        agg_result = nr.run(task=verify_napalm_nxos_ssh_connection)
+        print_result(agg_result)
 
 
 if __name__ == "__main__":

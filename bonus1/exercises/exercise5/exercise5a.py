@@ -11,10 +11,10 @@ def get_checkpoint_file(task):
 
 
 def main():
-    nr = InitNornir(config_file="config.yaml")
-    nr = nr.filter(F(groups__contains="nxos"))
-    agg_result = nr.run(task=get_checkpoint_file)
-    print_result(agg_result)
+    with InitNornir(config_file="config.yaml") as nr:
+        nr = nr.filter(F(groups__contains="nxos"))
+        agg_result = nr.run(task=get_checkpoint_file)
+        print_result(agg_result)
 
 
 if __name__ == "__main__":
