@@ -10,6 +10,6 @@ def netmiko_direct(task):
 
 
 if __name__ == "__main__":
-    nr = InitNornir(config_file="config.yaml")
-    agg_result = nr.run(task=netmiko_direct)
-    print_result(agg_result)
+    with InitNornir(config_file="config.yaml") as nr:
+        agg_result = nr.run(task=netmiko_direct)
+        print_result(agg_result)

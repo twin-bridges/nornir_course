@@ -31,14 +31,14 @@ def transform_ansible_inventory(host):
 
 
 def main():
-    nr = InitNornir(config_file="config_b.yaml")
-    nr = nr.filter(F(groups__contains="nxos"))
+    with InitNornir(config_file="config_b.yaml") as nr:
+        nr = nr.filter(F(groups__contains="nxos"))
 
-    # Transform functions are overly complicated in 3.x...just do it yourself
-    for host in nr.inventory.hosts.values():
-        transform_ansible_inventory(host)
-    agg_result = nr.run(task=napalm_get, getters=["facts"])
-    print_result(agg_result)
+        # Transform functions are overly complicated in 3.x...just do it yourself
+        for host in nr.inventory.hosts.values():
+            transform_ansible_inventory(host)
+        agg_result = nr.run(task=napalm_get, getters=["facts"])
+        print_result(agg_result)
 
 
 if __name__ == "__main__":

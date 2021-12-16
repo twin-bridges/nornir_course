@@ -24,14 +24,14 @@ def transform_ansible_inventory(host):
 
 
 def main():
-    nr = InitNornir(config_file="config_a.yaml")
-    nr = nr.filter(~F(name__contains="localhost"))
+    with InitNornir(config_file="config_a.yaml") as nr:
+        nr = nr.filter(~F(name__contains="localhost"))
 
-    # Transform functions are overly complicated in 3.x...just do it yourself
-    for host in nr.inventory.hosts.values():
-        transform_ansible_inventory(host)
-    agg_result = nr.run(task=netmiko_send_command, command_string="show version")
-    print_result(agg_result)
+        # Transform functions are overly complicated in 3.x...just do it yourself
+        for host in nr.inventory.hosts.values():
+            transform_ansible_inventory(host)
+        agg_result = nr.run(task=netmiko_send_command, command_string="show version")
+        print_result(agg_result)
 
 
 if __name__ == "__main__":
