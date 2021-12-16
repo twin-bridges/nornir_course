@@ -84,7 +84,7 @@ def get_current_checkpoint(task):
     ].connection._get_checkpoint_file()
 
     # Lesson videos used the above syntax, the next two commented out lines are an alternative
-    # way to "grab" the underlying NAPALM connection that are maybe a bit easier to read!
+    # way to "grab" the underlying NAPALM connection that may be a bit easier to read.
     # napalm_conn = task.host.get_connection("napalm", task.nornir.config)
     # current_checkpoint = napalm_conn._get_checkpoint_file()
 

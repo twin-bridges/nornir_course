@@ -9,3 +9,5 @@ inventory:
 logging:
   enabled: False
 
+# runner:
+#  plugin: serial
