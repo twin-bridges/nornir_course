@@ -97,7 +97,7 @@ def test_class3_ex3():
         in std_out
     )
     assert "{'arista2': Host: arista2}" in std_out
-    assert "{'arista1': Host: arista1, 'arista3': Host: arista3}" in std_out
+    assert "{'arista1': Host: arista1}" in std_out
     assert std_err == ""
 
 

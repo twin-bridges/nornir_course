@@ -17,15 +17,19 @@ def main():
     print(union.inventory.hosts)
     print("-" * 20)
 
-    print("\nExercise 3c (WIFI password 'racecar')")
+    print("\nExercise 3c (WAN-role and WIFI password 'racecar')")
     print("-" * 20)
-    racecar = nr.filter(F(site_details__wifi_password__contains="racecar"))
+    racecar = nr.filter(
+        F(site_details__wifi_password__contains="racecar") & F(role="WAN")
+    )
     print(racecar.inventory.hosts)
     print("-" * 20)
 
-    print("\nExercise 3d (Not WIFI password 'racecar')")
+    print("\nExercise 3d (WAN-role and not WIFI password 'racecar')")
     print("-" * 20)
-    not_racecar = nr.filter(~F(site_details__wifi_password__contains="racecar"))
+    not_racecar = nr.filter(
+        ~F(site_details__wifi_password__contains="racecar") & F(role="WAN")
+    )
     print(not_racecar.inventory.hosts)
     print("-" * 20)
     print()
