@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+import re
 import pytest
 
 from nornir import InitNornir
@@ -170,7 +171,8 @@ def test_class4_ex3a():
         if host.startswith("arista"):
             assert f"{host}(config)#vlan 123" in std_out
         else:
-            assert f"{host}(config)# vlan 123" in std_out
+            pattern = rf"{host}.*config.*vlan 123"
+            assert re.search(pattern, std_out)
     assert std_err == ""
 
 
@@ -193,7 +195,8 @@ def test_class4_ex3b():
         if host.startswith("arista"):
             assert f"{host}(config)#vlan 123" in std_out
         else:
-            assert f"{host}(config)# vlan 123" in std_out
+            pattern = rf"{host}.*config.*vlan 123"
+            assert re.search(pattern, std_out)
     assert std_err == ""
 
 
@@ -216,7 +219,8 @@ def test_class4_ex3c():
         if host.startswith("arista"):
             assert f"{host}(config)#vlan 123" in std_out
         else:
-            assert f"{host}(config)# vlan 123" in std_out
+            pattern = rf"{host}.*config.*vlan 123"
+            assert re.search(pattern, std_out)
     assert std_err == ""
 
 
