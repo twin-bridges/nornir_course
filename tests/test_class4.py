@@ -237,8 +237,7 @@ def test_class4_ex4a():
 
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
-    assert std_out.count("+!\n+vlan 123\n+   name ntp_vlan") == 4
-    assert std_out.count("vlan 123\n  name ntp_vlan") == 2
+    assert std_out.count("name ntp_vlan") == 6
     assert std_err == ""
 
 
@@ -255,8 +254,7 @@ def test_class4_ex4b():
 
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
-    assert std_out.count("+!\n+vlan 123\n+   name ntp_vlan") == 4
-    assert std_out.count("vlan 123\n  name ntp_vlan") == 2
+    assert std_out.count("name ntp_vlan") == 6
     assert std_err == ""
 
 
