@@ -8,6 +8,7 @@ ios:
       extras:
         use_keys: True
         key_file: "~/.ssh/student_key"
+        disabled_algorithms: {'pubkeys': ['rsa-sha2-256', 'rsa-sha2-512']}
     napalm:
       extras:
         optional_args: {}

@@ -1,6 +1,6 @@
 import os
 import random
-from netmiko.ssh_exception import NetMikoAuthenticationException
+from netmiko import NetMikoAuthenticationException
 from nornir import InitNornir
 from nornir.core.exceptions import NornirSubTaskError
 from nornir_utils.plugins.functions import print_result
