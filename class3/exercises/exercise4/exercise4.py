@@ -30,7 +30,8 @@ def main():
             intf_name = intf_dict["port"]
             inner_dict = {}
             inner_dict["status"] = intf_dict["status"]
-            inner_dict["vlan"] = intf_dict["vlan"]
+            # ntc-templates recently changed tfsm output to "vlan_id" from "vlan" 2023-08-02
+            inner_dict["vlan"] = intf_dict["vlan_id"]
             combined_data[device_name][intf_name] = inner_dict
     pprint(combined_data)
     print("-" * 20)
