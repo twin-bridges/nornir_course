@@ -6,7 +6,7 @@ NBOX_TOKEN = os.environ.get("NETBOX_TOKEN", "sad, no token")
 
 
 def nbox_task(task):
-    print(task.host["site"])
+    print(task.host["site"]["name"])
 
 
 def main():
