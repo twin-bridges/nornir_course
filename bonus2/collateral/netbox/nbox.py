@@ -7,15 +7,13 @@ NBOX_TOKEN = os.environ.get("NETBOX_TOKEN", "sad, no token")
 
 def nbox_task(task):
     print(task.host["site"])
-    if task.host["site"] == "area52":
-        print("very sneaky switch!")
 
 
 def main():
     nr = InitNornir(
         config_file="config.yaml",
         inventory={
-            "plugin": "NBInventory",
+            "plugin": "NetBoxInventory2",
             "options": {
                 "nb_token": NBOX_TOKEN,
                 "nb_url": "https://netbox.lasthop.io",
