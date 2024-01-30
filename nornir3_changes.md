@@ -130,7 +130,7 @@ Certain things did not like the use of the use of the generic term `file`. Conse
 
 ### Group Filtering and Group .refs
 
-Nornir version 2.x had a been of an obscure aspect where there was a difference between accessing the group name as a string versus accessing the Nornir group. For example (this is from `Nornir 2.5.0`):
+Nornir version 2.x had an obscure aspect where there was a difference between accessing the group name as a string versus accessing the Nornir group. For example (this is from `Nornir 2.5.0`):
 
 ```
 # This code returns the groups the given hosts belong to as a string
