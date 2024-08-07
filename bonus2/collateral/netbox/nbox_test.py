@@ -32,11 +32,11 @@ def main():
     )
     pdbr.set_trace()
 
-    cisco1 = nr.inventory.hosts["cisco1"]
+    cisco1 = nr.inventory.hosts["cisco1"]  # noqa
 
     # Filter after loaded
-    fremont = nr.filter(F(groups__contains="site__fremont-dc"))
-    cisco = nr.filter(F(groups__contains="manufacturer__cisco"))
+    fremont = nr.filter(F(groups__contains="site__fremont-dc"))  # noqa
+    cisco = nr.filter(F(groups__contains="manufacturer__cisco"))  # noqa
 
     nr.run(task=nbox_task)
 
