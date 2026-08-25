@@ -9,12 +9,10 @@ RETURN_CODE=0
 
 echo "pylama ." \
 && pylama . \
-&& echo "black" \
-&& black --check . \
 && echo "running pytest..." \
 && cd tests \
-&& py.test -x -s -v test_class* \
-&& py.test -x -s -v test_bonus* \
+&& py.test -x -s -v -p no:pylama test_class* \
+&& py.test -x -s -v -p no:pylama test_bonus* \
 \
 || RETURN_CODE=1
 

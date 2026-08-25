@@ -1,0 +1,3 @@
+---
+# Just so a logger message is not printed to standard error
+some_var: val1
