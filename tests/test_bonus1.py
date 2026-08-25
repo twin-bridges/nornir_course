@@ -190,6 +190,6 @@ def test_class_bonus1_ex6():
     std_out, std_err, return_code = subprocess_runner(cmd_list, exercise_dir=base_path)
     assert return_code == 0
     assert "<napalm.nxos_ssh.nxos_ssh.NXOSSSHDriver" in std_out
-    assert "<netmiko.cisco.cisco_nxos_ssh.CiscoNxosSSH" in std_out
+    assert "<netmiko.cisco.cisco_nxos.CiscoNxosSSH" in std_out
     assert "nxos1#" in std_out
     assert std_err == ""
